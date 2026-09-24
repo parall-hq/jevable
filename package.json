@@ -1,0 +1,19 @@
+{
+  "name": "jevable-monorepo",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "workspaces": [
+    "packages/core",
+    "packages/cli"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm test --workspaces"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "typescript": "7.0.2"
+  }
+}
