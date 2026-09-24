@@ -1,0 +1,32 @@
+{
+  "name": "@jevable/core",
+  "version": "0.1.1",
+  "description": "The jev rule engine: CEL rules that ask Jev, TypeSafe's classification model, semantic questions",
+  "type": "module",
+  "exports": {
+    ".": {
+      "jevable-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./testing": {
+      "jevable-source": "./src/testing.ts",
+      "types": "./dist/testing.d.ts",
+      "default": "./dist/testing.js"
+    }
+  },
+  "files": ["dist"],
+  "engines": {
+    "node": ">=20.3"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "node --conditions=jevable-source --test test/*.test.ts",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@bufbuild/cel": "0.6.1"
+  },
+  "license": "UNLICENSED"
+}
