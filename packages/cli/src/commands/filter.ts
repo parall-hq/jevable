@@ -1,11 +1,13 @@
+import { spawn } from "node:child_process";
 import { parseArgs } from "node:util";
 import { log, newEngine, printStats, ruleSource } from "../common.ts";
 import { runFilter } from "../run/filter.ts";
 
-export const FILTER_HELP = `jev filter [RULE] [options]
+export const FILTER_HELP = `jevable filter [RULE] [options]
 
-Print the records that pass RULE. Records come from stdin, one per line; in
-RULE, \`line\` is the text and \`json\` the parsed value when the line is JSON.
+Print the records that pass RULE. Records come from stdin, or from the
+output of --from CMD, one per line; in RULE, \`line\` is the text and \`json\`
+the parsed value when the line is JSON.
 
 With --key, records with the same key are the same thing: judged once and
 emitted once (or once per --cooldown). With --window, records are gathered
@@ -13,6 +15,7 @@ for that long and RULE judges each window as a whole through \`window\`.
 
 Options:
   -f, --file FILE       read the rule from a file
+      --from CMD        read the output of CMD (run with sh) instead of stdin; CMD stops when jevable does
   -k, --key EXPR        what makes records the same thing, e.g. json.id or fingerprint(line)
       --cooldown DUR    after emitting a key, hold back its further matches this long (e.g. 30m)
   -w, --window DUR      judge windows of this length instead of single records (always JSON)
@@ -24,22 +27,22 @@ Options:
       --model MODEL     Jev model (default $JEV_MODEL, else jev-1.13.0)
 
 Exit status: 0 when something was emitted, 1 when nothing was, 2 on error.
-An error that stops jev is also printed on stdout, so a watcher reading only
-stdout still learns why. See \`jev guide\` for everything else.
+An error that stops jevable is also printed on stdout, so a watcher reading only
+stdout still learns why. See \`jevable guide\` for everything else.
 
-  tail -n 0 -F app.log | jev filter --json --key 'fingerprint(line)' --cooldown 30m \\
+  tail -n 0 -F app.log | jevable filter --json --key 'fingerprint(line)' --cooldown 30m \\
     'line.contains("ERROR") && judge.boolean(line, "Does this log line report that a service or a dependency it needs is down or unreachable?") >= 0.7'
-  some-feed | jev filter -m 1 --json -f rule.cel
+  jevable filter -m 1 --json -f rule.cel --from 'tail -n 0 -F app.log'
 `;
 
 export async function filterCommand(args: string[]): Promise<number> {
   const asJSON = args.some((a) => ["--json", "--all", "-w", "--window"].includes(a) || a.startsWith("--window="));
-  // Whatever watches jev (Claude Code's Monitor, a background shell) reads
+  // Whatever watches jevable (Claude Code's Monitor, a background shell) reads
   // stdout only, and the source feeding it (tail -F) keeps the pipeline open
-  // after jev exits: on stderr alone the watcher would wait in silence.
+  // after jevable exits: on stderr alone the watcher would wait in silence.
   const stopped = (err: Error): number => {
     log(err.message);
-    const msg = `jev stopped: ${err.message}`;
+    const msg = `jevable stopped: ${err.message}`;
     process.stdout.write(asJSON ? `${JSON.stringify({ error: msg })}\n` : `${msg}\n`);
     return 2;
   };
@@ -49,6 +52,7 @@ export async function filterCommand(args: string[]): Promise<number> {
       allowPositionals: true,
       options: {
         file: { type: "string", short: "f" },
+        from: { type: "string" },
         key: { type: "string", short: "k" },
         cooldown: { type: "string" },
         window: { type: "string", short: "w" },
@@ -69,7 +73,8 @@ export async function filterCommand(args: string[]): Promise<number> {
     const ac = new AbortController();
     process.once("SIGINT", () => ac.abort());
     process.once("SIGTERM", () => ac.abort());
-    if (process.stdin.isTTY) log("reading records from stdin, one per line (Ctrl-D to end)");
+    const source = v.from ? startSource(v.from) : undefined;
+    if (!source && process.stdin.isTTY) log("reading records from stdin, one per line (Ctrl-D to end)");
     const result = await runFilter(
       {
         rule: ruleSource(positionals, v.file),
@@ -84,15 +89,41 @@ export async function filterCommand(args: string[]): Promise<number> {
         engine,
         signal: ac.signal,
       },
-      process.stdin,
+      source?.output ?? process.stdin,
       process.stdout,
       log,
     );
+    const sourceError = await source?.stop();
     if (result.count > 0 || !result.error) printStats(result, result.noun, engine);
-    return result.error ? stopped(result.error) : result.code;
+    const error = result.error ?? sourceError;
+    return error ? stopped(error) : result.code;
   } catch (err) {
     return stopped(err as Error);
   }
+}
+
+/**
+ * --from: jevable runs the source itself, so that it stops with jevable. In a pipe
+ * (`tail -F log | jevable -m 1`) the command would only end at tail's next write.
+ */
+function startSource(cmd: string) {
+  // Its own process group: stopping it also stops what it started (tail, a loop's sleep).
+  const child = spawn("sh", ["-c", cmd], { stdio: ["ignore", "pipe", "inherit"], detached: true });
+  const closed = new Promise<number | null>((resolve) => child.on("close", resolve));
+  return {
+    output: child.stdout,
+    /** Stop the source if it still runs; the error when it ended on its own with a failure. */
+    async stop(): Promise<Error | undefined> {
+      if (!child.stdout.readableEnded) {
+        try {
+          process.kill(-child.pid!, "SIGTERM");
+        } catch {}
+        return undefined;
+      }
+      const code = await closed;
+      return code ? new Error(`--from command exited with status ${code}`) : undefined;
+    },
+  };
 }
 
 const UNITS: Record<string, number> = { ms: 1, s: 1000, m: 60_000, h: 3_600_000, d: 86_400_000 };

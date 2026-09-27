@@ -2,7 +2,7 @@ import { parseArgs } from "node:util";
 import { log, newEngine, printStats, ruleSource } from "../common.ts";
 import { expandSamples, runSamples } from "./samples.ts";
 
-export const TEST_HELP = `jev test [RULE] --yes SAMPLE... --no SAMPLE... [options]
+export const TEST_HELP = `jevable test [RULE] --yes SAMPLE... --no SAMPLE... [options]
 
 Run RULE on samples that should pass (--yes) and should not (--no) and show
 each judge answer, which samples came out wrong, and for each question the
@@ -19,8 +19,8 @@ Options:
 
 Exit status: 0 when every sample came out as expected, 1 otherwise, 2 on error.
 
-  jev test -f rule.cel --yes "can you rename this function?" --no "LGTM" --no "thanks!"
-  jev test -f rule.cel --yes should.txt --no should-not.txt
+  jevable test -f rule.cel --yes "can you rename this function?" --no "LGTM" --no "thanks!"
+  jevable test -f rule.cel --yes should.txt --no should-not.txt
 `;
 
 export async function testCommand(args: string[]): Promise<number> {

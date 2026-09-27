@@ -2,6 +2,8 @@
 // source, and the stderr log with its closing summary.
 
 import { readFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { join } from "node:path";
 import { Client, Engine } from "@jevable/core";
 import type { FilterResult } from "./run/filter.ts";
 
@@ -13,13 +15,24 @@ export function packageFile(name: string): string {
 }
 
 export const log = (msg: string): void => {
-  process.stderr.write(`jev: ${msg}\n`);
+  process.stderr.write(`jevable: ${msg}\n`);
 };
 
 /** The shared engine, configured from the environment. A missing key is reported by the first judge call. */
 export function newEngine(model?: string): Engine {
   const env = process.env;
-  return new Engine(new Client({ apiKey: env.JEV_API_KEY || env.TYPESAFE_API_KEY, baseUrl: env.JEV_BASE_URL, model: model || env.JEV_MODEL }));
+  const apiKey = env.JEV_API_KEY || env.TYPESAFE_API_KEY || keyFile();
+  return new Engine(new Client({ apiKey, baseUrl: env.JEV_BASE_URL, model: model || env.JEV_MODEL }));
+}
+
+// ~/.jevable/key: for runtimes that keep secrets out of a command's environment
+// (dsh drops every variable named *KEY*) and for watches started elsewhere.
+function keyFile(): string | undefined {
+  try {
+    return readFileSync(join(homedir(), ".jevable", "key"), "utf8").trim() || undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 /** The rule from the positional argument or -f, exactly one. */
@@ -28,7 +41,7 @@ export function ruleSource(positionals: string[], file?: string): string {
   if (file) return readFileSync(file, "utf8");
   if (positionals.length > 1) throw new Error(`one rule only, got ${positionals.length} arguments — quote the rule`);
   if (positionals[0]?.trim()) return positionals[0];
-  throw new Error(`missing rule, e.g. jev filter 'judge.boolean(line, "Is this an outage?") >= 0.7' — see \`jev guide\``);
+  throw new Error(`missing rule, e.g. jevable filter 'judge.boolean(line, "Is this an outage?") >= 0.7' — see \`jevable guide\``);
 }
 
 export function printStats(r: Pick<FilterResult, "count" | "passed" | "emitted">, noun: string, engine: Engine): void {

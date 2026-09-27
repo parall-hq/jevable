@@ -1,4 +1,4 @@
-// `jev test`: run a rule on samples that should and should not pass, show
+// `jevable test`: run a rule on samples that should and should not pass, show
 // every answer, the samples that came out wrong, and per question the
 // thresholds that separate the two sides.
 
@@ -90,10 +90,13 @@ function separation(samples: Sample[], rule: string): string[] {
       const { yes, no } = byOption.get(o)!;
       if (!yes.length || !no.length) return [];
       const [yLo, yHi, nLo, nHi] = [Math.min(...yes), Math.max(...yes), Math.min(...no), Math.max(...no)].map((v) => v.toFixed(2));
+      // Yes above no suits `>= t`; yes below no (e.g. ["other"] <= t) suits `<= t`.
       const verdict =
         Math.max(...no) < Math.min(...yes)
           ? `any threshold above ${nHi} and up to ${yLo} separates them (use >=)`
-          : `not separable: a no sample scores ${nHi}, a yes sample ${yLo} — reword the question or add criteria`;
+          : Math.max(...yes) < Math.min(...no)
+            ? `any threshold from ${yHi} up to below ${nLo} separates them (use <=)`
+            : `not separable: the yes and no answers overlap — reword the question or add criteria`;
       return [`  ${o ? `[${JSON.stringify(o)}] ` : ""}yes ${yLo}–${yHi} · no ${nLo}–${nHi} → ${verdict}`];
     });
     if (lines.length) out.push("", q, ...lines);

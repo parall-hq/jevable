@@ -4,7 +4,6 @@
   "description": "grep that reads meaning: pass through only the records a Jev judgement lets through",
   "type": "module",
   "bin": {
-    "jev": "dist/cli.js",
     "jevable": "dist/cli.js"
   },
   "exports": {
@@ -14,7 +13,10 @@
       "default": "./dist/index.js"
     }
   },
-  "files": ["dist", "guide.md"],
+  "files": [
+    "dist",
+    "guide.md"
+  ],
   "engines": {
     "node": ">=20.3"
   },

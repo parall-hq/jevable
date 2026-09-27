@@ -13,7 +13,7 @@ export interface KeyState {
   seen?: boolean;
 }
 
-/** What jev remembers per key; with a path, it survives restarts. */
+/** What jevable remembers per key; with a path, it survives restarts. */
 export class Store {
   readonly path: string | undefined;
   private readonly keys: Map<string, KeyState>;

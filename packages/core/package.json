@@ -1,7 +1,7 @@
 {
   "name": "@jevable/core",
   "version": "0.1.1",
-  "description": "The jev rule engine: CEL rules that ask Jev, TypeSafe's classification model, semantic questions",
+  "description": "The jevable rule engine: CEL rules that ask Jev, TypeSafe's classification model, semantic questions",
   "type": "module",
   "exports": {
     ".": {

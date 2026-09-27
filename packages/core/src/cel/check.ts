@@ -10,7 +10,7 @@ export class RuleError extends Error {}
 const VARIABLES = new Set(["line", "json", "window"]);
 // Identifiers CEL itself provides: type names usable in `type(x) == int`.
 const BUILTIN_IDENTS = new Set(["int", "uint", "double", "bool", "string", "bytes", "list", "map", "null_type", "type"]);
-export const HINT = "Variables: line, json (the parsed line) and, with --window, window. Run `jev guide` for functions and examples.";
+export const HINT = "Variables: line, json (the parsed line) and, with --window, window. Run `jevable guide` for functions and examples.";
 const COMPARE = `compare it, e.g. judge.boolean(line, "...") >= 0.7`;
 
 // Values for the dry run, shaped like real ones.
