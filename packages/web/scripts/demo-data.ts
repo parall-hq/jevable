@@ -85,6 +85,7 @@ for (const c of cases) {
   // Interleave the two sides so the stream reads like a real feed.
   samples.sort((a, b) => hash(a.line) - hash(b.line));
   const events = [];
+  const before = { ...engine.stats };
   for (const s of samples) {
     const r = parseRecord(s.line);
     const outcome = await program.match({ line: s.line, json: toCel(r.json) });
@@ -92,7 +93,9 @@ for (const c of cases) {
     events.push({ text: c.show(r), want: s.want, grep: grep.test(s.line), pass: outcome.pass, score: score(outcome.calls, rule) });
   }
   const { show, ...meta } = c;
-  out.push({ ...meta, rule: rule.trim(), events });
+  const questions = engine.stats.calls - before.calls;
+  const tokens = engine.stats.tokens - before.tokens;
+  out.push({ ...meta, rule: rule.trim(), questions, tokens, events });
   console.log(`${c.id}: ${events.length} events, jevable right on ${events.filter((e) => e.pass === e.want).length}, grep on ${events.filter((e) => e.grep === e.want).length}`);
 }
 writeFileSync(OUT, `${JSON.stringify(out, null, 2)}\n`);

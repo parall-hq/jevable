@@ -2,6 +2,9 @@
 import Base from "../layouts/Base.astro";
 import Composer from "../components/Composer.astro";
 import Demo from "../components/Demo.astro";
+import Cost from "../components/Cost.astro";
+import { PER_QUESTION } from "../lib/cost.ts";
+import { usd } from "../lib/money.ts";
 
 const runtimes = [
   { name: "Claude Code", how: "A background command wakes you when it ends, even idle — or the Monitor tool, a notification per line." },
@@ -22,8 +25,8 @@ const runtimes = [
       <span class="pill"><span>$</span> npx -y jevable guide</span>
       <h1>Make your monitor smart.</h1>
       <p class="lede">
-        Your agent watches a log, a feed or an API — and gets woken by every line, or by a grep that misses what nobody foresaw.
-        jevable lets through only what matters, judged by meaning in a third of a second.
+        Your agent watches a log, a feed or an API — and pays a full turn for every line that wakes it, or misses what a grep did not foresee.
+        jevable judges each event by meaning, for a fraction of a cent, and wakes the agent only when it matters.
       </p>
     </div>
     <Composer id="need-top" />
@@ -35,6 +38,17 @@ const runtimes = [
     <p class="lede">A keyword alert fires on a teaser and a pun, and stays silent when an outage is worded differently. The same events through a jevable rule:</p>
     <div class="spacer"></div>
     <Demo />
+  </section>
+
+  <section class="wrap">
+    <span class="eyebrow">The other half</span>
+    <h2>Every wake is an agent turn.<br />Pay only for the ones that matter.</h2>
+    <p class="lede">
+      Woken, an agent reads its context and thinks — cents to dollars a turn. A Jev question reads one event for about {usd(PER_QUESTION)}. With jevable in
+      front, the agent watches everything and spends a turn only when something counts.
+    </p>
+    <div class="spacer"></div>
+    <Cost />
   </section>
 
   <section class="wrap how">
@@ -59,7 +73,7 @@ const runtimes = [
      <span class="hl">judge.boolean(json.name, "Does this incident title name a model, the API, or a developer tool?") &gt;= 0.7</span>)'</pre>
     <dl class="facts">
       <div><dt>~0.3 s</dt><dd>per question to Jev</dd></div>
-      <div><dt>$0.04</dt><dd>per million input tokens</dd></div>
+      <div><dt>{usd(PER_QUESTION)}</dt><dd>per question, measured</dd></div>
       <div><dt>0 calls</dt><dd>when a plain condition decides</dd></div>
       <div><dt>your fields</dt><dd>only what the rule names is sent</dd></div>
     </dl>

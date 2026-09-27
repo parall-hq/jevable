@@ -4,7 +4,8 @@ A watch that wakes you on every line buries you in noise; a grep strict enough
 to stay quiet misses what nobody foresaw. jevable sits between the events and
 whatever wakes you: plain conditions do what grep does, and a question that
 Jev (TypeSafe's classification model) answers in about 0.3 s for a tiny
-fraction of a cent decides the rest. Only what matters comes out.
+fraction of a cent decides the rest. Only what matters comes out, so you
+miss less and spend a turn only when something counts.
 
     jevable filter --json --from 'tail -n 0 -F app.log' \
       'line.contains("ERROR") && judge.boolean(line, "Does this log line report that a service or a dependency it needs is down or unreachable?") >= 0.7'

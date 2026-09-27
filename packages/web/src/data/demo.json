@@ -6,6 +6,8 @@
     "ask": "Tell me when Tibo announces that Codex usage limits were reset.",
     "grep": "reset",
     "rule": "judge.choice(line,\n  \"Does this post announce that Codex usage limits are being reset?\",\n  {\"reset_now\": \"The limits have been reset, are being reset right now, or will be back within the hour (e.g. 'back in a few minutes')\",\n   \"reset_soon\": \"A reset is promised or teased for later (hours or days away) but has not happened yet\",\n   \"other\": \"Anything else, including complaints about limits or other uses of the word reset\"})[\"reset_now\"] >= 0.7",
+    "questions": 16,
+    "tokens": 7195,
     "events": [
       {
         "text": "This was fixed. You know what's coming 👀 Give us 24 hours to reset the Codex rate limits across all plans.",
@@ -54,7 +56,7 @@
         "want": true,
         "grep": true,
         "pass": true,
-        "score": 0.97
+        "score": 0.98
       },
       {
         "text": "Old news actually from a bunch of days ago, but crossed that 15M. Enjoy a nice reset everyone. Landing in the next hour or so, go /fast.",
@@ -103,7 +105,7 @@
         "want": true,
         "grep": true,
         "pass": true,
-        "score": 0.95
+        "score": 0.97
       },
       {
         "text": "People keep asking about usage limits. We hear you, and we are working on a lot more capacity.",
@@ -128,6 +130,8 @@
     "ask": "Tell me when a resolved incident touched a model, the API or a developer tool.",
     "grep": "\\bapi\\b",
     "rule": "json.status == \"resolved\"\n  && (json.name.matches(\"(?i)\\\\bapi\\\\b\")\n      || judge.boolean(json.name,\n           \"Does this incident title name a model, the API, or a developer tool?\",\n           {\"true\": \"It names models (e.g. Opus, Sonnet, GPT-5.6), the API or developer platform, Claude Code, Codex, an agents API, or an SDK\",\n            \"false\": \"It names only consumer products or business functions: claude.ai, ChatGPT and its plans or modes, app stores, billing, sign-in, ads, office add-ins, connectors, or support\"}) >= 0.7)",
+    "questions": 10,
+    "tokens": 3833,
     "events": [
       {
         "text": "openai.com — Delayed support responses",
@@ -154,7 +158,7 @@
         "want": false,
         "grep": false,
         "pass": false,
-        "score": 0.13
+        "score": 0.15
       },
       {
         "text": "claude.com — Elevated errors on Claude Code and Claude Cowork",
@@ -180,14 +184,14 @@
         "want": false,
         "grep": false,
         "pass": false,
-        "score": 0.16
+        "score": 0.15
       },
       {
         "text": "openai.com — Mobile users unable to see Work Mode and the Model Picker",
         "want": false,
         "grep": false,
         "pass": false,
-        "score": 0.14
+        "score": 0.15
       },
       {
         "text": "openai.com — Codex GitHub Review and Pull Request Failures",
@@ -221,7 +225,7 @@
         "want": false,
         "grep": false,
         "pass": false,
-        "score": 0.06
+        "score": 0.07
       }
     ]
   },
@@ -232,6 +236,8 @@
     "ask": "Wake me when a new issue says something that used to work is broken.",
     "grep": "regression|used to work|no longer|stopped working",
     "rule": "json.body.contains(\"Yes, this worked in a previous version\")\n  || judge.boolean([json.title, json.body],\n       \"Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?\",\n       {\"true\": \"It worked in an earlier version or before some date, and now it does not\",\n        \"false\": \"A bug with no sign it ever worked, a feature request, a question, or an empty report\"}) >= 0.7",
+    "questions": 11,
+    "tokens": 8949,
     "events": [
       {
         "text": "#96720 [FEATURE] Support attaching terminal selection to chat (Cmd+L) in VS Code extension",
@@ -245,7 +251,7 @@
         "want": false,
         "grep": false,
         "pass": false,
-        "score": 0.1
+        "score": 0.09
       },
       {
         "text": "#96726 [GitHub integration]  Github connector completely broken and got features removed, worked perfectly fine earlier",
@@ -280,7 +286,7 @@
         "want": false,
         "grep": false,
         "pass": false,
-        "score": 0.07
+        "score": 0.06
       },
       {
         "text": "#96776 [FEATURE] Desktop (Linux): setting to stop a bare Alt key press from opening the application menu",

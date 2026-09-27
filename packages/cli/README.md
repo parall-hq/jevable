@@ -4,7 +4,9 @@ Make your monitor smart. An agent watching a log, a feed or an API is woken
 by every line, or by a grep that misses what nobody foresaw. `jevable` sits in
 between: plain conditions do what grep does, and a question answered by
 [Jev](https://docs.typesafe.ai), TypeSafe's fast and cheap classification
-model, decides the rest. Only what matters wakes the agent, or reaches you.
+model, decides the rest. Only what matters wakes the agent, or reaches you —
+and every wake it holds back is an agent turn you do not pay for, while a Jev
+question costs about $0.00002.
 
 ## One prompt, any agent
 

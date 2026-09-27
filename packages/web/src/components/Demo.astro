@@ -2,6 +2,8 @@
 // Real events from cases/, real Jev answers (scripts/demo-data.ts), replayed
 // next to what a keyword alert would have done.
 import demo from "../data/demo.json";
+import { JEV_PRICE } from "../lib/cost.ts";
+import { usd } from "../lib/money.ts";
 
 const count = (events: (typeof demo)[number]["events"], f: (e: (typeof events)[number]) => boolean) => events.filter(f).length;
 const scenarios = demo.map((c) => ({
@@ -71,6 +73,7 @@ const verdict = (noise: number, missed: number) =>
               woke you <span data-count="pass">{s.jevWakes}</span>×
             </strong>
             <span class="how">{s.jevWrong ? `${s.jevWrong} wrong` : "all real, none missed"}</span>
+            <span class="spent">{s.questions} questions to Jev, {usd(s.tokens * JEV_PRICE)} in all</span>
           </div>
         </div>
 
@@ -356,6 +359,12 @@ const verdict = (noise: number, missed: number) =>
 
   .how.bad {
     color: var(--wrong);
+  }
+
+  .spent {
+    margin-top: 6px;
+    font: 12px var(--mono);
+    color: var(--faint);
   }
 
   details {

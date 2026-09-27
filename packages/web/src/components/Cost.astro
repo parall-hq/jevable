@@ -1,0 +1,210 @@
+---
+import { PER_QUESTION } from "../lib/cost.ts";
+import { CHECKS_A_DAY, monthly, showInput, turnsADay, usd } from "../lib/money.ts";
+
+const inputs = [
+  { key: "events", label: "Events a day", stops: [10, 30, 100, 300, 1000, 3000, 10000, 30000, 100000], at: 4 },
+  { key: "share", label: "That matter", stops: [0.001, 0.003, 0.01, 0.03, 0.1, 0.3], at: 2 },
+  { key: "turn", label: "One agent turn", stops: [0.02, 0.05, 0.1, 0.25, 0.5, 1, 2], at: 2 },
+];
+const pick = (key: string) => inputs.find((i) => i.key === key)!;
+const at = (key: string) => pick(key).stops[pick(key).at];
+const m = monthly(at("events"), at("share"), at("turn"), PER_QUESTION);
+const max = Math.max(m.every.cost, m.check.cost, m.jevable.cost);
+const rows = [
+  { kind: "every", name: "Wake on every event", cost: m.every.cost, sub: turnsADay(m.every.turns), when: "at once, and for everything" },
+  { kind: "check", name: "Check every 30 minutes", cost: m.check.cost, sub: turnsADay(m.check.turns), when: "up to 30 minutes late" },
+  { kind: "jevable", name: "jevable in front", cost: m.jevable.cost, sub: turnsADay(m.jevable.turns), when: "within a second, only what matters" },
+];
+---
+
+<div class="cost panel" data-question={PER_QUESTION} data-checks={CHECKS_A_DAY}>
+  <div class="inputs">
+    {
+      inputs.map((i) => (
+        <label>
+          <span>{i.label}</span>
+          <output data-for={i.key}>{showInput(i.key, i.stops[i.at])}</output>
+          <input type="range" min="0" max={i.stops.length - 1} step="1" value={i.at} data-key={i.key} data-stops={i.stops.join(",")} />
+        </label>
+      ))
+    }
+  </div>
+  <ul class="rows">
+    {
+      rows.map((r) => (
+        <li class:list={["row", r.kind]} data-kind={r.kind}>
+          <div class="name">
+            <b>{r.name}</b>
+            <span data-sub>{r.sub}</span>
+            <span>{r.when}</span>
+          </div>
+          <span class="bar"><i style={`width:${(r.cost / max) * 100}%`} /></span>
+          <span class="money"><b data-money>{usd(r.cost)}</b> a month</span>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="fine">
+    jevable is charged a Jev question for every event here; plain conditions in the rule usually spare most of them. One question cost {usd(PER_QUESTION)} on average in
+    the demo above. Many matches a day? <code>--window</code> or <code>--cooldown</code> fold them into fewer wakes.
+  </p>
+</div>
+
+<script>
+  import { monthly, showInput, turnsADay, usd } from "../lib/money.ts";
+
+  for (const box of document.querySelectorAll<HTMLElement>(".cost")) {
+    const ranges = [...box.querySelectorAll<HTMLInputElement>("input[type=range]")];
+    const value = (key: string) => {
+      const r = ranges.find((r) => r.dataset.key === key)!;
+      return Number(r.dataset.stops!.split(",")[Number(r.value)]);
+    };
+    const update = () => {
+      for (const r of ranges) box.querySelector(`output[data-for=${r.dataset.key}]`)!.textContent = showInput(r.dataset.key!, value(r.dataset.key!));
+      const m = monthly(value("events"), value("share"), value("turn"), Number(box.dataset.question));
+      const max = Math.max(m.every.cost, m.check.cost, m.jevable.cost);
+      for (const row of box.querySelectorAll<HTMLElement>(".row")) {
+        const it = m[row.dataset.kind as keyof typeof m];
+        row.querySelector<HTMLElement>(".bar i")!.style.width = `${(it.cost / max) * 100}%`;
+        row.querySelector("[data-money]")!.textContent = usd(it.cost);
+        row.querySelector("[data-sub]")!.textContent = turnsADay(it.turns);
+      }
+    };
+    for (const r of ranges) r.addEventListener("input", update);
+  }
+</script>
+
+<style>
+  .cost {
+    padding: clamp(18px, 3vw, 28px);
+    display: grid;
+    gap: 28px;
+  }
+
+  .inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 28px;
+  }
+
+  label {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--dim);
+  }
+
+  output {
+    font: 500 14px var(--mono);
+    color: var(--fg);
+  }
+
+  input[type="range"] {
+    grid-column: 1 / -1;
+    width: 100%;
+    accent-color: var(--wake);
+  }
+
+  .rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr) 150px;
+    gap: 20px;
+    align-items: center;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+
+  .row.jevable {
+    border-color: var(--wake-line);
+    background: var(--wake-soft);
+  }
+
+  .name {
+    display: grid;
+    font-size: 13px;
+    color: var(--faint);
+  }
+
+  .name b {
+    font-size: 15px;
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  .name [data-sub] {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--dim);
+  }
+
+  .bar {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--line);
+    overflow: hidden;
+  }
+
+  .bar i {
+    display: block;
+    height: 100%;
+    min-width: 3px;
+    border-radius: 4px;
+    background: var(--faint);
+    transition: width 0.3s;
+  }
+
+  .jevable .bar i {
+    background: var(--wake);
+  }
+
+  .money {
+    text-align: right;
+    font-size: 13px;
+    color: var(--faint);
+  }
+
+  .money b {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+  }
+
+  .jevable .money b {
+    color: var(--wake);
+  }
+
+  .fine {
+    margin: 0;
+    font-size: 13px;
+    color: var(--faint);
+  }
+
+  @media (max-width: 760px) {
+    .inputs {
+      grid-template-columns: 1fr;
+    }
+
+    .row {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px 16px;
+    }
+
+    .bar {
+      grid-column: 1 / -1;
+      grid-row: 2;
+    }
+  }
+</style>
