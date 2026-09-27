@@ -5,7 +5,7 @@ Real self-trigger scenarios, each a rule plus samples it must get right, and
 that `jevable` and the writing advice in `jevable guide` hold up on real data.
 
 ```bash
-export TYPESAFE_API_KEY=... GITHUB_TOKEN=$(gh auth token)   # GitHub token only for the rate limit
+export OPENROUTER_API_KEY=... GITHUB_TOKEN=$(gh auth token)   # any Jev provider (jevable providers); GitHub token only for the rate limit
 cases/run.sh                  # every case
 cases/run.sh releases tibo    # some
 JEVABLE="npx -y jevable" cases/run.sh   # against the published package

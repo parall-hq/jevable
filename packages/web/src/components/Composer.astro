@@ -28,7 +28,10 @@ const first = examples[0].ask;
     <div class="bar"><span>Prompt</span><button type="button" class="copy">Copy</button></div>
     <pre><span class="need">{first}</span>{"\n"}<span class="setup" set:html={SETUP.replace(/`[^`]+`/, (c) => `<span class="nb">${c}</span>`)} /></pre>
   </div>
-  <p class="works">Paste into Claude Code, Codex, OpenClaw, Hermes, pi, dsh — any agent that runs shell commands.</p>
+  <p class="works">
+    Paste into Claude Code, Codex, OpenClaw, Hermes, pi, dsh — any agent that runs shell commands. It needs a key for Jev from OpenRouter, Vercel AI Gateway
+    or TypeSafe, and finds the one you have.
+  </p>
 </div>
 
 <script>

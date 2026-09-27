@@ -2,12 +2,10 @@
 // labelled samples in cases/, next to what a keyword alert would have done.
 // The page itself never calls Jev. Run after changing a case:
 //
-//   npm run demo-data -w packages/web     (key from TYPESAFE_API_KEY or ~/.jevable/key)
+//   npm run demo-data -w packages/web     (a Jev key in the environment: see `jevable providers`)
 
 import { readFileSync, writeFileSync } from "node:fs";
-import { homedir } from "node:os";
-import { join } from "node:path";
-import { Client, Engine, parseRecord, toCel, type Call } from "@jevable/core";
+import { choose, Client, Engine, lookup, parseRecord, toCel, type Call } from "@jevable/core";
 
 const CASES = new URL("../../../cases/", import.meta.url);
 const OUT = new URL("../src/data/demo.json", import.meta.url);
@@ -51,14 +49,6 @@ const cases: Case[] = [
   },
 ];
 
-function apiKey(): string | undefined {
-  if (process.env.TYPESAFE_API_KEY) return process.env.TYPESAFE_API_KEY;
-  try {
-    return readFileSync(join(homedir(), ".jevable", "key"), "utf8").trim();
-  } catch {
-    return undefined;
-  }
-}
 
 /** The number the rule compares: a boolean's probability, or the choice option it reads. */
 function score(calls: Call[], rule: string): number | undefined {
@@ -69,7 +59,9 @@ function score(calls: Call[], rule: string): number | undefined {
   return option ? c.options?.[option] : undefined;
 }
 
-const engine = new Engine(new Client({ apiKey: apiKey() }));
+const found = choose(lookup(process.env));
+const p = found?.provider;
+const engine = new Engine(new Client({ apiKey: found?.key, baseUrl: p?.baseUrl, model: p?.model, provider: p?.label }));
 const out = [];
 for (const c of cases) {
   const dir = new URL(`${c.id}/`, CASES);

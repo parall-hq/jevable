@@ -23,12 +23,15 @@ incident", "when a reviewer asks for a change on PR 12, make it". Do this:
 1. **Pin it down**: where the events come from, what counts, what happens
    then (you act, or the person is told), and for how long (one event, while
    this session is open, or days). Ask only what you cannot work out.
-2. **Key.** jevable reads `TYPESAFE_API_KEY` (or `JEV_API_KEY`), else the file
-   `~/.jevable/key`. If there is none, ask the person for a TypeSafe API key
-   (docs.typesafe.ai) and save it:
-   `mkdir -p ~/.jevable && printf '%s\n' "$KEY" > ~/.jevable/key && chmod 600 ~/.jevable/key`.
+2. **Key.** Jev is served by TypeSafe, Vercel AI Gateway and OpenRouter.
+   Run `jevable providers`: it lists the key it found for each (in the
+   environment or `~/.jevable/env`) and the one it uses. If none has a key, ask
+   the person which of these they already have — many have an OpenRouter or
+   Vercel AI Gateway key — and save it in `~/.jevable/env`, one `NAME=value`
+   per line: `mkdir -p ~/.jevable && printf 'OPENROUTER_API_KEY=%s\n' "$KEY" >> ~/.jevable/env && chmod 600 ~/.jevable/env`.
+   `jevable providers --check` asks each one question to confirm the key works.
    The file also reaches runtimes that strip keys from a command's environment
-   (dsh) and watches started outside your shell. Never put the key in a repository.
+   (dsh) and watches started outside your shell. Never put a key in a repository.
 3. **Source**: a command that prints one event per line — `tail -n 0 -F` a
    log, an API polled in a loop, a feed (Recipes). Keep everything for this
    watch in `~/.jevable/<name>/`; a longer source goes in `source.sh` there. Run it
@@ -150,7 +153,7 @@ Flags change between versions: check them with your runtime's `--help`.
   out; an extension that watches processes can wake you instead. After the session:
   `pi -p --session "$PI_SESSION_FILE" "..." </dev/null`, only while no pi
   window has the session open.
-- **dsh.** It strips `*KEY*` variables: use `~/.jevable/key`. A finished
+- **dsh.** It strips `*KEY*` variables: keep the key in `~/.jevable/env`. A finished
   background task does not wake an idle session: start the `-m 1` command with
   `run_in_background: true`, then call `task_output` with `wait: true` and
   `timeout_ms: 600000` until it ends (blocking). To be woken: only under `dsh web`, by posting a `session.prompt`

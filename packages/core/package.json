@@ -1,6 +1,6 @@
 {
   "name": "@jevable/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The jevable rule engine: CEL rules that ask Jev, TypeSafe's classification model, semantic questions",
   "type": "module",
   "exports": {
@@ -15,7 +15,9 @@
       "default": "./dist/testing.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=20.3"
   },
