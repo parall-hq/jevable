@@ -26,18 +26,20 @@ const { title, description } = Astro.props;
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <header class="nav wrap">
-      <a class="brand" href="/"><span class="prompt">&gt;</span>jevable<span class="dot"></span></a>
-      <nav>
-        <a href="/guide">Guide</a>
-        <a href="https://www.npmjs.com/package/jevable">npm</a>
-      </nav>
+    <header class="bar">
+      <div class="nav wrap">
+        <a class="brand" href="/"><span class="prompt">&gt;</span>jevable<span class="dot"></span></a>
+        <nav>
+          <a href="/guide">Guide</a>
+          <a href="https://www.npmjs.com/package/jevable">npm</a>
+        </nav>
+      </div>
     </header>
     <main>
       <slot />
     </main>
     <footer class="wrap">
-      <span>jevable</span>
+      <span class="by"><b>jevable</b> by <a href="https://parall.com">Parall</a></span>
       <span>Judgements by <a href="https://docs.typesafe.ai">Jev</a>, TypeSafe's classification model</span>
       <span><a href="/guide">Guide</a> · <a href="/guide.md">guide.md</a> · <a href="https://www.npmjs.com/package/jevable">npm</a></span>
     </footer>
@@ -45,11 +47,21 @@ const { title, description } = Astro.props;
 </html>
 
 <style>
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgb(10 10 11 / 0.86);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgb(255 255 255 / 0.04);
+  }
+
   .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 72px;
+    height: 64px;
   }
 
   .brand {
@@ -100,5 +112,18 @@ const { title, description } = Astro.props;
     border-top: 1px solid var(--line);
     color: var(--faint);
     font-size: 13px;
+  }
+
+  .by {
+    color: var(--dim);
+  }
+
+  .by b {
+    font: 600 14px var(--mono);
+    color: var(--fg);
+  }
+
+  .by a {
+    color: var(--fg);
   }
 </style>

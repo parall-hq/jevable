@@ -17,6 +17,9 @@ export function showInput(key: string, v: number): string {
 
 export const turnsADay = (n: number) => `${n.toLocaleString("en-US", { maximumFractionDigits: 1 })} agent turns a day`;
 
+/** jevable against waking on every event: "−97%". */
+export const saving = (m: ReturnType<typeof monthly>) => `−${Math.floor((1 - m.jevable.cost / m.every.cost) * 100)}%`;
+
 /** A heartbeat every 30 minutes, OpenClaw's default. */
 export const CHECKS_A_DAY = 48;
 

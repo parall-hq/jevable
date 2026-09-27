@@ -1,6 +1,6 @@
 ---
 import { PER_QUESTION } from "../lib/cost.ts";
-import { CHECKS_A_DAY, monthly, showInput, turnsADay, usd } from "../lib/money.ts";
+import { CHECKS_A_DAY, monthly, saving, showInput, turnsADay, usd } from "../lib/money.ts";
 
 const inputs = [
   { key: "events", label: "Events a day", stops: [10, 30, 100, 300, 1000, 3000, 10000, 30000, 100000], at: 4 },
@@ -40,7 +40,13 @@ const rows = [
             <span>{r.when}</span>
           </div>
           <span class="bar"><i style={`width:${(r.cost / max) * 100}%`} /></span>
-          <span class="money"><b data-money>{usd(r.cost)}</b> a month</span>
+          <span class="money">
+            <b>
+              {r.kind === "jevable" && <span class="save" data-save title="against waking on every event">{saving(m)}</span>}
+              <span data-money>{usd(r.cost)}</span>
+            </b>
+            a month
+          </span>
         </li>
       ))
     }
@@ -52,7 +58,7 @@ const rows = [
 </div>
 
 <script>
-  import { monthly, showInput, turnsADay, usd } from "../lib/money.ts";
+  import { monthly, saving, showInput, turnsADay, usd } from "../lib/money.ts";
 
   for (const box of document.querySelectorAll<HTMLElement>(".cost")) {
     const ranges = [...box.querySelectorAll<HTMLInputElement>("input[type=range]")];
@@ -70,6 +76,7 @@ const rows = [
         row.querySelector("[data-money]")!.textContent = usd(it.cost);
         row.querySelector("[data-sub]")!.textContent = turnsADay(it.turns);
       }
+      box.querySelector("[data-save]")!.textContent = saving(m);
     };
     for (const r of ranges) r.addEventListener("input", update);
   }
@@ -117,7 +124,7 @@ const rows = [
 
   .row {
     display: grid;
-    grid-template-columns: 260px minmax(0, 1fr) 150px;
+    grid-template-columns: 260px minmax(0, 1fr) 200px;
     gap: 20px;
     align-items: center;
     padding: 14px 16px;
@@ -184,6 +191,18 @@ const rows = [
 
   .jevable .money b {
     color: var(--wake);
+  }
+
+  .save {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--wake);
+    color: var(--bg);
+    font: 600 12px/1.4 var(--mono);
+    letter-spacing: 0;
   }
 
   .fine {
