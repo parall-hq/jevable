@@ -2,7 +2,7 @@
 // The jevable command line: filter, test, guide.
 
 import { filterCommand } from "./commands/filter.ts";
-import { providersCommand } from "./commands/providers.ts";
+import { keyCommand } from "./commands/key.ts";
 import { testCommand } from "./commands/test.ts";
 import { log, packageFile } from "./common.ts";
 
@@ -18,14 +18,11 @@ a fast and cheap classification model, a semantic question.
 Commands:
   filter [RULE]                  print the records (or windows) that pass RULE
   test [RULE] --yes .. --no ..   run RULE on samples and show the scores
-  providers [--check]            where jevable reaches Jev, the key it found, the one it uses
+  key [KEY]                      whether there is a working key for Jev; with KEY, check and save it
   guide                          what to do and how: steps for agents, rules, options, recipes
 
 Agents: read \`jevable guide\` first and follow it.
-Setup: a key for Jev from TypeSafe (TYPESAFE_API_KEY), Vercel AI Gateway
-       (AI_GATEWAY_API_KEY) or OpenRouter (OPENROUTER_API_KEY), in the environment
-       or in ~/.jevable/env. \`jevable providers\` shows what it finds.
-       JEV_PROVIDER picks one; JEV_BASE_URL + JEV_API_KEY for a proxy; JEV_MODEL.
+Setup: \`jevable key\`. Any API key from TypeSafe, OpenRouter or Vercel AI Gateway works.
 Run \`jevable <command> --help\` for a command's options.
 `;
 
@@ -35,8 +32,8 @@ async function main([cmd, ...args]: string[]): Promise<number> {
       return filterCommand(args);
     case "test":
       return testCommand(args);
-    case "providers":
-      return providersCommand(args);
+    case "key":
+      return keyCommand(args);
     case "guide":
       process.stdout.write(packageFile("guide.md"));
       return 0;

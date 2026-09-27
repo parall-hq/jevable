@@ -12,17 +12,22 @@ export interface Provider {
   model: string;
   /** Variables holding its credential, the first set one wins. */
   env: readonly string[];
-  /** Where a person gets a key. */
-  keys: string;
+  /** How its keys start, to tell whose a pasted key is. */
+  prefix: string;
 }
 
 /** In the order jevable prefers them. */
 export const PROVIDERS: readonly Provider[] = [
-  { name: "typesafe", label: "TypeSafe", baseUrl: DEFAULT_BASE_URL, model: DEFAULT_MODEL, env: ["TYPESAFE_API_KEY", "JEV_API_KEY"], keys: "https://docs.typesafe.ai" },
+  { name: "typesafe", label: "TypeSafe", baseUrl: DEFAULT_BASE_URL, model: DEFAULT_MODEL, env: ["TYPESAFE_API_KEY", "JEV_API_KEY"], prefix: "apikey_" },
   // AI Gateway lists Jev under one id only; it does not take a version.
-  { name: "vercel", label: "Vercel AI Gateway", baseUrl: "https://ai-gateway.vercel.sh/typesafe", model: "typesafe-ai/jev", env: ["AI_GATEWAY_API_KEY", "VERCEL_OIDC_TOKEN"], keys: "https://vercel.com/ai-gateway" },
-  { name: "openrouter", label: "OpenRouter", baseUrl: "https://openrouter.ai/api", model: "typesafe/jev-1.13", env: ["OPENROUTER_API_KEY"], keys: "https://openrouter.ai/keys" },
+  { name: "vercel", label: "Vercel AI Gateway", baseUrl: "https://ai-gateway.vercel.sh/typesafe", model: "typesafe-ai/jev", env: ["AI_GATEWAY_API_KEY", "VERCEL_OIDC_TOKEN"], prefix: "vck_" },
+  { name: "openrouter", label: "OpenRouter", baseUrl: "https://openrouter.ai/api", model: "typesafe/jev-1.13", env: ["OPENROUTER_API_KEY"], prefix: "sk-or-" },
 ];
+
+/** The provider a key belongs to, told by how it starts. */
+export function whose(key: string): Provider | undefined {
+  return PROVIDERS.find((p) => key.startsWith(p.prefix));
+}
 
 export interface Found {
   provider: Provider;
@@ -37,7 +42,7 @@ export interface Found {
  */
 export function lookup(vars: Readonly<Record<string, string | undefined>>): Found[] {
   const custom: Provider[] = vars.JEV_BASE_URL
-    ? [{ name: "custom", label: vars.JEV_BASE_URL, baseUrl: vars.JEV_BASE_URL, model: DEFAULT_MODEL, env: ["JEV_API_KEY", "TYPESAFE_API_KEY"], keys: "" }]
+    ? [{ name: "custom", label: vars.JEV_BASE_URL, baseUrl: vars.JEV_BASE_URL, model: DEFAULT_MODEL, env: ["JEV_API_KEY", "TYPESAFE_API_KEY"], prefix: "" }]
     : [];
   return [...custom, ...PROVIDERS].map((provider) => {
     const variable = provider.env.find((v) => vars[v]);

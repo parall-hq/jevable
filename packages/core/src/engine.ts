@@ -4,7 +4,7 @@ import { env, type Answers, type Planned } from "./cel/env.ts";
 import { Program } from "./program.ts";
 import { HttpError, type Answer, type Client, type Question } from "./typesafe/client.ts";
 
-export const NO_KEY = "no Jev API key (TypeSafe, Vercel AI Gateway or OpenRouter): `jevable providers` shows where jevable looks";
+export const NO_KEY = "no Jev API key: run `jevable key`";
 
 /**
  * What every program shares: the Jev client, an answer cache (the same
