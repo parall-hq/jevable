@@ -1,0 +1,177 @@
+---
+// The one prompt: the visitor's need, then the line that hands the agent the guide.
+import demo from "../data/demo.json";
+
+interface Props {
+  /** Unique per page: the composer appears more than once. */
+  id: string;
+}
+
+const { id } = Astro.props;
+
+const SETUP = "Set it up with jevable: run `npx -y jevable guide` and follow it.";
+const examples = [
+  ...demo.map((c) => ({ label: c.title, ask: c.ask })),
+  { label: "PR review asks", ask: "When a reviewer asks for a change on PR #12 in acme/api, make the change and push it." },
+  { label: "Dev log", ask: "While I work, watch logs/dev.log and wake up when a dependency goes down." },
+];
+const first = examples[0].ask;
+---
+
+<div class="composer panel" data-setup={SETUP}>
+  <label for={id}>What should your agent watch for?</label>
+  <textarea id={id} rows="2" spellcheck="false">{first}</textarea>
+  <div class="chips" role="list">
+    {examples.map((e, i) => <button type="button" role="listitem" class:list={["chip", { on: i === 0 }]} data-ask={e.ask}>{e.label}</button>)}
+  </div>
+  <div class="out">
+    <div class="bar"><span>Prompt</span><button type="button" class="copy">Copy</button></div>
+    <pre><span class="need">{first}</span>{"\n"}<span class="setup" set:html={SETUP.replace(/`[^`]+`/, (c) => `<span class="nb">${c}</span>`)} /></pre>
+  </div>
+  <p class="works">Paste into Claude Code, Codex, OpenClaw, Hermes, pi, dsh — any agent that runs shell commands.</p>
+</div>
+
+<script>
+  for (const box of document.querySelectorAll<HTMLElement>(".composer")) {
+    const need = box.querySelector("textarea")!;
+    const shown = box.querySelector(".need")!;
+    const copy = box.querySelector<HTMLButtonElement>(".copy")!;
+    const chips = [...box.querySelectorAll<HTMLButtonElement>(".chip")];
+    const sync = () => {
+      shown.textContent = need.value.trim() || "…";
+      for (const c of chips) c.classList.toggle("on", c.dataset.ask === need.value);
+    };
+    need.addEventListener("input", sync);
+    for (const c of chips)
+      c.addEventListener("click", () => {
+        need.value = c.dataset.ask!;
+        sync();
+      });
+    copy.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(`${need.value.trim()}\n${box.dataset.setup}`);
+      copy.textContent = "Copied";
+      copy.classList.add("done");
+      setTimeout(() => {
+        copy.textContent = "Copy";
+        copy.classList.remove("done");
+      }, 1600);
+    });
+  }
+</script>
+
+<style>
+  .composer {
+    padding: 20px;
+    display: grid;
+    gap: 14px;
+    box-shadow: 0 30px 80px -40px rgb(255 181 71 / 0.18);
+  }
+
+  label {
+    font: 500 12px/1 var(--mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 64px;
+    background: var(--sunken);
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    color: var(--fg);
+    font: 16px/1.5 var(--sans);
+    padding: 12px 14px;
+    outline: none;
+  }
+
+  textarea:focus {
+    border-color: var(--wake-line);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 13px;
+    color: var(--dim);
+    cursor: pointer;
+  }
+
+  .chip:hover {
+    color: var(--fg);
+  }
+
+  .chip.on {
+    border-color: var(--wake-line);
+    color: var(--wake);
+    background: var(--wake-soft);
+  }
+
+  .out {
+    background: var(--sunken);
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px 6px 16px;
+    border-bottom: 1px solid var(--line);
+    font: 12px var(--mono);
+    color: var(--faint);
+  }
+
+  pre {
+    padding: 14px 16px;
+    font: 13.5px/1.65 var(--mono);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .need {
+    color: var(--fg);
+  }
+
+  .setup {
+    color: var(--wake);
+  }
+
+  .setup :global(.nb) {
+    white-space: nowrap;
+  }
+
+  .copy {
+    border: 1px solid var(--line-strong);
+    background: var(--raised);
+    border-radius: 7px;
+    padding: 4px 12px;
+    font: 500 13px var(--sans);
+    cursor: pointer;
+  }
+
+  .copy:hover,
+  .copy.done {
+    border-color: var(--wake-line);
+    color: var(--wake);
+  }
+
+  .works {
+    margin: 0;
+    font-size: 13px;
+    color: var(--faint);
+  }
+
+</style>

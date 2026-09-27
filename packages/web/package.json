@@ -1,0 +1,20 @@
+{
+  "name": "@jevable/web",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "demo-data": "node --conditions=jevable-source scripts/demo-data.ts",
+    "deploy": "astro build && npx -y wrangler@4 deploy"
+  },
+  "dependencies": {
+    "astro": "7.3.5",
+    "marked": "^18"
+  },
+  "devDependencies": {
+    "@jevable/core": "0.1.1"
+  }
+}

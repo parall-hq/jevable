@@ -1,0 +1,132 @@
+---
+import { marked } from "marked";
+import Base from "../layouts/Base.astro";
+import { guide } from "../lib/guide.ts";
+
+// Headings get ids so sections can be linked; the h1 becomes the page title.
+const slug = (s: string) => s.toLowerCase().replace(/<[^>]+>/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const renderer = new marked.Renderer();
+renderer.heading = function ({ tokens, depth }) {
+  const text = this.parser.parseInline(tokens);
+  return `<h${depth} id="${slug(text)}">${text}</h${depth}>`;
+};
+const html = marked.parse(guide, { renderer, async: false });
+const sections = [...guide.matchAll(/^## (.+)$/gm)].map((m) => ({ title: m[1], id: slug(m[1]) }));
+---
+
+<Base title="jevable guide" description="Everything an agent needs to set up a jevable watch: the steps, how each runtime gets the events back, rules, options and recipes.">
+  <div class="wrap page">
+    <aside>
+      <span class="eyebrow">Guide</span>
+      <ul>
+        {sections.map((s) => <li><a href={`#${s.id}`}>{s.title}</a></li>)}
+      </ul>
+      <p>Agents: <code>npx -y jevable guide</code>, or fetch <a href="/guide.md">/guide.md</a>.</p>
+    </aside>
+    <article set:html={html} />
+  </div>
+</Base>
+
+<style>
+  .page {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 56px;
+    padding-top: 32px;
+  }
+
+  aside {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    font-size: 14px;
+  }
+
+  aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0 20px;
+    display: grid;
+    gap: 8px;
+  }
+
+  aside a {
+    color: var(--dim);
+    text-decoration: none;
+  }
+
+  aside a:hover {
+    color: var(--fg);
+  }
+
+  aside p {
+    color: var(--faint);
+    font-size: 13px;
+  }
+
+  article {
+    max-width: 78ch;
+  }
+
+  article :global(h1) {
+    font-size: clamp(32px, 5vw, 48px);
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0 0 20px;
+  }
+
+  article :global(h2) {
+    font-size: 26px;
+    margin: 56px 0 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  article :global(h3) {
+    font-size: 19px;
+    margin: 36px 0 8px;
+  }
+
+  article :global(p),
+  article :global(li) {
+    color: var(--dim);
+  }
+
+  article :global(strong) {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  article :global(pre) {
+    background: var(--sunken);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--fg);
+    margin: 16px 0;
+  }
+
+  article :global(pre code) {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  article :global(li) {
+    margin: 6px 0;
+  }
+
+  @media (max-width: 860px) {
+    .page {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    aside {
+      position: static;
+    }
+  }
+</style>

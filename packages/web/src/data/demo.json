@@ -1,0 +1,315 @@
+[
+  {
+    "id": "tibo",
+    "title": "Codex limit resets",
+    "source": "@thsottiaux on X",
+    "ask": "Tell me when Tibo announces that Codex usage limits were reset.",
+    "grep": "reset",
+    "rule": "judge.choice(line,\n  \"Does this post announce that Codex usage limits are being reset?\",\n  {\"reset_now\": \"The limits have been reset, are being reset right now, or will be back within the hour (e.g. 'back in a few minutes')\",\n   \"reset_soon\": \"A reset is promised or teased for later (hours or days away) but has not happened yet\",\n   \"other\": \"Anything else, including complaints about limits or other uses of the word reset\"})[\"reset_now\"] >= 0.7",
+    "events": [
+      {
+        "text": "This was fixed. You know what's coming 👀 Give us 24 hours to reset the Codex rate limits across all plans.",
+        "want": false,
+        "grep": true,
+        "pass": false,
+        "score": 0
+      },
+      {
+        "text": "Hi. Over the last 24 hours we had three separate small incidents that affected Codex reliability. Those are three too many and we are taking active steps for them to not reproduce. I have reset usage limits for Codex across all paid plans. May the tokens flow again.",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 1
+      },
+      {
+        "text": "As we are still investigating, I have reset everyone's Codex usage limits. This is a hard reset given some users had stacked up to three banked resets already that they can apply on their own schedule.",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 1
+      },
+      {
+        "text": "Reset your expectations: the new model is much faster than you think.",
+        "want": false,
+        "grep": true,
+        "pass": false,
+        "score": 0
+      },
+      {
+        "text": "Codex now supports plugins in the CLI. Try it with codex plugins and tell us what you build.",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0
+      },
+      {
+        "text": "Dearest gentle codexer. We did a sneaky double reset. Not only do you get a full reset on us. But you are also getting one into the reset bank to use at your own leisure. Enjoy",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 0.97
+      },
+      {
+        "text": "Hi! To celebrate its 1-year anniversary, I have allowed Codex to reset its own rate limits across all plans. Enjoy all the new features.",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 0.97
+      },
+      {
+        "text": "Old news actually from a bunch of days ago, but crossed that 15M. Enjoy a nice reset everyone. Landing in the next hour or so, go /fast.",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 0.87
+      },
+      {
+        "text": "Another reset for our Codex and ChatGPT Work users. Actually hit 9M active users way earlier today, but then got distracted by the approximately millions of things the team is doing to keep the systems up and reliable. Should have that sweet 100% weekly usage limit back in a few minutes.",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 1
+      },
+      {
+        "text": "We are investigating elevated error rates in Codex. Updates to follow.",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0
+      },
+      {
+        "text": "Hello. We have reached 8M active users across Codex and ChatGPT Work. We are once again resetting the usage limits for all. And we continue to not have the 5h rate limit as well, allowing everyone to explore the boundaries of GPT-5.6 Sol and discover how ambitious you can be.",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 0.99
+      },
+      {
+        "text": "I previously promised a reset for every 1M in additional active users for Codex, until 10M. We blew past that and have been silent since 10M. Little surprise for you tomorrow.",
+        "want": false,
+        "grep": true,
+        "pass": false,
+        "score": 0.04
+      },
+      {
+        "text": "What should we build next for Codex? Replies open.",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0
+      },
+      {
+        "text": "Oops... I did it again. Enjoy reset usage limits for all paid users for Codex and ChatGPT Work. Super grateful for an incredible team who is iterating at lightspeed and keeping the infra up as we scale faster than ever. Enjoy the weekend!",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 0.95
+      },
+      {
+        "text": "People keep asking about usage limits. We hear you, and we are working on a lot more capacity.",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0
+      },
+      {
+        "text": "We are reseting usage for all paid users of Codex and ChatGPT Work. Please continue reading for an update on Codex usage limits. The team has been working around the clock, going through thousands of reports and shipping fixes. Depending on how you use Codex, you should see your usage go between 10% and 50% further than before. We really went with a fine comb, with many uncovered small things being longstanding and here is what we found and fixed: - Compaction. We were keeping old images during compaction, sometimes making the context large enough to trigger compaction again. After the fix, usage dropped around 10% for users making heavy use of images. Fixed. - Memory. Background memory workers could inherit Stop hooks and keep running when the hook wouldn’t let them finish. This affected fewer than 1% of users, with the long tail being pretty bad and we saw one example thread check whether it could stop 15,000 times. Fixed. - Goals. In some cases, a set /goal could finish and then keep going past the intended stop condition, or the model would keep retrying broken tools without stopping. We saw examples consume anywhere from 15% to 70% of a weekly allowance. Fixed. - Automations. Some custom schedules could run more frequently than configured. Fixed. - Subagents. Smaller models (e.g. Luna) sometimes picked more capable helpers without being explicitly asked. The same was true where the orchestrating model not running in /fast mode could request sub-agents to run /fast. Fixed. - Computer History. The older implementation could lead to repeatedly summarizing overlapping activity. For some cases we saw it consume up to one fifth of the weekly usage per week. Fixed. - Rolling task summaries. Ordinary turns were triggering extra background requests. These added about 1% to token usage. Small each time, but it adds up. We have disabled this. - MCP. Some tool results could be encoded twice. We also found tool instructions getting cut off and fetched again. Fixed. We’ve also made architectural changes to prevent these from regressing and our teams will get paged if it happens regardless. We are also working on showing you directly in the app where your usage goes so you don’t have to guess. Goes without saying that we’re resetting usage limits and I hope you enjoy a very nice Saturday!",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 1
+      }
+    ]
+  },
+  {
+    "id": "status",
+    "title": "API incidents",
+    "source": "Claude and OpenAI status pages",
+    "ask": "Tell me when a resolved incident touched a model, the API or a developer tool.",
+    "grep": "\\bapi\\b",
+    "rule": "json.status == \"resolved\"\n  && (json.name.matches(\"(?i)\\\\bapi\\\\b\")\n      || judge.boolean(json.name,\n           \"Does this incident title name a model, the API, or a developer tool?\",\n           {\"true\": \"It names models (e.g. Opus, Sonnet, GPT-5.6), the API or developer platform, Claude Code, Codex, an agents API, or an SDK\",\n            \"false\": \"It names only consumer products or business functions: claude.ai, ChatGPT and its plans or modes, app stores, billing, sign-in, ads, office add-ins, connectors, or support\"}) >= 0.7)",
+    "events": [
+      {
+        "text": "openai.com — Delayed support responses",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.04
+      },
+      {
+        "text": "openai.com — Elevated errors for GPT-5.6 Sol on the API",
+        "want": true,
+        "grep": true,
+        "pass": true
+      },
+      {
+        "text": "openai.com — Elevated error rates for Codex and ChatGPT Work",
+        "want": true,
+        "grep": false,
+        "pass": true,
+        "score": 0.89
+      },
+      {
+        "text": "openai.com — Unable to open shared ChatGPT Project using direct link",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.13
+      },
+      {
+        "text": "claude.com — Elevated errors on Claude Code and Claude Cowork",
+        "want": true,
+        "grep": false,
+        "pass": true,
+        "score": 0.96
+      },
+      {
+        "text": "openai.com — Degraded Performance affecting Agents API",
+        "want": true,
+        "grep": true,
+        "pass": true
+      },
+      {
+        "text": "openai.com — We are seeing elevated error rates across API models",
+        "want": true,
+        "grep": true,
+        "pass": true
+      },
+      {
+        "text": "openai.com — Elevated Error Rates for ChatGPT across Plus and Pro plans.",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.16
+      },
+      {
+        "text": "openai.com — Mobile users unable to see Work Mode and the Model Picker",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.14
+      },
+      {
+        "text": "openai.com — Codex GitHub Review and Pull Request Failures",
+        "want": true,
+        "grep": false,
+        "pass": true,
+        "score": 0.98
+      },
+      {
+        "text": "claude.com — Issues with Google Play subscriptions",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.07
+      },
+      {
+        "text": "claude.com — Issues logging into Claude.ai",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.08
+      },
+      {
+        "text": "claude.com — Elevated latency on the Claude API for some users",
+        "want": true,
+        "grep": true,
+        "pass": true
+      },
+      {
+        "text": "openai.com — Ads Manager login issues",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.06
+      }
+    ]
+  },
+  {
+    "id": "regressions",
+    "title": "Regressions",
+    "source": "new issues on anthropics/claude-code",
+    "ask": "Wake me when a new issue says something that used to work is broken.",
+    "grep": "regression|used to work|no longer|stopped working",
+    "rule": "json.body.contains(\"Yes, this worked in a previous version\")\n  || judge.boolean([json.title, json.body],\n       \"Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?\",\n       {\"true\": \"It worked in an earlier version or before some date, and now it does not\",\n        \"false\": \"A bug with no sign it ever worked, a feature request, a question, or an empty report\"}) >= 0.7",
+    "events": [
+      {
+        "text": "#96720 [FEATURE] Support attaching terminal selection to chat (Cmd+L) in VS Code extension",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.02
+      },
+      {
+        "text": "#96729 [BUG] IDE diagnostics report \"code\": \"[object Object]\" for object-form Diagnostic.code",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.1
+      },
+      {
+        "text": "#96726 [GitHub integration]  Github connector completely broken and got features removed, worked perfectly fine earlier",
+        "want": true,
+        "grep": false,
+        "pass": true,
+        "score": 0.98
+      },
+      {
+        "text": "#96785 [Bug] False positive security flag on non-security iOS development queries",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.06
+      },
+      {
+        "text": "#96738 MCP OAuth over http now refused (2.1.281), but error only shows as 'no from the MCP SDK'",
+        "want": true,
+        "grep": false,
+        "pass": true,
+        "score": 0.99
+      },
+      {
+        "text": "#96751 [Bug] `/new` command doesn't clear session title from previous renamed session",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.06
+      },
+      {
+        "text": "#96769 [FEATURE] Claude Cloud Environment: Add JDK 25 Support",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.07
+      },
+      {
+        "text": "#96776 [FEATURE] Desktop (Linux): setting to stop a bare Alt key press from opening the application menu",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.03
+      },
+      {
+        "text": "#96745 [Bug] Claude loses file paths and working context mid-conversation",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 0.99
+      },
+      {
+        "text": "#96710 [FEATURE] Color-code sessions by project/brand in the desktop app sidebar",
+        "want": false,
+        "grep": false,
+        "pass": false,
+        "score": 0.01
+      },
+      {
+        "text": "#96787 [BUG] Middle-click paste inserts text twice in the TUI (VS Code terminal, Linux X11) — regression of #67857 in 2.1.281",
+        "want": true,
+        "grep": true,
+        "pass": true,
+        "score": 0.94
+      }
+    ]
+  }
+]

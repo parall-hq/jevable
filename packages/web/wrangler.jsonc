@@ -1,0 +1,8 @@
+// jevable.sh: the static site on Cloudflare Workers (static assets only, no code yet).
+// The hosted service can later add a Worker script here and serve /api from it.
+{
+  "name": "jevable-web",
+  "compatibility_date": "2026-09-27",
+  "assets": { "directory": "./dist" },
+  "routes": [{ "pattern": "jevable.sh", "custom_domain": true }]
+}

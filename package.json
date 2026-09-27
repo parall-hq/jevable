@@ -5,12 +5,13 @@
   "type": "module",
   "workspaces": [
     "packages/core",
-    "packages/cli"
+    "packages/cli",
+    "packages/web"
   ],
   "scripts": {
     "build": "npm run build --workspaces",
-    "typecheck": "npm run typecheck --workspaces",
-    "test": "npm test --workspaces"
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm test --workspaces --if-present"
   },
   "devDependencies": {
     "@types/node": "^24",
