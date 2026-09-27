@@ -1,0 +1,104 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="nav wrap">
+      <a class="brand" href="/"><span class="prompt">&gt;</span>jevable<span class="dot"></span></a>
+      <nav>
+        <a href="/guide">Guide</a>
+        <a href="https://www.npmjs.com/package/jevable">npm</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="wrap">
+      <span>jevable</span>
+      <span>Judgements by <a href="https://docs.typesafe.ai">Jev</a>, TypeSafe's classification model</span>
+      <span><a href="/guide">Guide</a> · <a href="/guide.md">guide.md</a> · <a href="https://www.npmjs.com/package/jevable">npm</a></span>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .brand {
+    font: 600 17px/1 var(--mono);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .prompt {
+    color: var(--faint);
+    margin-right: 6px;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--wake);
+    margin-left: 5px;
+    box-shadow: 0 0 12px var(--wake);
+  }
+
+  nav {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+    color: var(--dim);
+  }
+
+  nav a {
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--fg);
+  }
+
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 32px;
+    justify-content: space-between;
+    margin-top: clamp(80px, 12vw, 140px);
+    padding-top: 28px;
+    padding-bottom: 40px;
+    border-top: 1px solid var(--line);
+    color: var(--faint);
+    font-size: 13px;
+  }
+</style>

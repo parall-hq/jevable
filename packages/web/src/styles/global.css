@@ -1,0 +1,144 @@
+:root {
+  --bg: #0a0a0b;
+  --raised: #111113;
+  --sunken: #070708;
+  --line: #1e1e22;
+  --line-strong: #2b2b31;
+  --fg: #ececef;
+  --dim: #a1a1aa;
+  --faint: #66666e;
+  --wake: #ffb547;
+  --wake-soft: rgb(255 181 71 / 0.1);
+  --wake-line: rgb(255 181 71 / 0.35);
+  --wrong: #f87171;
+  --wrong-soft: rgb(248 113 113 / 0.1);
+  --sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --page: 1120px;
+  --gutter: clamp(16px, 4vw, 40px);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+}
+
+a:hover {
+  text-decoration-color: var(--wake);
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--mono);
+  font-size: 0.875em;
+}
+
+:not(pre) > code {
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0.1em 0.35em;
+}
+
+pre {
+  margin: 0;
+  overflow-x: auto;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+::selection {
+  background: var(--wake);
+  color: var(--bg);
+}
+
+.wrap {
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+section {
+  padding: clamp(64px, 10vw, 120px) 0 0;
+}
+
+h2 {
+  font-size: clamp(28px, 4.2vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin: 12px 0 16px;
+  text-wrap: balance;
+}
+
+.lede {
+  color: var(--dim);
+  font-size: clamp(16px, 1.6vw, 18px);
+  max-width: 62ch;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.panel {
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.term {
+  background: var(--sunken);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  font: 13px/1.7 var(--mono);
+  color: var(--dim);
+}
+
+.term .hl {
+  color: var(--wake);
+}
+
+.term .fg {
+  color: var(--fg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

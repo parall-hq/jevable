@@ -1,0 +1,284 @@
+---
+import Base from "../layouts/Base.astro";
+import Composer from "../components/Composer.astro";
+import Demo from "../components/Demo.astro";
+
+const runtimes = [
+  { name: "Claude Code", how: "A background command wakes you when it ends, even idle — or the Monitor tool, a notification per line." },
+  { name: "Codex", how: "A background terminal you wait on, or `codex queue` into the open thread; network needs one approval." },
+  { name: "OpenClaw", how: "A background `exec` wakes the session; an automation keeps long watches alive across restarts." },
+  { name: "Hermes", how: "`notify_on_complete` or `watch_patterns` in the session; a cron `--script` pre-check for long watches." },
+  { name: "pi", how: "A blocking wait with a timeout, or a detached watch that resumes the session with `pi -p --session`." },
+  { name: "dsh", how: "A background task you wait on with `task_output`; the key comes from `~/.jevable/key`." },
+];
+---
+
+<Base
+  title="jevable — make your monitor smart"
+  description="Your agent watches a log, a feed or an API. jevable wakes it only for what matters, judged by meaning in a third of a second. One prompt sets it up in any agent."
+>
+  <section class="hero wrap">
+    <div class="copy">
+      <span class="pill"><span>$</span> npx -y jevable guide</span>
+      <h1>Make your monitor smart.</h1>
+      <p class="lede">
+        Your agent watches a log, a feed or an API — and gets woken by every line, or by a grep that misses what nobody foresaw.
+        jevable lets through only what matters, judged by meaning in a third of a second.
+      </p>
+    </div>
+    <Composer id="need-top" />
+  </section>
+
+  <section class="wrap" id="demo">
+    <span class="eyebrow">Same events, two alerts</span>
+    <h2>grep wakes you for words.<br />jevable wakes you for what they mean.</h2>
+    <p class="lede">A keyword alert fires on a teaser and a pun, and stays silent when an outage is worded differently. The same events through a jevable rule:</p>
+    <div class="spacer"></div>
+    <Demo />
+  </section>
+
+  <section class="wrap how">
+    <span class="eyebrow">How it works</span>
+    <h2>A pipe, a rule, one question.</h2>
+    <ol class="steps">
+      <li>
+        <b>Source</b>
+        <p>Anything that prints one event per line: <code>tail -F</code> a log, an API polled in a loop, a feed.</p>
+      </li>
+      <li>
+        <b>Rule</b>
+        <p>Plain conditions first, like grep. Only what they cannot decide goes to <a href="https://docs.typesafe.ai">Jev</a> as one question.</p>
+      </li>
+      <li>
+        <b>Wake</b>
+        <p>Each match reaches the agent the way its runtime listens — or goes straight to your phone.</p>
+      </li>
+    </ol>
+    <pre class="term"><span class="fg">jevable filter --json --key json.id --from 'sh status.sh' \</span>
+  'json.status == "resolved" &amp;&amp; (json.name.matches("(?i)\\bapi\\b") ||
+     <span class="hl">judge.boolean(json.name, "Does this incident title name a model, the API, or a developer tool?") &gt;= 0.7</span>)'</pre>
+    <dl class="facts">
+      <div><dt>~0.3 s</dt><dd>per question to Jev</dd></div>
+      <div><dt>$0.04</dt><dd>per million input tokens</dd></div>
+      <div><dt>0 calls</dt><dd>when a plain condition decides</dd></div>
+      <div><dt>your fields</dt><dd>only what the rule names is sent</dd></div>
+    </dl>
+  </section>
+
+  <section class="wrap test">
+    <div>
+      <span class="eyebrow">Before you trust it</span>
+      <h2>Know the threshold, not a guess.</h2>
+      <p class="lede">
+        The agent writes samples that should and should not wake you, then runs <code>jevable test</code>. It shows every score and the thresholds that
+        separate the two sides — here, anything between 0.03 and 0.89.
+      </p>
+    </div>
+    <pre class="term"><span class="fg">$ jevable test -f rule.cel --yes yes.txt --no no.txt</span>
+ok  yes  reset_now  1.00  Another reset for our Codex…
+ok  yes  reset_now  0.89  Old news actually from a bunch…
+ok  yes  reset_now  1.00  We are reseting usage for all…
+ok  no   reset_soon 1.00  You know what's coming 👀 Give us…
+ok  no   other      1.00  Reset your expectations: the new…
+
+<span class="fg">16 of 16 as expected.</span>
+
+<span class="hl">["reset_now"] yes 0.89–1.00 · no 0.00–0.03
+  → any threshold above 0.03 and up to 0.89 separates them</span></pre>
+  </section>
+
+  <section class="wrap">
+    <span class="eyebrow">Runtimes</span>
+    <h2>Wakes the agent you already use.</h2>
+    <p class="lede">The guide tells each agent how its own runtime gets the events back — while the session is open, or for days after it closes.</p>
+    <ul class="runtimes">
+      {
+        runtimes.map((r) => (
+          <li class="panel">
+            <b>{r.name}</b>
+            <p set:html={r.how.replace(/`([^`]+)`/g, "<code>$1</code>")} />
+          </li>
+        ))
+      }
+      <li class="panel any">
+        <b>Anything with a shell</b>
+        <p>Wait for the next match, run a detached watch, or push each match to your phone.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="wrap cta">
+    <h2>One line in, a smart monitor out.</h2>
+    <p class="lede">Describe what to watch. Your agent writes the rule, tests it and arms it. It asks you once for a <a href="https://docs.typesafe.ai">TypeSafe API key</a>.</p>
+    <div class="spacer"></div>
+    <Composer id="need-bottom" />
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+    padding-top: clamp(40px, 8vw, 96px);
+    position: relative;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -120px auto auto -200px;
+    width: min(640px, calc(100vw + 200px - var(--gutter)));
+    height: 480px;
+    background: radial-gradient(closest-side, rgb(255 181 71 / 0.1), transparent);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .pill {
+    display: inline-block;
+    font: 13px var(--mono);
+    color: var(--dim);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 5px 14px;
+  }
+
+  .pill span {
+    color: var(--wake);
+  }
+
+  h1 {
+    font-size: clamp(44px, 7vw, 80px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    font-weight: 600;
+    margin: 18px 0 22px;
+    text-wrap: balance;
+  }
+
+  .spacer {
+    height: 32px;
+  }
+
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    counter-reset: step;
+  }
+
+  .steps li {
+    border-top: 1px solid var(--line-strong);
+    padding-top: 16px;
+    counter-increment: step;
+  }
+
+  .steps b::before {
+    content: "0" counter(step) "  ";
+    font: 500 12px var(--mono);
+    color: var(--wake);
+    white-space: pre;
+  }
+
+  .steps p {
+    color: var(--dim);
+    margin: 8px 0 0;
+    font-size: 15px;
+  }
+
+  .how pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 24px 0 0;
+  }
+
+  .facts div {
+    border-left: 1px solid var(--line-strong);
+    padding-left: 14px;
+  }
+
+  .facts dt {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .facts dd {
+    margin: 0;
+    color: var(--faint);
+    font-size: 13px;
+  }
+
+  .test {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: center;
+  }
+
+  .test pre {
+    font-size: 12.5px;
+  }
+
+  .runtimes {
+    list-style: none;
+    padding: 0;
+    margin: 32px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .runtimes li {
+    padding: 18px 20px;
+  }
+
+  .runtimes b {
+    font-weight: 600;
+  }
+
+  .runtimes p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--dim);
+  }
+
+  .runtimes :global(code) {
+    white-space: nowrap;
+  }
+
+  .runtimes .any {
+    border-style: dashed;
+    background: transparent;
+  }
+
+  .cta > * {
+    max-width: 760px;
+  }
+
+  @media (max-width: 900px) {
+    .hero,
+    .test {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .steps {
+      grid-template-columns: 1fr;
+    }
+
+    .facts {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

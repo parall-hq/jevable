@@ -1,0 +1,414 @@
+---
+// Real events from cases/, real Jev answers (scripts/demo-data.ts), replayed
+// next to what a keyword alert would have done.
+import demo from "../data/demo.json";
+
+const count = (events: (typeof demo)[number]["events"], f: (e: (typeof events)[number]) => boolean) => events.filter(f).length;
+const scenarios = demo.map((c) => ({
+  ...c,
+  grepWakes: count(c.events, (e) => e.grep),
+  grepNoise: count(c.events, (e) => e.grep && !e.want),
+  grepMissed: count(c.events, (e) => !e.grep && e.want),
+  jevWakes: count(c.events, (e) => e.pass),
+  jevWrong: count(c.events, (e) => e.pass !== e.want),
+}));
+const verdict = (noise: number, missed: number) =>
+  [noise && `${noise} for nothing`, missed && `missed ${missed}`].filter(Boolean).join(", ") || "all real, none missed";
+---
+
+<div class="demo">
+  <div class="tabs" role="tablist">
+    {scenarios.map((s, i) => <button type="button" role="tab" aria-selected={i === 0 ? "true" : "false"} data-tab={s.id}>{s.title}</button>)}
+  </div>
+
+  {
+    scenarios.map((s, i) => (
+      <div class="scenario" data-id={s.id} hidden={i !== 0}>
+        <div class="ask">
+          <p>“{s.ask}”</p>
+          <span>{s.events.length} real events · {s.source}</span>
+        </div>
+
+        <div class="feed panel">
+          <div class="head">
+            <span>event</span>
+            <span class="g">grep -iE '{s.grep}'</span>
+            <span class="j">jevable ≥ {s.rule.match(/>=\s*([\d.]+)\s*\)?\s*$/)?.[1] ?? "0.7"}</span>
+          </div>
+          <ol>
+            {s.events.map((e) => (
+              <li class:list={["row", { pass: e.pass, want: e.want }]}>
+                <p class="text">{e.text}</p>
+                <span class:list={["cell", "g", { fired: e.grep, wrong: e.grep !== e.want }]}>
+                  {e.grep ? (e.want ? "woke" : "woke · noise") : e.want ? "missed" : ""}
+                </span>
+                <span class="cell j">
+                  {e.score === undefined ? (
+                    <em>{e.pass ? "marker" : "—"}</em>
+                  ) : (
+                    <>
+                      <i class="bar" style={`--v:${e.score}`} />
+                      <b>{e.score.toFixed(2)}</b>
+                    </>
+                  )}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="score">
+          <div>
+            <span class="who">grep</span>
+            <strong>
+              woke you <span data-count="grep">{s.grepWakes}</span>×
+            </strong>
+            <span class:list={["how", { bad: s.grepNoise + s.grepMissed > 0 }]}>{verdict(s.grepNoise, s.grepMissed)}</span>
+          </div>
+          <div class="us">
+            <span class="who">jevable</span>
+            <strong>
+              woke you <span data-count="pass">{s.jevWakes}</span>×
+            </strong>
+            <span class="how">{s.jevWrong ? `${s.jevWrong} wrong` : "all real, none missed"}</span>
+          </div>
+        </div>
+
+        <details>
+          <summary>The rule</summary>
+          <pre class="term">{s.rule}</pre>
+        </details>
+      </div>
+    ))
+  }
+  <p class="note">
+    Real posts, incidents and issues, labelled before the first run. Scores are real Jev answers, recorded when this page was built.
+    “marker” means a plain condition in the rule decided without asking Jev.
+  </p>
+</div>
+
+<script>
+  const STEP = 260;
+
+  for (const demo of document.querySelectorAll<HTMLElement>(".demo")) {
+    const tabs = [...demo.querySelectorAll<HTMLButtonElement>("[role=tab]")];
+    const scenarios = [...demo.querySelectorAll<HTMLElement>(".scenario")];
+    let timers: number[] = [];
+
+    const play = (s: HTMLElement) => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      const rows = [...s.querySelectorAll<HTMLElement>(".row")];
+      const counters = [...s.querySelectorAll<HTMLElement>("[data-count]")];
+      const tally = { grep: 0, pass: 0 };
+      s.classList.add("armed");
+      rows.forEach((r) => r.classList.remove("in"));
+      counters.forEach((c) => (c.textContent = "0"));
+      rows.forEach((r, i) =>
+        timers.push(
+          window.setTimeout(() => {
+            r.classList.add("in");
+            if (r.querySelector(".g.fired")) tally.grep++;
+            if (r.classList.contains("pass")) tally.pass++;
+            for (const c of counters) c.textContent = String(tally[c.dataset.count as "grep" | "pass"]);
+          }, i * STEP),
+        ),
+      );
+    };
+
+    const show = (id: string) => {
+      tabs.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.tab === id)));
+      scenarios.forEach((s) => (s.hidden = s.dataset.id !== id));
+      play(scenarios.find((s) => s.dataset.id === id)!);
+    };
+
+    tabs.forEach((t) => t.addEventListener("click", () => show(t.dataset.tab!)));
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) continue;
+    const seen = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      seen.disconnect();
+      play(scenarios.find((s) => !s.hidden)!);
+    }, { threshold: 0.25 });
+    seen.observe(demo);
+  }
+</script>
+
+<style>
+  .tabs {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--raised);
+    margin-bottom: 28px;
+  }
+
+  [role="tab"] {
+    border: 0;
+    background: transparent;
+    border-radius: 7px;
+    padding: 7px 14px;
+    font-size: 14px;
+    color: var(--dim);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  [role="tab"][aria-selected="true"] {
+    background: var(--line-strong);
+    color: var(--fg);
+  }
+
+  .ask {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px 24px;
+    margin-bottom: 14px;
+  }
+
+  .ask p {
+    margin: 0;
+    font-size: 18px;
+    color: var(--fg);
+  }
+
+  .ask span {
+    font: 12px var(--mono);
+    color: var(--faint);
+  }
+
+  .feed {
+    overflow: hidden;
+  }
+
+  .head,
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px 150px;
+    gap: 16px;
+    align-items: center;
+    padding: 0 18px;
+  }
+
+  .head {
+    height: 40px;
+    border-bottom: 1px solid var(--line);
+    font: 500 12px var(--mono);
+    color: var(--faint);
+  }
+
+  .head .j {
+    color: var(--wake);
+  }
+
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .row {
+    min-height: 52px;
+    border-bottom: 1px solid var(--line);
+    border-left: 2px solid transparent;
+    padding-left: 16px;
+    transition:
+      opacity 0.35s,
+      transform 0.35s,
+      background 0.35s;
+  }
+
+  .row:last-child {
+    border-bottom: 0;
+  }
+
+  .armed .row {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  .armed .row.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .row.pass {
+    background: var(--wake-soft);
+    border-left-color: var(--wake);
+  }
+
+  .text {
+    margin: 10px 0;
+    font-size: 14px;
+    color: var(--dim);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .row.pass .text {
+    color: var(--fg);
+  }
+
+  .cell {
+    font: 12px var(--mono);
+    color: var(--faint);
+  }
+
+  .g.fired {
+    color: var(--dim);
+  }
+
+  .g.wrong {
+    color: var(--wrong);
+  }
+
+  .j {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bar {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line-strong);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: calc(var(--v) * 100%);
+    background: var(--faint);
+    border-radius: 2px;
+  }
+
+  .row.pass .bar::after {
+    background: var(--wake);
+  }
+
+  .j b {
+    font-weight: 500;
+    width: 32px;
+    text-align: right;
+  }
+
+  .row.pass .j {
+    color: var(--wake);
+  }
+
+  .j em {
+    font-style: normal;
+  }
+
+  .score {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .score > div {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: grid;
+    gap: 2px;
+  }
+
+  .score .us {
+    border-color: var(--wake-line);
+    background: var(--wake-soft);
+  }
+
+  .who {
+    font: 500 12px var(--mono);
+    color: var(--faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .us .who {
+    color: var(--wake);
+  }
+
+  strong {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .how {
+    color: var(--dim);
+    font-size: 14px;
+  }
+
+  .how.bad {
+    color: var(--wrong);
+  }
+
+  details {
+    margin-top: 16px;
+  }
+
+  summary {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--dim);
+    width: fit-content;
+  }
+
+  details pre {
+    margin-top: 10px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .note {
+    margin: 20px 0 0;
+    font-size: 13px;
+    color: var(--faint);
+    max-width: 80ch;
+  }
+
+  @media (max-width: 720px) {
+    .head {
+      display: none;
+    }
+
+    .row {
+      grid-template-columns: 1fr 1fr;
+      gap: 0 16px;
+      padding-bottom: 10px;
+    }
+
+    .text {
+      grid-column: 1 / -1;
+      margin-bottom: 6px;
+    }
+
+    .g::before {
+      content: "grep ";
+      color: var(--faint);
+    }
+
+    .g:empty::after {
+      content: "quiet";
+    }
+
+    .score {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
