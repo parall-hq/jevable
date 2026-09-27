@@ -4,7 +4,7 @@
 import { readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
-import { Client, Engine } from "@jevable/core";
+import { choose, Client, Engine, lookup, type Found } from "@jevable/core";
 import type { FilterResult } from "./run/filter.ts";
 
 // guide.md and package.json sit at the package root, next to src/ and dist/.
@@ -18,21 +18,40 @@ export const log = (msg: string): void => {
   process.stderr.write(`jevable: ${msg}\n`);
 };
 
-/** The shared engine, configured from the environment. A missing key is reported by the first judge call. */
-export function newEngine(model?: string): Engine {
-  const env = process.env;
-  const apiKey = env.JEV_API_KEY || env.TYPESAFE_API_KEY || keyFile();
-  return new Engine(new Client({ apiKey, baseUrl: env.JEV_BASE_URL, model: model || env.JEV_MODEL }));
+export const ENV_FILE = join(homedir(), ".jevable", "env");
+
+/**
+ * The environment, with ~/.jevable/env (NAME=value lines) filling in what it
+ * lacks: for runtimes that keep secrets out of a command's environment (dsh
+ * drops every variable named *KEY*) and for watches started elsewhere.
+ */
+export function settings(): { vars: Record<string, string | undefined>; fromFile: Set<string> } {
+  const vars: Record<string, string | undefined> = { ...process.env };
+  const fromFile = new Set<string>();
+  let text = "";
+  try {
+    text = readFileSync(ENV_FILE, "utf8");
+  } catch {}
+  for (const line of text.split("\n")) {
+    const m = line.match(/^\s*(?:export\s+)?([A-Za-z_]\w*)\s*=\s*(.*?)\s*$/);
+    if (!m || vars[m[1]]) continue;
+    vars[m[1]] = m[2].replace(/^(["'])(.*)\1$/, "$2");
+    fromFile.add(m[1]);
+  }
+  return { vars, fromFile };
 }
 
-// ~/.jevable/key: for runtimes that keep secrets out of a command's environment
-// (dsh drops every variable named *KEY*) and for watches started elsewhere.
-function keyFile(): string | undefined {
-  try {
-    return readFileSync(join(homedir(), ".jevable", "key"), "utf8").trim() || undefined;
-  } catch {
-    return undefined;
-  }
+/** The provider of Jev to use, from the environment: JEV_PROVIDER, else the first with a key. */
+export function provider(vars = settings().vars): Found | undefined {
+  return choose(lookup(vars), vars.JEV_PROVIDER);
+}
+
+/** The shared engine, configured from the environment. A missing key is reported by the first judge call. */
+export function newEngine(model?: string): Engine {
+  const { vars } = settings();
+  const found = provider(vars);
+  const p = found?.provider;
+  return new Engine(new Client({ apiKey: found?.key, baseUrl: p?.baseUrl, model: model || vars.JEV_MODEL || p?.model, provider: p?.label }));
 }
 
 /** The rule from the positional argument or -f, exactly one. */
@@ -48,5 +67,6 @@ export function printStats(r: Pick<FilterResult, "count" | "passed" | "emitted">
   const { calls, cacheHits, tokens } = engine.stats;
   const unit = r.count === 1 ? noun.replace(/s$/, "") : noun;
   const held = r.emitted >= 0 && r.emitted !== r.passed ? ` (${r.emitted} emitted, the rest held back by --key/--cooldown)` : "";
-  log(`${r.count} ${unit} · ${r.passed} passed${held} · ${calls} Jev calls (+${cacheHits} from cache) · ${tokens} tokens`);
+  const via = calls ? ` via ${engine.client.provider}` : "";
+  log(`${r.count} ${unit} · ${r.passed} passed${held} · ${calls} Jev calls${via} (+${cacheHits} from cache) · ${tokens} tokens`);
 }

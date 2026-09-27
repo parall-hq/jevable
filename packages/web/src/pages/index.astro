@@ -14,7 +14,7 @@ const runtimes = [
   { name: "OpenClaw", how: "A background `exec` wakes the session; an automation keeps long watches alive across restarts." },
   { name: "Hermes", how: "`notify_on_complete` or `watch_patterns` in the session; a cron `--script` pre-check for long watches." },
   { name: "pi", how: "A blocking wait with a timeout, or a detached watch that resumes the session with `pi -p --session`." },
-  { name: "dsh", how: "A background task you wait on with `task_output`; the key comes from `~/.jevable/key`." },
+  { name: "dsh", how: "A background task you wait on with `task_output`; the key comes from `~/.jevable/env`." },
 ];
 ---
 
@@ -134,7 +134,7 @@ ok  no   other      1.00  Reset your expectations: the new…
 
   <section class="wrap cta">
     <h2><span class="soft">One line in,</span><br />a smart monitor out.</h2>
-    <p class="lede">Describe what to watch. Your agent writes the rule, tests it and arms it. It asks you once for a <a href="https://docs.typesafe.ai">TypeSafe API key</a>.</p>
+    <p class="lede">Describe what to watch. Your agent writes the rule, tests it and arms it. For Jev it uses a key you already have — OpenRouter, Vercel AI Gateway or TypeSafe — or asks you once.</p>
     <div class="spacer"></div>
     <Composer id="need-bottom" />
   </section>

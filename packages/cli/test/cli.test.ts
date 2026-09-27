@@ -75,13 +75,38 @@ test("a failing --from source stops jevable with the reason on stdout", async ()
   assert.match(run.stdout, /jevable stopped: --from command exited with status 3/);
 });
 
-test("the key can come from ~/.jevable/key", async () => {
+test("settings can come from ~/.jevable/env", async () => {
   const f = await fake(outage);
   const home = tempHome();
   mkdirSync(join(home, ".jevable"));
-  writeFileSync(join(home, ".jevable", "key"), `${FAKE_KEY}\n`);
-  const run = await jevable(["filter", `judge.boolean(line, "Is this an outage?") >= 0.7`], { input: "outage\n", env: { HOME: home, JEV_BASE_URL: f.url } });
+  writeFileSync(join(home, ".jevable", "env"), `# for jevable\nexport JEV_API_KEY="${FAKE_KEY}"\nJEV_BASE_URL=${f.url}\n`);
+  const run = await jevable(["filter", `judge.boolean(line, "Is this an outage?") >= 0.7`], { input: "outage\n", env: { HOME: home } });
   assert.deepEqual([run.code, run.stdout], [0, "outage\n"]);
+  assert.match(run.stderr, new RegExp(`1 Jev calls via ${f.url.replace(/[.]/g, "\\.")}`));
+});
+
+test("providers lists where a key was found and which one is used", async () => {
+  const none = await jevable(["providers"]);
+  assert.equal(none.code, 1);
+  assert.match(none.stdout, /No key for Jev[\s\S]*OPENROUTER_API_KEY=\.\.\./);
+
+  const two = await jevable(["providers"], { env: { OPENROUTER_API_KEY: "or", AI_GATEWAY_API_KEY: "gw" } });
+  assert.equal(two.code, 0);
+  assert.match(two.stdout, /vercel\s+AI_GATEWAY_API_KEY \(environment\)\s+← used/);
+  assert.match(two.stdout, /openrouter\s+OPENROUTER_API_KEY \(environment\)\n/);
+
+  const picked = await jevable(["providers"], { env: { OPENROUTER_API_KEY: "or", AI_GATEWAY_API_KEY: "gw", JEV_PROVIDER: "openrouter" } });
+  assert.match(picked.stdout, /openrouter\s+OPENROUTER_API_KEY \(environment\)\s+← used/);
+});
+
+test("providers --check asks each provider with a key", async () => {
+  const f = await fake(outage);
+  const ok = await jevable(["providers", "--check"], { env: { JEV_BASE_URL: f.url, JEV_API_KEY: FAKE_KEY } });
+  assert.equal(ok.code, 0);
+  assert.match(ok.stdout, /custom\s+JEV_API_KEY \(environment\)\s+← used\s+ok /);
+  const refused = await jevable(["providers", "--check"], { env: { JEV_BASE_URL: f.url, JEV_API_KEY: "wrong" } });
+  assert.equal(refused.code, 1);
+  assert.match(refused.stdout, /failed: .* returned 401: invalid api key/);
 });
 
 test("guide, help and version", async () => {

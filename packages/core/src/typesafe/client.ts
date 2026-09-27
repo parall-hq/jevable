@@ -1,6 +1,6 @@
 // A minimal client for TypeSafe's System One endpoint
 // (https://docs.typesafe.ai/api): one state, a map of typed questions, one
-// typed answer per question.
+// typed answer per question. Other providers serve the same API (providers.ts).
 
 export const DEFAULT_BASE_URL = "https://api.typesafe.ai";
 // Pinned rather than `jev-latest`: thresholds are tuned against one model,
@@ -37,8 +37,8 @@ export interface Result {
 /** A non-2xx answer from the API. */
 export class HttpError extends Error {
   readonly status: number;
-  constructor(status: number, body: string) {
-    super(`typesafe API returned ${status}: ${body.slice(0, 512)}`);
+  constructor(provider: string, status: number, body: string) {
+    super(`${provider} returned ${status}: ${reason(body)}`);
     this.status = status;
   }
   /** Retrying cannot help: a bad key or a malformed request. */
@@ -47,15 +47,28 @@ export class HttpError extends Error {
   }
 }
 
+/** The message in an error body — TypeSafe's {message}, a gateway's {error: {message}} — else the body itself. */
+function reason(body: string): string {
+  try {
+    const j = JSON.parse(body);
+    const m = j?.error?.message ?? j?.message ?? j?.error;
+    if (typeof m === "string") return m;
+  } catch {}
+  return body.slice(0, 512);
+}
+
 export class Client {
   readonly baseUrl: string;
   readonly apiKey: string;
   readonly model: string;
+  /** Who serves Jev here, for messages. */
+  readonly provider: string;
 
-  constructor(opts: { apiKey?: string; baseUrl?: string; model?: string } = {}) {
+  constructor(opts: { apiKey?: string; baseUrl?: string; model?: string; provider?: string } = {}) {
     this.apiKey = opts.apiKey ?? "";
     this.baseUrl = (opts.baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
     this.model = opts.model || DEFAULT_MODEL;
+    this.provider = opts.provider || "TypeSafe";
   }
 
   /** Evaluates every question against state in one call, retrying once on anything but a fatal error. */
@@ -78,10 +91,10 @@ export class Client {
       signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
     });
     const text = await res.text();
-    if (!res.ok) throw new HttpError(res.status, text);
+    if (!res.ok) throw new HttpError(this.provider, res.status, text);
     const out = JSON.parse(text) as Result;
     for (const key of Object.keys(questions)) {
-      if (!out.answers?.[key]) throw new Error(`typesafe: answer ${JSON.stringify(key)} missing`);
+      if (!out.answers?.[key]) throw new Error(`${this.provider}: answer ${JSON.stringify(key)} missing`);
     }
     return out;
   }
