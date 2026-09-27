@@ -1,0 +1,111 @@
+---
+// A live run from cases/hn-problems (see cases/README.md): 100 Hacker News
+// comments, a rule that wakes you when one reports a problem with Claude Code.
+const stages = [
+  { n: 100, what: "comments came in", how: "the source" },
+  { n: 41, what: "mention Claude Code", how: "plain condition, no Jev call for the other 59" },
+  { n: 10, what: "report a problem with it", how: "one question to Jev each" },
+];
+---
+
+<figure class="funnel panel">
+  <figcaption>
+    <span>Live run</span>
+    “Wake me when a Hacker News comment reports a problem with Claude Code.”
+  </figcaption>
+  <ol>
+    {
+      stages.map((s, i) => (
+        <li class:list={{ last: i === stages.length - 1 }}>
+          <span class="bar" style={`--w:${s.n / stages[0].n}`} />
+          <b>{s.n}</b>
+          <span class="what">
+            {s.what}
+            <em>{s.how}</em>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <p>10 wakes, each one real.</p>
+</figure>
+
+<style>
+  .funnel {
+    margin: 0;
+    padding: 22px 24px;
+    display: grid;
+    gap: 18px;
+  }
+
+  figcaption {
+    font-size: 15px;
+    color: var(--fg);
+  }
+
+  figcaption span {
+    display: block;
+    margin-bottom: 4px;
+    font: 500 12px var(--mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 14px;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 4px 14px;
+    align-items: baseline;
+  }
+
+  .bar {
+    grid-column: 1 / -1;
+    height: 10px;
+    width: calc(var(--w) * 100%);
+    min-width: 10px;
+    border-radius: 5px;
+    background: var(--line-strong);
+  }
+
+  .last .bar {
+    background: var(--wake);
+    box-shadow: 0 0 18px rgb(255 181 71 / 0.35);
+  }
+
+  b {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .last b {
+    color: var(--wake);
+  }
+
+  .what {
+    color: var(--dim);
+    font-size: 14px;
+  }
+
+  em {
+    display: block;
+    font: 12px var(--mono);
+    font-style: normal;
+    color: var(--faint);
+  }
+
+  p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--faint);
+  }
+</style>

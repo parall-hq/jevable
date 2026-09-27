@@ -1,0 +1,82 @@
+---
+// A band of the demo's real events drifting by; the ones jevable woke for are lit.
+import demo from "../data/demo.json";
+
+const clip = (s: string) => (s.length > 72 ? `${s.slice(0, 70).trimEnd()}…` : s);
+// Interleave the cases so the band reads like one mixed feed.
+const longest = Math.max(...demo.map((c) => c.events.length));
+const items = Array.from({ length: longest }, (_, i) => demo.map((c) => c.events[i]).filter(Boolean)).flat();
+---
+
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    {
+      [0, 1].map(() =>
+        items.map((e) => (
+          <span class:list={["ev", { wake: e.pass }]}>
+            <i />
+            {clip(e.text)}
+          </span>
+        )),
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .ticker {
+    margin-top: clamp(56px, 8vw, 96px);
+    border-block: 1px solid var(--line);
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .track {
+    display: flex;
+    width: max-content;
+    padding: 14px 0;
+    animation: drift 160s linear infinite;
+  }
+
+  .ticker:hover .track {
+    animation-play-state: paused;
+  }
+
+  /* A margin rather than a gap: the second copy then starts exactly halfway. */
+  .ev {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 12px;
+    padding: 6px 14px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font: 13px var(--mono);
+    color: var(--faint);
+    white-space: nowrap;
+  }
+
+  .ev i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--line-strong);
+  }
+
+  .ev.wake {
+    color: var(--fg);
+    border-color: var(--wake-line);
+    background: var(--wake-soft);
+  }
+
+  .ev.wake i {
+    background: var(--wake);
+    box-shadow: 0 0 10px var(--wake);
+  }
+
+  @keyframes drift {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

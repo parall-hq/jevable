@@ -3,6 +3,8 @@ import Base from "../layouts/Base.astro";
 import Composer from "../components/Composer.astro";
 import Demo from "../components/Demo.astro";
 import Cost from "../components/Cost.astro";
+import Funnel from "../components/Funnel.astro";
+import Ticker from "../components/Ticker.astro";
 import { PER_QUESTION } from "../lib/cost.ts";
 import { usd } from "../lib/money.ts";
 
@@ -23,7 +25,7 @@ const runtimes = [
   <section class="hero wrap">
     <div class="copy">
       <span class="pill"><span>$</span> npx -y jevable guide</span>
-      <h1>Make your monitor smart.</h1>
+      <h1>Make your monitor <em>smart.</em></h1>
       <p class="lede">
         Your agent watches a log, a feed or an API — and pays a full turn for every line that wakes it, or misses what a grep did not foresee.
         jevable judges each event by meaning, for a fraction of a cent, and wakes the agent only when it matters.
@@ -32,9 +34,11 @@ const runtimes = [
     <Composer id="need-top" />
   </section>
 
+  <Ticker />
+
   <section class="wrap">
-    <span class="eyebrow">What a wake costs</span>
-    <h2>Every wake is an agent turn.<br />Pay only for the ones that matter.</h2>
+    <span class="eyebrow"><b>01</b>What a wake costs</span>
+    <h2><span class="soft">Every wake is an agent turn.</span><br />Pay only for the ones that matter.</h2>
     <p class="lede">
       Woken, an agent reads its context and thinks — cents to dollars a turn. A Jev question reads one event for about {usd(PER_QUESTION)}. With jevable in
       front, the agent watches everything and spends a turn only when something counts.
@@ -44,16 +48,16 @@ const runtimes = [
   </section>
 
   <section class="wrap" id="demo">
-    <span class="eyebrow">Same events, two alerts</span>
-    <h2>grep wakes you for words.<br />jevable wakes you for what they mean.</h2>
+    <span class="eyebrow"><b>02</b>Same events, two alerts</span>
+    <h2><span class="soft">grep wakes you for words.</span><br />jevable wakes you for what they mean.</h2>
     <p class="lede">A keyword alert fires on a teaser and a pun, and stays silent when an outage is worded differently. The same events through a jevable rule:</p>
     <div class="spacer"></div>
     <Demo />
   </section>
 
   <section class="wrap how">
-    <span class="eyebrow">How it works</span>
-    <h2>A pipe, a rule, one question.</h2>
+    <span class="eyebrow"><b>03</b>How it works</span>
+    <h2><span class="soft">A pipe, a rule,</span> one question.</h2>
     <ol class="steps">
       <li>
         <b>Source</b>
@@ -68,9 +72,16 @@ const runtimes = [
         <p>Each match reaches the agent the way its runtime listens — or goes straight to your phone.</p>
       </li>
     </ol>
-    <pre class="term"><span class="fg">jevable filter --json --key json.id --from 'sh status.sh' \</span>
-  'json.status == "resolved" &amp;&amp; (json.name.matches("(?i)\\bapi\\b") ||
-     <span class="hl">judge.boolean(json.name, "Does this incident title name a model, the API, or a developer tool?") &gt;= 0.7</span>)'</pre>
+    <div class="split">
+      <Funnel />
+      <div class="code term"><pre><span class="dim"># resolved incidents that name a model, the API or a dev tool</span>
+<span class="fg">jevable filter --json --key json.id --from 'sh status.sh' \</span>
+  'json.status == "resolved"
+   &amp;&amp; (json.name.matches("(?i)\\bapi\\b")
+       || <span class="hl">judge.boolean(json.name,
+            "Does this incident title name a model,
+             the API, or a developer tool?") &gt;= 0.7</span>)'</pre></div>
+    </div>
     <dl class="facts">
       <div><dt>~0.3 s</dt><dd>per question to Jev</dd></div>
       <div><dt>{usd(PER_QUESTION)}</dt><dd>per question, measured</dd></div>
@@ -81,8 +92,8 @@ const runtimes = [
 
   <section class="wrap test">
     <div>
-      <span class="eyebrow">Before you trust it</span>
-      <h2>Know the threshold, not a guess.</h2>
+      <span class="eyebrow"><b>04</b>Before you trust it</span>
+      <h2><span class="soft">Know the threshold,</span> not a guess.</h2>
       <p class="lede">
         The agent writes samples that should and should not wake you, then runs <code>jevable test</code>. It shows every score and the thresholds that
         separate the two sides — here, anything between 0.03 and 0.89.
@@ -102,8 +113,8 @@ ok  no   other      1.00  Reset your expectations: the new…
   </section>
 
   <section class="wrap">
-    <span class="eyebrow">Runtimes</span>
-    <h2>Wakes the agent you already use.</h2>
+    <span class="eyebrow"><b>05</b>Runtimes</span>
+    <h2><span class="soft">Wakes the agent</span> you already use.</h2>
     <p class="lede">The guide tells each agent how its own runtime gets the events back — while the session is open, or for days after it closes.</p>
     <ul class="runtimes">
       {
@@ -122,7 +133,7 @@ ok  no   other      1.00  Reset your expectations: the new…
   </section>
 
   <section class="wrap cta">
-    <h2>One line in, a smart monitor out.</h2>
+    <h2><span class="soft">One line in,</span><br />a smart monitor out.</h2>
     <p class="lede">Describe what to watch. Your agent writes the rule, tests it and arms it. It asks you once for a <a href="https://docs.typesafe.ai">TypeSafe API key</a>.</p>
     <div class="spacer"></div>
     <Composer id="need-bottom" />
@@ -161,6 +172,12 @@ ok  no   other      1.00  Reset your expectations: the new…
 
   .pill span {
     color: var(--wake);
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--wake);
+    text-shadow: 0 0 40px rgb(255 181 71 / 0.35);
   }
 
   h1 {
@@ -205,9 +222,27 @@ ok  no   other      1.00  Reset your expectations: the new…
     font-size: 15px;
   }
 
-  .how pre {
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .code {
+    display: grid;
+    align-content: center;
+    padding: 22px 24px;
+  }
+
+  .code pre {
+    font: inherit;
     white-space: pre-wrap;
     word-break: break-word;
+  }
+
+  .term :global(.dim) {
+    color: var(--faint);
   }
 
   .facts {
@@ -256,6 +291,14 @@ ok  no   other      1.00  Reset your expectations: the new…
 
   .runtimes li {
     padding: 18px 20px;
+    transition:
+      border-color 0.2s,
+      transform 0.2s;
+  }
+
+  .runtimes li:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
   }
 
   .runtimes b {
@@ -287,8 +330,9 @@ ok  no   other      1.00  Reset your expectations: the new…
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .steps {
-      grid-template-columns: 1fr;
+    .steps,
+    .split {
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .facts {

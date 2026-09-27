@@ -30,12 +30,26 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   background: var(--bg);
   color: var(--fg);
   font: 16px/1.6 var(--sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* A faint dot grid at the top of every page, fading out. */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 960px;
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 0%, #000 20%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 
 a {
@@ -84,10 +98,20 @@ button {
 }
 
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font: 500 12px/1 var(--mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--faint);
+}
+
+.eyebrow b {
+  font-weight: 500;
+  color: var(--wake);
+  padding-right: 10px;
+  border-right: 1px solid var(--line-strong);
 }
 
 section {
@@ -101,6 +125,10 @@ h2 {
   font-weight: 600;
   margin: 12px 0 16px;
   text-wrap: balance;
+}
+
+h2 .soft {
+  color: var(--faint);
 }
 
 .lede {
