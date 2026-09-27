@@ -1,0 +1,5 @@
+json.text.lowerAscii().contains("claude code")
+  && judge.boolean(json.text,
+       "Does the author report a problem they ran into with Claude Code?",
+       {"true": "Something went wrong or got in their way when using Claude Code: a bug, an error, slowness, an annoying behavior, or trouble installing or updating it",
+        "false": "Praise, opinions, jokes, comparisons, benchmarks, how-to advice, pricing talk, or problems with something other than Claude Code"}) >= 0.7

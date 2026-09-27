@@ -1,0 +1,13 @@
+{"id":4087429782,"user":"bgw","body":"Thinking more about this: Ignoring `ELOOP` here is correct. If you've got an infinitely looping symlink cycle (ugh, why), we can (and therefore should) preserve it by leaving `targetType` at the default of `file`."}
+{"id":4087182406,"user":"lukesandberg","body":"yeah i think that that is possible\n\nalso that `node_maybe_collectible` is wrong\n\nthe scenario would almost certainly require two sessions and an expiring root\n\nsession 1 leaks a root that retains a cell dep to a task that is deleted in that session\nsession 2 deletes the root, removing the edge which fails here"}
+{"id":4086252179,"user":"devjiwonchoi","body":"let me follow up with evals, it's not blocking, need to change the infra a bit"}
+{"id":4086219084,"user":"Sumit-Ks1","body":"Addressed in commit e14ef54e04 with try...finally teardown across all prospective, runtime, and final passes"}
+{"id":4086188718,"user":"lukesandberg","body":"ok, so we can only discard if the ref count is zero which tells us there are no waiters\n\nif there is a waiter, then either they want the blank or they will delete it"}
+{"id":4086169079,"user":"bgw","body":"Yikes"}
+{"id":4085037093,"user":"sokra","body":"Let's defer that to a follow up PR and try to land this as soon as possible"}
+{"id":4085024534,"user":"sokra","body":"Yeah, would be cool if that's possible. Not sure as we don't checkout the repo at all in this job"}
+{"id":4085016551,"user":"sokra","body":"I considered that, but concurrency doesn't allow you to control the order of scheduling, so that wasn't working well"}
+{"id":4082377860,"user":"sokra","body":"I think it's good as basic test, since it's involved to really test this behavior in CI"}
+{"id":4081993111,"user":"unstubbable","body":"Right. Clearing a user immediate can leave an unnecessary idle check, but it cannot make us report readiness too early. I kept that conservative behavior; the native cancellation and disposal cases are covered in the scheduler tests."}
+{"id":4079707368,"user":"lukesandberg","body":"the task_cache is still a dashmap, so the locks are sharded, this is why the try_lock approach is effective"}
+{"id":4078070461,"user":"lubieowoce","body":"i guess we're not accounting for if the immediate gets cleared? i suppose that's fine, we're just gonna wait longer than strictly needed but will still be correct"}

@@ -1,6 +1,6 @@
 # @jevable/core
 
-The rule engine behind [`jev`](../cli/README.md): CEL expressions over a
+The rule engine behind [`jevable`](../cli/README.md): CEL expressions over a
 record (`line`, `json`) or a window (`window`) that can ask
 [Jev](https://docs.typesafe.ai) semantic questions through `judge.boolean`,
 `judge.choice` and `judge.score`. Plain conditions decide first; Jev is asked

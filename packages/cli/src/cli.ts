@@ -1,17 +1,17 @@
 #!/usr/bin/env node
-// The jev command line: filter, test, guide.
+// The jevable command line: filter, test, guide.
 
 import { filterCommand } from "./commands/filter.ts";
 import { testCommand } from "./commands/test.ts";
 import { log, packageFile } from "./common.ts";
 
-const HELP = `jev — grep that reads meaning
+const HELP = `jevable — make your monitor smart
 
-jev reads records from stdin, one per line, and prints the ones that pass a
-rule: a CEL expression over the record that may ask Jev, a fast and cheap
-classification model, a semantic question.
+jevable reads records from stdin (or from --from CMD), one per line, and prints
+the ones that pass a rule: a CEL expression over the record that may ask Jev,
+a fast and cheap classification model, a semantic question.
 
-  tail -n 0 -F app.log | jev filter 'line.contains("ERROR") &&
+  jevable filter --from 'tail -n 0 -F app.log' 'line.contains("ERROR") &&
       judge.boolean(line, "Does this log line report that a service or a dependency it needs is down or unreachable?") >= 0.7'
 
 Commands:
@@ -19,9 +19,10 @@ Commands:
   test [RULE] --yes .. --no ..   run RULE on samples and show the scores
   guide                          what to do and how: steps for agents, rules, options, recipes
 
-Agents: read \`jev guide\` first and follow it.
-Setup: export TYPESAFE_API_KEY (or JEV_API_KEY; JEV_BASE_URL for a proxy, JEV_MODEL to pin a model).
-Run \`jev <command> --help\` for a command's options.
+Agents: read \`jevable guide\` first and follow it.
+Setup: export TYPESAFE_API_KEY (or JEV_API_KEY), or put the key in ~/.jevable/key.
+       JEV_BASE_URL for a proxy, JEV_MODEL to pin a model.
+Run \`jevable <command> --help\` for a command's options.
 `;
 
 async function main([cmd, ...args]: string[]): Promise<number> {
@@ -46,7 +47,7 @@ async function main([cmd, ...args]: string[]): Promise<number> {
       process.stderr.write(HELP);
       return 2;
     default:
-      log(`unknown command ${JSON.stringify(cmd)} — see \`jev --help\``);
+      log(`unknown command ${JSON.stringify(cmd)} — see \`jevable --help\``);
       return 2;
   }
 }

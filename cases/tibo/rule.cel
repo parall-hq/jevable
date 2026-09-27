@@ -1,0 +1,5 @@
+judge.choice(line,
+  "Does this post announce that Codex usage limits are being reset?",
+  {"reset_now": "The limits have been reset, are being reset right now, or will be back within the hour (e.g. 'back in a few minutes')",
+   "reset_soon": "A reset is promised or teased for later (hours or days away) but has not happened yet",
+   "other": "Anything else, including complaints about limits or other uses of the word reset"})["reset_now"] >= 0.7

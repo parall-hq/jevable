@@ -1,0 +1,5 @@
+judge.choice(json.body,
+  "What does this release mean for a project that already depends on this library?",
+  {"breaking": "Existing code or configuration must change to keep working: removed or renamed APIs, changed defaults or behavior, dropped support",
+   "security": "It fixes a security vulnerability that projects should patch",
+   "other": "Only fixes, additions, performance or docs; existing code keeps working unchanged"})["other"] <= 0.5

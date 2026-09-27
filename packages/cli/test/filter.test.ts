@@ -150,7 +150,7 @@ test("a missing field warns once and does not pass", async () => {
   assert.equal(logs.filter((l) => l.startsWith("record")).length, 1);
 });
 
-test("jev test reports wrong samples and the thresholds that separate", async () => {
+test("jevable test reports wrong samples and the thresholds that separate", async () => {
   const f = await fake((state) => {
     if (state.includes("rename")) return { noul: 0.91 };
     if (state.includes("nit")) return { noul: 0.62 };
@@ -163,7 +163,15 @@ test("jev test reports wrong samples and the thresholds that separate", async ()
   for (const want of [/WRONG\s+yes\s+0\.62/, /3 of 4 as expected\./, /any threshold above 0\.55 and up to 0\.62/]) assert.match(report, want);
 });
 
-test("jev test shows only the choice options the rule reads", async () => {
+test("jevable test finds the threshold when passing means a low score", async () => {
+  const f = await fake((state) => ({ probabilities: state.includes("breaking") ? { breaking: 0.95, other: 0.05 } : { breaking: 0.1, other: 0.9 } }));
+  const samples = [...expandSamples(["breaking: renamed the API"], true), ...expandSamples(["fixed a typo"], false)];
+  const { report, ok } = await runSamples(f.engine(), `judge.choice(line, "Kind?", {"breaking": "", "other": ""})["other"] <= 0.3`, samples);
+  assert.equal(ok, true);
+  assert.match(report, /\["other"\] yes 0\.05–0\.05 · no 0\.90–0\.90 → any threshold from 0\.05 up to below 0\.90 separates them \(use <=\)/);
+});
+
+test("jevable test shows only the choice options the rule reads", async () => {
   const f = await fake((state) => ({ probabilities: state.includes("reset") ? { now: 0.9, soon: 0.05, other: 0.05 } : { now: 0.02, soon: 0.08, other: 0.9 } }));
   const samples = [...expandSamples(["limits reset for all"], true), ...expandSamples(["new model today"], false)];
   const { report } = await runSamples(f.engine(), `judge.choice(line, "Reset?", {"now": "", "soon": "", "other": ""})["now"] >= 0.7`, samples);

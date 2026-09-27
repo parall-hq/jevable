@@ -1,0 +1,6 @@
+{"id":4095061770,"user":"mischnic","body":"```suggestion\n      const serverDir = join(next.testDir, next.distDir, 'server')\n```"}
+{"id":4092960499,"user":"sokra","body":"Fix and remove `.wasm_.loader.mjs` in the same way"}
+{"id":4088382713,"user":"bgw","body":"Run this after the other checks, it's lower priority than eslint for the rest of Next.js."}
+{"id":4088104213,"user":"lukesandberg","body":"move this so it is a sibling of code under test"}
+{"id":4087909200,"user":"lukesandberg","body":"these don't strike me as very valuable tests, trim it down?"}
+{"id":4087297798,"user":"sokra","body":"rename file and symbols to be more neutral, e.g. foo, bar, baz"}

@@ -1,0 +1,19 @@
+{"id":4095045453,"user":"BowlingX","body":"Seems to be wrong (See https://github.com/vercel/next.js/blob/0556c918bf7c4365f539f44f2dbc8b77df781da8/turbopack/crates/turbo-tasks/src/vc/resolved.rs#L44), `#[turbo_tasks::function]` rewrites the external signature. Without the deref I get an error"}
+{"id":4092953140,"user":"sokra","body":"```suggestion\n        self: ResolvedVc<Self>,\n```"}
+{"id":4092949552,"user":"sokra","body":"```suggestion\n        module_graph: ResolvedVc<ModuleGraph>,\n```"}
+{"id":4092415300,"user":"icyJoseph","body":"Minor thing, this is moving in the right direction, but maybe the second branch here should have the version, then we can remover line 64, which looks like a repetition otherwise\n\n"}
+{"id":4091706370,"user":"mischnic","body":"with_module_context is a weird API. Not sure if that breaks anything else\n\nwhat if we instead have some higher-level abstract helper to create these proxy modules (overriding a module's code)"}
+{"id":4090947503,"user":"sokra","body":"```suggestion\npredecessor links and checks all three required results: **8 REST calls**. The \n`pulls.list` response already contains head/base\n```"}
+{"id":4088375754,"user":"bgw","body":"You have to fetch scripts, but this is an action now. You shouldn't have to fetch actions, GH does this for you."}
+{"id":4088127416,"user":"lukesandberg","body":"should this be next to the other tests for mapNftFileEntries"}
+{"id":4087996769,"user":"icyJoseph","body":"Maybe to keep consistency, we can call this one a `known security vulnerability`"}
+{"id":4087626374,"user":"lukesandberg","body":"https://tenor.com/view/thanks-i-hate-it-gif-21433856\n\ndrop a comemnt about this"}
+{"id":4087294448,"user":"sokra","body":"Change the file paths to make this .gitignore unneeded."}
+{"id":4087107192,"user":"lukesandberg","body":"no need to be cute, just `symlinkCrossesRoot` as a short-named field\n\nkeep object shapes consistent"}
+{"id":4087082522,"user":"lukesandberg","body":"```suggestion\n      // We might be running again on partially written output if directory cleaning failed\n      if ((error as NodeJS.ErrnoException).code !== 'EEXIST') {\n        throw error\n      }\n```"}
+{"id":4087071455,"user":"lukesandberg","body":"i think stageName should be the cacheKey"}
+{"id":4087048323,"user":"lukesandberg","body":"Don't no-op on ELOOP?"}
+{"id":4086996374,"user":"lukesandberg","body":"stage? maybe write?"}
+{"id":4086922102,"user":"lukesandberg","body":"discussed in person\n\nthese two sections are maybe not 'examples' so much as 'descriptions', could go in a different section and/or their own pages\n\n"}
+{"id":4086362481,"user":"lukesandberg","body":"instead of filtering the array below it would be clearer to just have a separate list of webpack aliases that are conditionally included like `...(customWebpack? [] : webpackAliases)`\n\nthe string matching on its own looks very brittle"}
+{"id":4086361221,"user":"bgw","body":"GitHub rate limits are a huge problem throughout the org, and we should try to avoid making more requests than we need:\n\n- If one of the predecessors is not done yet, we don't need to poll the other two within the same 5s poll interval.\n- If we've previously discovered that a specific predecessor has reached a terminal state (succeeded or failed), we should move that predecessor to the bottom of the list so that we only recheck it if all the other predecessors have also completed.\n- GraphQL may allow us to check multiple PRs in a single request. Similar to my other comment about this, you should do a little bit of research into what the implications for rate limiting are there. GraphQL would prevent us from being able to bail out early in this loop."}

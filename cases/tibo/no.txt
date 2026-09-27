@@ -1,0 +1,7 @@
+This was fixed. You know what's coming 👀 Give us 24 hours to reset the Codex rate limits across all plans.
+Codex now supports plugins in the CLI. Try it with codex plugins and tell us what you build.
+We are investigating elevated error rates in Codex. Updates to follow.
+People keep asking about usage limits. We hear you, and we are working on a lot more capacity.
+What should we build next for Codex? Replies open.
+Reset your expectations: the new model is much faster than you think.
+I previously promised a reset for every 1M in additional active users for Codex, until 10M. We blew past that and have been silent since 10M. Little surprise for you tomorrow.

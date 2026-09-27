@@ -1,0 +1,5 @@
+json.body.contains("Yes, this worked in a previous version")
+  || judge.boolean([json.title, json.body],
+       "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       {"true": "It worked in an earlier version or before some date, and now it does not",
+        "false": "A bug with no sign it ever worked, a feature request, a question, or an empty report"}) >= 0.7

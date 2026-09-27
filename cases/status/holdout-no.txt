@@ -1,0 +1,14 @@
+{"page":"status.openai.com","id":"01M28MEQWTQJDRCRPFD9FWQ0H3","name":"1% of ChatGPT Work (mobile/web) turns are failing for existing threads","status":"resolved"}
+{"page":"status.claude.com","id":"nr3h7bw8b3k3","name":"Degraded performance on Claude for Microsoft Office 365","status":"resolved"}
+{"page":"status.claude.com","id":"9jrp5rtyzrf6","name":"Degraded performance on claude.ai","status":"resolved"}
+{"page":"status.claude.com","id":"620swtqyn24k","name":"Delays in credit purchases","status":"resolved"}
+{"page":"status.openai.com","id":"01M26E3PPAYJMMRHX2MZJCTHMF","name":"Delays in customer support responses","status":"resolved"}
+{"page":"status.openai.com","id":"01M34TAFM9WBGEBE3G1GBH4SE8","name":"Elevated Error Rates for ChatGPT Work, across Plus, Pro, Business, Enterprise and Education plans.","status":"resolved"}
+{"page":"status.openai.com","id":"01M2GA8XTS6VB3QCDEGZ0HNAQ5","name":"Elevated errors affecting Work Mode in ChatGPT","status":"resolved"}
+{"page":"status.openai.com","id":"01M2DV6788RRSDZ5K98S5HN0A8","name":"Elevated errors for ChatGPT users in Europe","status":"resolved"}
+{"page":"status.openai.com","id":"01M2NRHTYAM3K3M93X1D068MCY","name":"Elevated errors in ChatGPT Work","status":"resolved"}
+{"page":"status.claude.com","id":"w43j3xmngxgj","name":"Errors logging into Claude.ai","status":"resolved"}
+{"page":"status.openai.com","id":"01M348TX2DX7KPM9X857N4APNV","name":"Increased error rate for Plus and Pro users.","status":"resolved"}
+{"page":"status.claude.com","id":"kmbpgrsszf72","name":"Issues reaching status.claude.com","status":"resolved"}
+{"page":"status.claude.com","id":"yc7mr2gvl914","name":"Microsoft Office add-in availability","status":"resolved"}
+{"page":"status.openai.com","id":"01M2VBZB1RYSMXHZNRA25ZJ36X","name":"SSO sign-in and SCIM provisioning issues","status":"resolved"}
