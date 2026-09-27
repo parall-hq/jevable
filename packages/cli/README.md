@@ -28,14 +28,14 @@ The agent writes the rule, tests it on real events and on the edge cases you
 named, and arms it the way its runtime can be woken: a background command
 that ends at the next match and wakes the agent (restarted after each one), a
 stream of notifications (Claude Code's Monitor), or a watch that runs on after
-the session and pushes to your phone or resumes the session. For Jev it uses
-a key you already have — OpenRouter, Vercel AI Gateway or TypeSafe — or asks
-you once and keeps it in `~/.jevable/env`.
+the session and pushes to your phone or resumes the session. For Jev it needs
+one API key from TypeSafe, OpenRouter or Vercel AI Gateway: it finds the one
+you have, or asks you to paste one and sets it up.
 
 ## By hand
 
 ```bash
-export OPENROUTER_API_KEY=...        # or AI_GATEWAY_API_KEY, TYPESAFE_API_KEY; or put it in ~/.jevable/env
+npx -y jevable key sk-or-v1-...      # an API key from TypeSafe, OpenRouter or Vercel AI Gateway
 npx -y jevable filter --json --from 'tail -n 0 -F app.log' \
   'line.contains("ERROR") && judge.boolean(line, "Does this log line report that a service or a dependency it needs is down or unreachable?") >= 0.7'
 ```
@@ -44,7 +44,7 @@ Node 20+. `npx -y jevable <command>` needs no install; `npm i -g jevable` gives 
 
 - `jevable filter [RULE]` — print what passes, from stdin or `--from CMD`. `--json`, `--key`, `--cooldown`, `--window`, `-m`, `--state`, `--all`.
 - `jevable test [RULE] --yes ... --no ...` — run a rule on samples, show the scores and the thresholds that separate them.
-- `jevable providers [--check]` — where jevable reaches Jev (TypeSafe, Vercel AI Gateway, OpenRouter), the key it found for each, the one it uses.
+- `jevable key [KEY]` — whether there is a working key for Jev; given an API key from TypeSafe, OpenRouter or Vercel AI Gateway, check it and save it.
 - `jevable guide` — everything an agent needs: the steps, how each runtime gets the events back, rules, options, recipes ([guide.md](guide.md)).
 
 ## As a library

@@ -2,7 +2,7 @@
 // labelled samples in cases/, next to what a keyword alert would have done.
 // The page itself never calls Jev. Run after changing a case:
 //
-//   npm run demo-data -w packages/web     (a Jev key in the environment: see `jevable providers`)
+//   npm run demo-data -w packages/web     (a Jev key in the environment, e.g. OPENROUTER_API_KEY)
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { choose, Client, Engine, lookup, parseRecord, toCel, type Call } from "@jevable/core";

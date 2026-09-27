@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Runs every case, or the ones named: `jevable test` on its samples, then, if it
-# has a source.sh, `jevable filter` on live data. Needs a key for Jev (see `jevable providers`; and
+# has a source.sh, `jevable filter` on live data. Needs a key for Jev (`jevable key`; and
 # GITHUB_TOKEN helps with GitHub's rate limit). JEVABLE picks the jevable to run;
 # the default is this checkout's sources.
 set -euo pipefail

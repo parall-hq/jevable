@@ -2,7 +2,7 @@
 // background shell) actually sees on stdout, and when the process ends.
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, test } from "node:test";
@@ -85,28 +85,34 @@ test("settings can come from ~/.jevable/env", async () => {
   assert.match(run.stderr, new RegExp(`1 Jev calls via ${f.url.replace(/[.]/g, "\\.")}`));
 });
 
-test("providers lists where a key was found and which one is used", async () => {
-  const none = await jevable(["providers"]);
-  assert.equal(none.code, 1);
-  assert.match(none.stdout, /No key for Jev[\s\S]*OPENROUTER_API_KEY=\.\.\./);
-
-  const two = await jevable(["providers"], { env: { OPENROUTER_API_KEY: "or", AI_GATEWAY_API_KEY: "gw" } });
-  assert.equal(two.code, 0);
-  assert.match(two.stdout, /vercel\s+AI_GATEWAY_API_KEY \(environment\)\s+← used/);
-  assert.match(two.stdout, /openrouter\s+OPENROUTER_API_KEY \(environment\)\n/);
-
-  const picked = await jevable(["providers"], { env: { OPENROUTER_API_KEY: "or", AI_GATEWAY_API_KEY: "gw", JEV_PROVIDER: "openrouter" } });
-  assert.match(picked.stdout, /openrouter\s+OPENROUTER_API_KEY \(environment\)\s+← used/);
+test("key without one says what to ask the person", async () => {
+  const run = await jevable(["key"]);
+  assert.equal(run.code, 1);
+  assert.match(run.stdout, /^No key for Jev\. Ask the person for an API key from TypeSafe, OpenRouter or Vercel AI Gateway, then run: jevable key <the key>/);
 });
 
-test("providers --check asks each provider with a key", async () => {
+test("key checks a pasted key and saves it where later runs find it", async () => {
   const f = await fake(outage);
-  const ok = await jevable(["providers", "--check"], { env: { JEV_BASE_URL: f.url, JEV_API_KEY: FAKE_KEY } });
-  assert.equal(ok.code, 0);
-  assert.match(ok.stdout, /custom\s+JEV_API_KEY \(environment\)\s+← used\s+ok /);
-  const refused = await jevable(["providers", "--check"], { env: { JEV_BASE_URL: f.url, JEV_API_KEY: "wrong" } });
-  assert.equal(refused.code, 1);
-  assert.match(refused.stdout, /failed: .* returned 401: invalid api key/);
+  const home = tempHome();
+  const env = { HOME: home, JEV_BASE_URL: f.url };
+  const wrong = await jevable(["key", "wrong"], { env });
+  assert.equal(wrong.code, 1);
+  assert.match(wrong.stdout, /does not work: .*401: invalid api key\. Nothing saved\./);
+  assert.equal(existsSync(join(home, ".jevable", "env")), false);
+
+  const saved = await jevable(["key", FAKE_KEY], { env });
+  assert.equal(saved.code, 0);
+  assert.match(saved.stdout, /^Saved the .* key in ~\/\.jevable\/env; it works/);
+  assert.equal(statSync(join(home, ".jevable", "env")).mode & 0o777, 0o600);
+  assert.match((await jevable(["key"], { env })).stdout, /key in ~\/\.jevable\/env; it works/);
+  const run = await jevable(["filter", `judge.boolean(line, "Is this an outage?") >= 0.7`], { input: "outage\n", env });
+  assert.deepEqual([run.code, run.stdout], [0, "outage\n"]);
+});
+
+test("key refuses what is no key for Jev", async () => {
+  const run = await jevable(["key", "sk-ant-api03-xyz"]);
+  assert.equal(run.code, 1);
+  assert.match(run.stdout, /not a key for Jev: TypeSafe keys start with apikey_/);
 });
 
 test("guide, help and version", async () => {

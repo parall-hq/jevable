@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { choose, lookup } from "../src/index.ts";
+import { choose, lookup, whose } from "../src/index.ts";
 
 test("the first provider with a key is chosen, in preference order", () => {
   const found = lookup({ OPENROUTER_API_KEY: "or", AI_GATEWAY_API_KEY: "gw" });
@@ -15,6 +15,13 @@ test("the first provider with a key is chosen, in preference order", () => {
 test("JEV_BASE_URL puts a custom endpoint first, keyed by JEV_API_KEY", () => {
   const chosen = choose(lookup({ JEV_BASE_URL: "http://proxy", JEV_API_KEY: "k", OPENROUTER_API_KEY: "or" }));
   assert.deepEqual([chosen?.provider.name, chosen?.provider.baseUrl, chosen?.key], ["custom", "http://proxy", "k"]);
+});
+
+test("a key tells whose it is by how it starts", () => {
+  assert.deepEqual(
+    ["sk-or-v1-abc", "vck_abc", "apikey_abc", "sk-ant-abc"].map((k) => whose(k)?.name),
+    ["openrouter", "vercel", "typesafe", undefined],
+  );
 });
 
 test("no key anywhere chooses nothing", () => {
