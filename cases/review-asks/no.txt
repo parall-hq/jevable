@@ -1,0 +1,5 @@
+{"id":4093329515,"user":"lubieowoce","body":"after committing some embarrasingly mismatched snapshots where Instant Validation reported one thing in dev and another in build, i decided to make the new `ensureStatic` tests explicitly state which message they're expecting to see, and check that it's the same across dev/build. really, we should make the whole test suite do this, because it's too easy to commit a bad snapshot, but i'm gonna leave that for a follow up"}
+{"id":4092718933,"user":"lubieowoce","body":"oh i must've not had my coffee when i wrote that, damn"}
+{"id":4091204981,"user":"unstubbable","body":"Yeah, `_revealAfter` is not about delaying later stages, it's only about preventing flashing fallbacks from the earlier stages."}
+{"id":4087547751,"user":"bgw","body":"Will do this in a follow-up."}
+{"id":4086714052,"user":"unstubbable","body":"I think this was left over from the earlier review draft. Fixed in 7964498: the fallback now throws before reporting, so only the outer catch calls `onRequestError`."}

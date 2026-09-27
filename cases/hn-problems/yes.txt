@@ -1,0 +1,3 @@
+{"id":"49824692","author":"silverwind","text":"What's also annoying is that Claude Code now spams \"agents-md: no CLAUDE.md found; AGENTS.md loaded\" on every startup. I could just do that silently, no need to inform me that I'm using the superior file."}
+{"id":"49823675","author":"wrxd","text":"Startup time of Claude code is atrocious. I haven’t had a chance to have a look at what it is doing but it should be easy to measure"}
+{"id":"49817749","author":"yangcheng","text":"is there reason I can't update claude to 2.1.281? I just run claude update > claude update\nCurrent version: 2.1.280\nChecking for updates to latest version...\nClaude Code is up to date (2.1.280)"}

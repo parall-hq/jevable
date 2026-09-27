@@ -1,0 +1,6 @@
+!json.user.endsWith("[bot]")
+  && (json.body.contains("```suggestion")
+      || judge.boolean(json.body,
+           "Does this review comment ask the author to change the code?",
+           {"true": "It requests or suggests a change, including a plain instruction such as 'run this after X', 'move this', 'drop this', or fewer or more tests",
+            "false": "Approval, thanks, an explanation, a reply by the author, a promise to do it later, or a note that it is already fixed"}) >= 0.7)

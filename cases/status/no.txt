@@ -1,0 +1,7 @@
+{"page":"status.claude.com","id":"t8fpw9vcshl9","name":"Issues with Google Play subscriptions","status":"resolved"}
+{"page":"status.claude.com","id":"n0rlp126qf8g","name":"Issues logging into Claude.ai","status":"resolved"}
+{"page":"status.openai.com","id":"01M389CDQ97B11QPMSRAAYSE5S","name":"Mobile users unable to see Work Mode and the Model Picker","status":"resolved"}
+{"page":"status.openai.com","id":"01M36RMC01ZFWQ861WYJKC4XE1","name":"Elevated Error Rates for ChatGPT across Plus and Pro plans.","status":"resolved"}
+{"page":"status.openai.com","id":"01M2V76GEPJB0HQGRA0QERRZ3T","name":"Delayed support responses","status":"resolved"}
+{"page":"status.openai.com","id":"01M2JZR57HRQTKQGTCWG31M3AS","name":"Ads Manager login issues","status":"resolved"}
+{"page":"status.openai.com","id":"01M24HYC9SX2Q4471EVMY6EXQE","name":"Unable to open shared ChatGPT Project using direct link","status":"resolved"}
