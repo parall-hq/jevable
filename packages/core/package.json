@@ -1,6 +1,6 @@
 {
   "name": "@jevable/core",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "The jevable rule engine: CEL rules that ask Jev, TypeSafe's classification model, semantic questions",
   "type": "module",
   "exports": {
