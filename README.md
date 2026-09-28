@@ -48,4 +48,6 @@ npm run build       # dist/ per package; core first
 
 Tests and local runs use the TypeScript sources directly through the
 `jevable-source` export condition (`node --conditions=jevable-source`);
-published packages use `dist/`. Not open source: packages are `UNLICENSED`.
+published packages use `dist/`.
+
+[MIT](LICENSE) · [Security](SECURITY.md)
