@@ -1,6 +1,7 @@
 ---
-// The one prompt: the visitor's need, then the line that hands the agent the guide.
+// The one prompt: copy it into any agent and it works. Optionally, a job in front.
 import demo from "../data/demo.json";
+import { promptHtml } from "../lib/prompt.ts";
 
 interface Props {
   /** Unique per page: the composer appears more than once. */
@@ -8,55 +9,59 @@ interface Props {
 }
 
 const { id } = Astro.props;
-
-const SETUP = "Set it up with jevable: run `npx -y jevable guide` and follow it.";
-// Status incidents first: a source any agent can reach, so the default prompt runs end to end.
+// Status incidents first: a source any agent can reach.
 const examples = [
   ...demo.map((c) => ({ label: c.title, ask: c.ask })).sort((a, b) => Number(b.ask.includes("incident")) - Number(a.ask.includes("incident"))),
   { label: "PR review asks", ask: "When a reviewer asks for a change on PR #12 in acme/api, make the change and push it." },
   { label: "Dev log", ask: "While I work, watch logs/dev.log and wake up when a dependency goes down." },
 ];
-const first = examples[0].ask;
 ---
 
-<div class="composer panel" data-setup={SETUP}>
-  <label for={id}>What should your agent watch for?</label>
-  <textarea id={id} rows="2" spellcheck="false">{first}</textarea>
-  <div class="chips" role="list">
-    {examples.map((e, i) => <button type="button" role="listitem" class:list={["chip", { on: i === 0 }]} data-ask={e.ask}>{e.label}</button>)}
+<div class="composer">
+  <div class="card">
+    <div class="bar">
+      <span>Paste this into your agent</span>
+      <button type="button" class="copy">Copy prompt</button>
+    </div>
+    <pre set:html={promptHtml("")} />
   </div>
-  <div class="out">
-    <div class="bar"><span>Prompt</span><button type="button" class="copy">Copy</button></div>
-    <pre><span class="need">{first}</span>{"\n"}<span class="setup" set:html={SETUP.replace(/`[^`]+`/, (c) => `<span class="nb">${c}</span>`)} /></pre>
+  <div class="job">
+    <label for={id}>Or give it one job <em>(optional)</em></label>
+    <input id={id} type="text" autocomplete="off" spellcheck="false" placeholder="What should it watch, and what should happen when it matters?" />
+    <div class="chips" role="list">
+      {examples.map((e) => <button type="button" role="listitem" class="chip" data-ask={e.ask}>{e.label}</button>)}
+    </div>
   </div>
   <p class="works">
-    Paste into Claude Code, Codex, OpenClaw, Hermes, pi, dsh — any agent that runs shell commands. It asks you once for an API key from TypeSafe, OpenRouter or
-    Vercel, and sets it up.
+    Works in Claude Code, Codex, OpenClaw, Hermes, pi, dsh — any agent that runs shell commands. It asks you once for an API key from TypeSafe, OpenRouter or
+    Vercel, and sets itself up.
   </p>
 </div>
 
 <script>
+  import { prompt, promptHtml } from "../lib/prompt.ts";
+
   for (const box of document.querySelectorAll<HTMLElement>(".composer")) {
-    const need = box.querySelector("textarea")!;
-    const shown = box.querySelector(".need")!;
+    const job = box.querySelector("input")!;
+    const shown = box.querySelector("pre")!;
     const copy = box.querySelector<HTMLButtonElement>(".copy")!;
     const chips = [...box.querySelectorAll<HTMLButtonElement>(".chip")];
     const sync = () => {
-      shown.textContent = need.value.trim() || "…";
-      for (const c of chips) c.classList.toggle("on", c.dataset.ask === need.value);
+      shown.innerHTML = promptHtml(job.value);
+      for (const c of chips) c.classList.toggle("on", c.dataset.ask === job.value.trim());
     };
-    need.addEventListener("input", sync);
+    job.addEventListener("input", sync);
     for (const c of chips)
       c.addEventListener("click", () => {
-        need.value = c.dataset.ask!;
+        job.value = c.classList.contains("on") ? "" : c.dataset.ask!;
         sync();
       });
     copy.addEventListener("click", async () => {
-      await navigator.clipboard.writeText(`${need.value.trim()}\n${box.dataset.setup}`);
+      await navigator.clipboard.writeText(prompt(job.value));
       copy.textContent = "Copied";
       copy.classList.add("done");
       setTimeout(() => {
-        copy.textContent = "Copy";
+        copy.textContent = "Copy prompt";
         copy.classList.remove("done");
       }, 1600);
     });
@@ -65,33 +70,97 @@ const first = examples[0].ask;
 
 <style>
   .composer {
-    padding: 20px;
     display: grid;
-    gap: 14px;
-    box-shadow: 0 30px 80px -40px rgb(255 181 71 / 0.18);
+    gap: 18px;
   }
 
-  label {
-    font: 500 12px/1 var(--mono);
+  .card {
+    background: var(--sunken);
+    border: 1px solid var(--wake-line);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 4px var(--wake-soft),
+      0 40px 100px -40px rgb(255 181 71 / 0.35);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 10px 10px 20px;
+    border-bottom: 1px solid var(--line);
+    font: 500 12px var(--mono);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--faint);
   }
 
-  textarea {
+  .copy {
+    border: 0;
+    background: var(--wake);
+    color: var(--bg);
+    border-radius: 8px;
+    padding: 9px 18px;
+    font: 600 14px var(--sans);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .copy:hover {
+    filter: brightness(1.08);
+  }
+
+  .copy.done {
+    background: var(--fg);
+  }
+
+  pre {
+    padding: 22px 24px 26px;
+    font: 17px/1.6 var(--mono);
+    color: var(--wake);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+
+  pre :global(.need) {
+    color: var(--fg);
+  }
+
+  pre :global(.nb) {
+    white-space: nowrap;
+  }
+
+  .job {
+    display: grid;
+    gap: 10px;
+    text-align: left;
+  }
+
+  label {
+    font-size: 14px;
+    color: var(--dim);
+  }
+
+  label em {
+    font-style: normal;
+    color: var(--faint);
+  }
+
+  input {
     width: 100%;
-    resize: vertical;
-    min-height: 64px;
-    background: var(--sunken);
+    background: var(--raised);
     border: 1px solid var(--line-strong);
     border-radius: 10px;
     color: var(--fg);
-    font: 16px/1.5 var(--sans);
-    padding: 12px 14px;
+    font: 15px var(--sans);
+    padding: 11px 14px;
     outline: none;
   }
 
-  textarea:focus {
+  input:focus {
     border-color: var(--wake-line);
   }
 
@@ -121,61 +190,21 @@ const first = examples[0].ask;
     background: var(--wake-soft);
   }
 
-  .out {
-    background: var(--sunken);
-    border: 1px solid var(--line-strong);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
-  .bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px 8px 6px 16px;
-    border-bottom: 1px solid var(--line);
-    font: 12px var(--mono);
-    color: var(--faint);
-  }
-
-  pre {
-    padding: 14px 16px;
-    font: 13.5px/1.65 var(--mono);
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-  }
-
-  .need {
-    color: var(--fg);
-  }
-
-  .setup {
-    color: var(--wake);
-  }
-
-  .setup :global(.nb) {
-    white-space: nowrap;
-  }
-
-  .copy {
-    border: 1px solid var(--line-strong);
-    background: var(--raised);
-    border-radius: 7px;
-    padding: 4px 12px;
-    font: 500 13px var(--sans);
-    cursor: pointer;
-  }
-
-  .copy:hover,
-  .copy.done {
-    border-color: var(--wake-line);
-    color: var(--wake);
-  }
-
   .works {
     margin: 0;
     font-size: 13px;
     color: var(--faint);
+    text-align: left;
   }
 
+  @media (max-width: 560px) {
+    pre {
+      font-size: 15px;
+      padding: 18px;
+    }
+
+    .bar span {
+      font-size: 11px;
+    }
+  }
 </style>

@@ -1,6 +1,6 @@
 import { spawn } from "node:child_process";
 import { parseArgs } from "node:util";
-import { log, newEngine, printStats, QUESTION_OPTIONS, ruleOrQuestion, ruleSource } from "../common.ts";
+import { invert, log, newEngine, printStats, QUESTION_OPTIONS, ruleOrQuestion, ruleSource } from "../common.ts";
 import { runFilter } from "../run/filter.ts";
 
 export const FILTER_HELP = `jevable QUESTION [options]
@@ -14,7 +14,7 @@ text and \`json\` the parsed value when the line is JSON.
 With a question:
       --on PATH         judge this field of JSON records, jq style (.body, .user.login); repeat for several
   -t, --threshold N     pass when the probability of yes is at least N (default 0.7)
-  -v, --invert          pass when it is below instead
+  -v, --invert          pass when it is below instead (with a rule: when the rule is false)
       --rule RULE       a CEL rule instead of a question (-f FILE: read it from a file)
 
 With --key, records with the same key are the same thing: judged once and
@@ -79,9 +79,9 @@ export async function filterCommand(args: string[], form: "question" | "rule"): 
       process.stdout.write(FILTER_HELP);
       return 0;
     }
-    if (form === "rule" && (v.on?.length || v.threshold !== undefined || v.invert))
-      throw new Error(`--on, -t and -v go with a question: jevable --on .body "Does this ask for a change?"`);
-    const rule = form === "question" ? ruleOrQuestion(positionals, v) : (v.rule ?? ruleSource(positionals, v.file));
+    if (form === "rule" && (v.on?.length || v.threshold !== undefined))
+      throw new Error(`--on and -t go with a question: jevable --on .body "Does this ask for a change?"`);
+    const rule = form === "question" ? ruleOrQuestion(positionals, v) : invert(v.rule ?? ruleSource(positionals, v.file), v.invert);
     const engine = newEngine(v.model);
     const ac = new AbortController();
     process.once("SIGINT", () => ac.abort());

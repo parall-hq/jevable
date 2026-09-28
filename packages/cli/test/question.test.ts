@@ -20,6 +20,7 @@ test("a rule and a question do not mix", () => {
   assert.equal(ruleOrQuestion([], { rule: "line == 'x'" }), "line == 'x'");
   assert.throws(() => ruleOrQuestion(["Q?"], { rule: "true" }), /not both/);
   assert.throws(() => ruleOrQuestion([], { rule: "true", on: [".body"] }), /go with a question/);
+  assert.equal(ruleOrQuestion([], { rule: "line == 'x'", invert: true }), "!(line == 'x')");
   assert.throws(() => ruleOrQuestion([], {}), /missing question/);
   assert.throws(() => ruleOrQuestion(["Q?"], { threshold: "70" }), /between 0 and 1/);
 });

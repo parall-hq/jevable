@@ -77,8 +77,8 @@ export interface QuestionOptions {
 export function ruleOrQuestion(positionals: string[], o: QuestionOptions): string {
   if (o.rule !== undefined || o.file) {
     if (positionals.length) throw new Error("give a question, or a rule with --rule or -f, not both");
-    if (o.on?.length || o.threshold !== undefined || o.invert) throw new Error("--on, -t and -v go with a question; in a rule, write them into judge.boolean(...)");
-    return ruleSource(o.rule !== undefined ? [o.rule] : [], o.file);
+    if (o.on?.length || o.threshold !== undefined) throw new Error("--on and -t go with a question; in a rule, write them into judge.boolean(...)");
+    return invert(ruleSource(o.rule !== undefined ? [o.rule] : [], o.file), o.invert);
   }
   if (positionals.length > 1) throw new Error(`one question only, got ${positionals.length} arguments — quote the question`);
   const question = positionals[0]?.trim();
@@ -89,6 +89,9 @@ export function ruleOrQuestion(positionals: string[], o: QuestionOptions): strin
   if (!(t > 0 && t < 1)) throw new Error(`-t ${JSON.stringify(o.threshold)}: give a number between 0 and 1, e.g. 0.7`);
   return `judge.boolean(${material}, ${JSON.stringify(question)}) ${o.invert ? "<" : ">="} ${t}`;
 }
+
+/** -v on a rule: the records it does not pass. */
+export const invert = (rule: string, on?: boolean) => (on ? `!(${rule.trim()})` : rule);
 
 /** The options a question takes, for parseArgs. */
 export const QUESTION_OPTIONS = {
