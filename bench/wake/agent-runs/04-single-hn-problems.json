@@ -1,0 +1,105 @@
+{
+ "kind": "single",
+ "case": "hn-problems",
+ "matters": [
+  false
+ ],
+ "notifyLog": null,
+ "claude": {
+  "duration_api_ms": 4822,
+  "stop_reason": "end_turn",
+  "session_id": "894ff277-02a3-4b0a-9f3d-b0d521db64f7",
+  "total_cost_usd": 0.11417479999999999,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 13025,
+   "cache_read_input_tokens": 10234,
+   "output_tokens": 396,
+   "output_tokens_details": {
+    "thinking_tokens": 273
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 13025,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 396,
+     "cache_read_input_tokens": 10234,
+     "cache_creation_input_tokens": 13025,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 13025
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-opus-5-5[1m]": {
+    "inputTokens": 2,
+    "outputTokens": 396,
+    "cacheReadInputTokens": 10234,
+    "cacheCreationInputTokens": 13025,
+    "webSearchRequests": 0,
+    "costUSD": 0.11417479999999999,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 128000,
+    "thinkingTokens": 273,
+    "canonicalModel": "claude-opus-5-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "这条不用记录，我没有写 notify.log。\n\n这条评论是在跟人争论。作者在解释自己改过的评论改了哪里，以及对方记错了什么。里面提到的“Claude Code 用 remote control 控制 agent.md 的说法不对”，是在反驳别人的说法，不是在报告 Claude Code 出了什么问题。",
+  "ttft_ms": 3288,
+  "type": "result",
+  "duration_ms": 5601,
+  "uuid": "260f40bf-9aec-4b5e-83e2-8b6eb4312ff3",
+  "ttft_stream_ms": 1052,
+  "time_to_request_ms": 176,
+  "first_content_frame_ms": 1052,
+  "queued_turn_count": 0,
+  "result_index": 0
+ }
+}

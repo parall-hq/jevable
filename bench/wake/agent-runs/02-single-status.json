@@ -1,0 +1,105 @@
+{
+ "kind": "single",
+ "case": "status",
+ "matters": [
+  false
+ ],
+ "notifyLog": null,
+ "claude": {
+  "duration_api_ms": 3390,
+  "stop_reason": "end_turn",
+  "session_id": "16669332-31f5-4d4b-940d-d2da2cbca410",
+  "total_cost_usd": 0.0970508,
+  "usage": {
+   "input_tokens": 2,
+   "cache_creation_input_tokens": 11367,
+   "cache_read_input_tokens": 10234,
+   "output_tokens": 203,
+   "output_tokens_details": {
+    "thinking_tokens": 131
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 11367,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 203,
+     "cache_read_input_tokens": 10234,
+     "cache_creation_input_tokens": 11367,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 11367
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-opus-5-5[1m]": {
+    "inputTokens": 2,
+    "outputTokens": 203,
+    "cacheReadInputTokens": 10234,
+    "cacheCreationInputTokens": 11367,
+    "webSearchRequests": 0,
+    "costUSD": 0.0970508,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 128000,
+    "thinkingTokens": 131,
+    "canonicalModel": "claude-opus-5-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 1,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "这条不需要记录，我没有写入 notify.log。\n\n「Delays in credit purchases」讲的是买额度时到账慢，属于付款问题，没有影响到模型、API 本身或开发者工具。",
+  "ttft_ms": 1968,
+  "type": "result",
+  "duration_ms": 3645,
+  "uuid": "5f21aeb5-db7c-42d2-a985-4b9659a193fa",
+  "ttft_stream_ms": 897,
+  "time_to_request_ms": 119,
+  "first_content_frame_ms": 897,
+  "queued_turn_count": 0,
+  "result_index": 0
+ }
+}

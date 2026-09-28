@@ -1,0 +1,105 @@
+{
+ "kind": "single",
+ "case": "releases",
+ "matters": [
+  true
+ ],
+ "notifyLog": "2026-09-28 prisma/prisma v8.0.0-rc.5: breaking change — ORM toolchain commands renamed (format→contract format, migrate→db migrate, ref→migration ref, init→orm init); scripts calling the workspace binary with old names or mounting the command family by key must be updated (unified `prisma` CLI unaffected). Also: Postgres pools we construct ourselves now need our own 'error' listener to avoid crashes on dropped idle connections. See upgrade recipe skills/prisma-next-upgrade/upgrades/8.0.0-rc.4-to-8.0.0-rc.5/\n",
+ "claude": {
+  "duration_api_ms": 18568,
+  "stop_reason": "end_turn",
+  "session_id": "82aa6c97-c93f-4045-b0e4-0ed63cfb3414",
+  "total_cost_usd": 0.16401899999999997,
+  "usage": {
+   "input_tokens": 6,
+   "cache_creation_input_tokens": 15585,
+   "cache_read_input_tokens": 59675,
+   "output_tokens": 1369,
+   "output_tokens_details": {
+    "thinking_tokens": 458
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 15585,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 452,
+     "cache_read_input_tokens": 24932,
+     "cache_creation_input_tokens": 887,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 887
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-opus-5-5[1m]": {
+    "inputTokens": 6,
+    "outputTokens": 1369,
+    "cacheReadInputTokens": 59675,
+    "cacheCreationInputTokens": 15585,
+    "webSearchRequests": 0,
+    "costUSD": 0.16401899999999997,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 128000,
+    "thinkingTokens": 458,
+    "canonicalModel": "claude-opus-5-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 3,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "我在 `notify.log` 里加了一行，因为 prisma v8.0.0-rc.5 有两处可能要改我们的代码：\n\n1. **命令改名（官方列为破坏性改动）**：6 个 ORM 命令换了名字。`format` 变成 `contract format`，`migrate` 变成 `db migrate`，`ref …` 变成 `migration ref …`，`init` 变成 `orm init`。只要我们有脚本直接调用工作区里的二进制文件、还用着旧名字，就得改。通过统一的 `prisma` 命令行调用的不受影响。\n2. **Postgres 连接池**：官方已经修好了它自己创建的连接池，数据库重启或网络断开后，空闲连接掉线不会再让进程崩溃。但我们自己代码里新建、直接使用的连接池，需要自己加一个 `'error'` 监听器，否则还是会崩。\n\n这个版本没有修安全漏洞。当前目录里没有我们的代码，所以我没法确认我们到底有没有用到旧命令，或者有没有自己建连接池。这行记录只是说明\"可能要改\"，还需要有人对照项目核实一下。",
+  "ttft_ms": 4977,
+  "type": "result",
+  "duration_ms": 20864,
+  "uuid": "bcfd1b86-e4f2-4426-91a8-83a52703be3e",
+  "ttft_stream_ms": 2374,
+  "time_to_request_ms": 187,
+  "first_content_frame_ms": 2374,
+  "queued_turn_count": 0,
+  "result_index": 0
+ }
+}

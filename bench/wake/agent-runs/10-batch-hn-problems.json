@@ -1,0 +1,114 @@
+{
+ "kind": "batch",
+ "case": "hn-problems",
+ "matters": [
+  false,
+  true,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  true,
+  false
+ ],
+ "notifyLog": "49821482 (bayarearefugee): Claude Code/Opus 5 took down the only wi-fi adapter while diagnosing a wi-fi issue, cutting off its own connection and leaving a mess to clean up.\n49819493 (naw103): Claude Code subagents ignore shared memory and create conflicts with each other; it resolves itself but wastes a lot of tokens.\n",
+ "claude": {
+  "duration_api_ms": 15669,
+  "stop_reason": "end_turn",
+  "session_id": "b13d8376-301f-4374-9a72-7b172a70eafa",
+  "total_cost_usd": 0.1726492,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 16981,
+   "cache_read_input_tokens": 34526,
+   "output_tokens": 1494,
+   "output_tokens_details": {
+    "thinking_tokens": 837
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 16981,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 416,
+     "cache_read_input_tokens": 24292,
+     "cache_creation_input_tokens": 2923,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 2923
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-opus-5-5[1m]": {
+    "inputTokens": 4,
+    "outputTokens": 1494,
+    "cacheReadInputTokens": 34526,
+    "cacheCreationInputTokens": 16981,
+    "webSearchRequests": 0,
+    "costUSD": 0.1726492,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 128000,
+    "thinkingTokens": 837,
+    "canonicalModel": "claude-opus-5-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 2,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "这 10 条评论里有 2 条在报告 Claude Code 出的问题，已经各写了一行进 `notify.log`：\n\n- **49821482**（bayarearefugee）：用 Claude Code（Opus 5）排查 wi-fi 时断时续，它第一步就把网卡关了。这块网卡是机器唯一的联网方式，等于把自己的网断了，后面越搞越乱，最后要用户手动收拾。\n- **49819493**（naw103）：Claude Code 自己开出来的几个子任务 agent 会各干各的，互相冲突。最后能自己解决，但白白多花不少 token。这条评论主要是在推他自己的工具 Foremerge，不过提到的问题是具体的。\n\n另外 8 条没有记：\n\n- 有的只是提到 Claude Code 或说自己在用（dashersw、linsomniac、fnoef、agentdev001）。\n- 有的是在跟别人争论（mgaldys4、the_sleaze_、minimaxir）。\n- jorgeleo 说 \"claude code nope\"，只是笼统表达不喜欢，没说具体出了什么问题。",
+  "ttft_ms": 8333,
+  "type": "result",
+  "duration_ms": 17363,
+  "uuid": "baba135b-9e3a-4308-af6d-68d9e128a6d5",
+  "ttft_stream_ms": 1247,
+  "time_to_request_ms": 271,
+  "first_content_frame_ms": 1247,
+  "queued_turn_count": 0,
+  "result_index": 0
+ }
+}

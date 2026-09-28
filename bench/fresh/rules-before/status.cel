@@ -2,5 +2,5 @@ json.status == "resolved"
   && (json.name.matches("(?i)\\bapi\\b")
       || judge.boolean(json.name,
            "Does this incident title name a model, the API, or a developer tool?",
-           {"true": "It names models (one, such as Opus, Sonnet or GPT-5.6, or several or all, such as 'multiple models' or 'all models'), the API or developer platform (platform.claude.com, platform.openai.com, the Console), Claude Code, Codex, an agents API, or an SDK",
+           {"true": "It names models (e.g. Opus, Sonnet, GPT-5.6), the API or developer platform, Claude Code, Codex, an agents API, or an SDK",
             "false": "It names only consumer products or business functions: claude.ai, ChatGPT and its plans or modes, app stores, billing, sign-in, ads, office add-ins, connectors, or support"}) >= 0.7)
