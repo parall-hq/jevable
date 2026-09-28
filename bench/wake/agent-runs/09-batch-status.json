@@ -1,0 +1,114 @@
+{
+ "kind": "batch",
+ "case": "status",
+ "matters": [
+  true,
+  false,
+  true,
+  true,
+  false,
+  true,
+  false,
+  false,
+  true,
+  true
+ ],
+ "notifyLog": "[status.openai.com 01M2VA7X37P1ASADSNZ1CG4N4D] resolved: Overbilling for OpenAI-hosted containers in the Agent API — API issue (Agent API containers billed too much)\n[status.claude.com 6304r9jjhj34] resolved: Intermittent error spikes for Claude Mythos 5.1 and Claude Fable 5.1 — model issue (errors on two models)\n[status.claude.com 288w7p4hk1l1] resolved: Elevated errors for Claude Sonnet 5 — model issue (errors on Sonnet 5)\n[status.claude.com 3g3d55q6vk3h] resolved: Degraded performance on platform.claude.com and Claude for Microsoft Office 365 — developer tool issue (platform.claude.com developer console was slow)\n[status.claude.com c0ncxxm2wd9r] resolved: Elevated errors on requests to multiple models — model/API issue (errors across several models)\n[status.claude.com q2kg8n613kr3] resolved: Elevated errors across all models — model/API issue (errors on every model)\n",
+ "claude": {
+  "duration_api_ms": 17983,
+  "stop_reason": "end_turn",
+  "session_id": "5ae33915-e0a1-4683-b29f-b024d8ab8dac",
+  "total_cost_usd": 0.17329280000000002,
+  "usage": {
+   "input_tokens": 6,
+   "cache_creation_input_tokens": 15429,
+   "cache_read_input_tokens": 58584,
+   "output_tokens": 1906,
+   "output_tokens_details": {
+    "thinking_tokens": 644
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 15429,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 507,
+     "cache_read_input_tokens": 24645,
+     "cache_creation_input_tokens": 1018,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 1018
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-opus-5-5[1m]": {
+    "inputTokens": 6,
+    "outputTokens": 1906,
+    "cacheReadInputTokens": 58584,
+    "cacheCreationInputTokens": 15429,
+    "webSearchRequests": 0,
+    "costUSD": 0.17329280000000002,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 128000,
+    "thinkingTokens": 644,
+    "canonicalModel": "claude-opus-5-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 3,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "10 条事件里有 6 条和模型、API 或开发者工具有关，我已经把它们各写成一行追加到 `notify.log`（之前这个文件不存在，这次是新建的）。\n\n**已记录：**\n- OpenAI 的 Agent API 容器多收费：属于 API 问题\n- Claude Mythos 5.1 和 Fable 5.1 报错突然变多：属于模型问题\n- Claude Sonnet 5 报错变多：属于模型问题\n- platform.claude.com 变慢：这是开发者控制台，算开发者工具\n- 多个模型请求报错变多：属于模型/API 问题\n- 所有模型报错变多：属于模型/API 问题\n\n**没记录：**\n- 购买额度变慢：只影响付款，没影响模型或 API 本身\n- Claude.ai 登录出错：这是给普通用户的网页产品\n- Claude for Microsoft Office 365 变慢（单独那条）：是办公插件，不算开发者工具\n- status.claude.com 打不开：只是状态页本身的问题\n\n有两条是按我的理解判断的，你可以看一下：\n- **OpenAI 多收费那条我记了**：它是计费问题，但只出在 Agent API 上。\n- **购买额度那条我没记**：它虽然也和 API 用户有关，但没影响到接口本身。\n\n如果你的标准不一样，告诉我，我改一下。",
+  "ttft_ms": 5871,
+  "type": "result",
+  "duration_ms": 19928,
+  "uuid": "33a01c0f-b516-4184-be62-66e676cc0566",
+  "ttft_stream_ms": 983,
+  "time_to_request_ms": 135,
+  "first_content_frame_ms": 983,
+  "queued_turn_count": 0,
+  "result_index": 0
+ }
+}

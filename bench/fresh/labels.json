@@ -1,0 +1,1742 @@
+{
+ "status": [
+  {
+   "i": 0,
+   "label": "no",
+   "why": "Cowork desktop app mode on Windows only"
+  },
+  {
+   "i": 1,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 2,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 3,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 4,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 5,
+   "label": "no",
+   "why": "Google connectors only, consumer feature"
+  },
+  {
+   "i": 6,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 7,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 8,
+   "label": "yes",
+   "why": "resolved; API, platform, Claude Code affected"
+  },
+  {
+   "i": 9,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 10,
+   "label": "yes",
+   "why": "resolved; Claude API and Claude Code affected"
+  },
+  {
+   "i": 11,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 12,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 13,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 14,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 15,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 16,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 17,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 18,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 19,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 20,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 21,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 22,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 23,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 24,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 25,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 26,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 27,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 28,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 29,
+   "label": "yes",
+   "why": "resolved; models / API affected"
+  },
+  {
+   "i": 30,
+   "label": "yes",
+   "why": "resolved; Codex affected"
+  },
+  {
+   "i": 31,
+   "label": "yes",
+   "why": "resolved; GPT-6 Astra Pro model errors"
+  },
+  {
+   "i": 32,
+   "label": "no",
+   "why": "ChatGPT Work mode only"
+  },
+  {
+   "i": 33,
+   "label": "unsure",
+   "why": "model errors, but scoped to ChatGPT paid plans"
+  },
+  {
+   "i": 34,
+   "label": "no",
+   "why": "ChatGPT users in Europe, consumer app"
+  },
+  {
+   "i": 35,
+   "label": "no",
+   "why": "ChatGPT Work only"
+  }
+ ],
+ "review-asks": [
+  {
+   "i": 0,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 1,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 2,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 3,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 4,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 5,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 6,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 7,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 8,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 9,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 10,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 11,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 12,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 13,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 14,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 15,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 16,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 17,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 18,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 19,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 20,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 21,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 22,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 23,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 24,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 25,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 26,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 27,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 28,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 29,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 30,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 31,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 32,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 33,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 34,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 35,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 36,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 37,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 38,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 39,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 40,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 41,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 42,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 43,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 44,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 45,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 46,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 47,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 48,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 49,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 50,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 51,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 52,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 53,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 54,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 55,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 56,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 57,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 58,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 59,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 60,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 61,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 62,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 63,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 64,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 65,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 66,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 67,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 68,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 69,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 70,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 71,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 72,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 73,
+   "label": "no",
+   "why": "author explaining own change"
+  },
+  {
+   "i": 74,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 75,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 76,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 77,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 78,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 79,
+   "label": "no",
+   "why": "author declining suggestion, explanation"
+  },
+  {
+   "i": 80,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 81,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 82,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 83,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 84,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 85,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 86,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 87,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 88,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 89,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 90,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 91,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 92,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 93,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 94,
+   "label": "no",
+   "why": "author's reply / fix note, not a request"
+  },
+  {
+   "i": 95,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 96,
+   "label": "no",
+   "why": "bot comment"
+  },
+  {
+   "i": 97,
+   "label": "yes",
+   "why": "reviewer asks to add serde::Serialize support"
+  },
+  {
+   "i": 98,
+   "label": "yes",
+   "why": "reviewer asks to do same for Serialize"
+  },
+  {
+   "i": 99,
+   "label": "yes",
+   "why": "reviewer asks to remove trivial tests"
+  }
+ ],
+ "hn-problems": [
+  {
+   "i": 0,
+   "label": "no",
+   "why": "legal privilege discussion, not Claude Code"
+  },
+  {
+   "i": 1,
+   "label": "unsure",
+   "why": "hit claude max limits, Claude Code implied not named"
+  },
+  {
+   "i": 2,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 3,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 4,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 5,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 6,
+   "label": "no",
+   "why": "critiques vibe-coded landing page, not Claude Code problem"
+  },
+  {
+   "i": 7,
+   "label": "no",
+   "why": "Claude Opus disassembly, no Claude Code problem"
+  },
+  {
+   "i": 8,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 9,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 10,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 11,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 12,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 13,
+   "label": "unsure",
+   "why": "Claude over-engineers code; unclear if Claude Code"
+  },
+  {
+   "i": 14,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 15,
+   "label": "no",
+   "why": "praise for Claude"
+  },
+  {
+   "i": 16,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 17,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 18,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 19,
+   "label": "unsure",
+   "why": "second-hand Opus refusal; Claude Code not named"
+  },
+  {
+   "i": 20,
+   "label": "no",
+   "why": "general model comparison"
+  },
+  {
+   "i": 21,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 22,
+   "label": "no",
+   "why": "praise of Claude Code"
+  },
+  {
+   "i": 23,
+   "label": "no",
+   "why": "rarely hits limits, no problem"
+  },
+  {
+   "i": 24,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 25,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 26,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 27,
+   "label": "no",
+   "why": "workflow tips, no problem reported"
+  },
+  {
+   "i": 28,
+   "label": "no",
+   "why": "praise of Opus 5.5"
+  },
+  {
+   "i": 29,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 30,
+   "label": "unsure",
+   "why": "LLM drift, general, citing Claude Code experience"
+  },
+  {
+   "i": 31,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 32,
+   "label": "no",
+   "why": "praise, no problem"
+  },
+  {
+   "i": 33,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 34,
+   "label": "unsure",
+   "why": "Claude wrote broken PTX; unclear if Claude Code"
+  },
+  {
+   "i": 35,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 36,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 37,
+   "label": "unsure",
+   "why": "criticises Claude Code plan mode, no first-hand incident"
+  },
+  {
+   "i": 38,
+   "label": "no",
+   "why": "blames user for article author's deletion"
+  },
+  {
+   "i": 39,
+   "label": "yes",
+   "why": "Claude nuked their database; CLAUDE.md workaround"
+  },
+  {
+   "i": 40,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 41,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 42,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 43,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 44,
+   "label": "yes",
+   "why": "Claude Code plan mode does destructive operations"
+  },
+  {
+   "i": 45,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 46,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 47,
+   "label": "no",
+   "why": "own project cost, not Claude Code problem"
+  },
+  {
+   "i": 48,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 49,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 50,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 51,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 52,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 53,
+   "label": "yes",
+   "why": "Claude Code user: hours spent, stockfish analysis failed"
+  },
+  {
+   "i": 54,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 55,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 56,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 57,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 58,
+   "label": "no",
+   "why": "opinion on plan mode concept generally"
+  },
+  {
+   "i": 59,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 60,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 61,
+   "label": "no",
+   "why": "hypothetical future change"
+  },
+  {
+   "i": 62,
+   "label": "yes",
+   "why": "Claude Code forced two-question prompts annoying"
+  },
+  {
+   "i": 63,
+   "label": "no",
+   "why": "dislikes Claude-written code style, general"
+  },
+  {
+   "i": 64,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 65,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 66,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 67,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 68,
+   "label": "no",
+   "why": "workflow praise; MCP directory review delay"
+  },
+  {
+   "i": 69,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 70,
+   "label": "yes",
+   "why": "Claude Code edited file despite plan mode"
+  },
+  {
+   "i": 71,
+   "label": "unsure",
+   "why": "odd Claude behaviour anecdote, product unclear"
+  },
+  {
+   "i": 72,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 73,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 74,
+   "label": "no",
+   "why": "general LLM laziness, not Claude Code specific"
+  },
+  {
+   "i": 75,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 76,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 77,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 78,
+   "label": "yes",
+   "why": "Claude Code became much slower lately"
+  },
+  {
+   "i": 79,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 80,
+   "label": "unsure",
+   "why": "Claude mistakes reading repo; unclear if Claude Code"
+  },
+  {
+   "i": 81,
+   "label": "no",
+   "why": "praise of Claude Code"
+  },
+  {
+   "i": 82,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 83,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 84,
+   "label": "no",
+   "why": "general model over-engineering"
+  },
+  {
+   "i": 85,
+   "label": "no",
+   "why": "feature wish, not a problem"
+  },
+  {
+   "i": 86,
+   "label": "no",
+   "why": "Claude Code output acceptable, positive"
+  },
+  {
+   "i": 87,
+   "label": "no",
+   "why": "general AI chat tools never worked"
+  },
+  {
+   "i": 88,
+   "label": "unsure",
+   "why": "Claude Code tool system rudimentary, comparison only"
+  },
+  {
+   "i": 89,
+   "label": "yes",
+   "why": "Claude Code plan mode UX annoying, stopped using it"
+  },
+  {
+   "i": 90,
+   "label": "no",
+   "why": "comparison without a problem"
+  },
+  {
+   "i": 91,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 92,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 93,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 94,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 95,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 96,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 97,
+   "label": "no",
+   "why": "hypothetical backdoor risk"
+  },
+  {
+   "i": 98,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  },
+  {
+   "i": 99,
+   "label": "no",
+   "why": "no Claude Code problem reported"
+  }
+ ],
+ "regressions": [
+  {
+   "i": 0,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 1,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 2,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 3,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 4,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 5,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 6,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 7,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 8,
+   "label": "no",
+   "why": "template: 'No, this never worked'"
+  },
+  {
+   "i": 9,
+   "label": "yes",
+   "why": "template: 'Yes, this worked in a previous version'"
+  },
+  {
+   "i": 10,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 11,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 12,
+   "label": "no",
+   "why": "empty test report"
+  },
+  {
+   "i": 13,
+   "label": "no",
+   "why": "variant of old bug still occurring, never worked here"
+  },
+  {
+   "i": 14,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 15,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 16,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 17,
+   "label": "yes",
+   "why": "login worked, broken since 2026-09-18"
+  },
+  {
+   "i": 18,
+   "label": "no",
+   "why": "long-standing, reporter says regression unclear"
+  },
+  {
+   "i": 19,
+   "label": "no",
+   "why": "empty test report"
+  },
+  {
+   "i": 20,
+   "label": "no",
+   "why": "empty report"
+  },
+  {
+   "i": 21,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 22,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 23,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 24,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 25,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 26,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 27,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 28,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 29,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 30,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 31,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 32,
+   "label": "no",
+   "why": "empty report"
+  },
+  {
+   "i": 33,
+   "label": "no",
+   "why": "docs question"
+  },
+  {
+   "i": 34,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 35,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 36,
+   "label": "yes",
+   "why": "template: 'Yes, this worked in a previous version'"
+  },
+  {
+   "i": 37,
+   "label": "no",
+   "why": "template: 'No, this never worked'"
+  },
+  {
+   "i": 38,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 39,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 40,
+   "label": "yes",
+   "why": "mode tabs used to exist, now gone"
+  },
+  {
+   "i": 41,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 42,
+   "label": "no",
+   "why": "empty report"
+  },
+  {
+   "i": 43,
+   "label": "yes",
+   "why": "2.1.283 regression; 2.1.177 worked for weeks"
+  },
+  {
+   "i": 44,
+   "label": "yes",
+   "why": "flagging inputs that worked for months"
+  },
+  {
+   "i": 45,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 46,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 47,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 48,
+   "label": "no",
+   "why": "old bug still present, re-filed"
+  },
+  {
+   "i": 49,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 50,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 51,
+   "label": "no",
+   "why": "cost complaint / request"
+  },
+  {
+   "i": 52,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 53,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 54,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 55,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 56,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 57,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 58,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 59,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 60,
+   "label": "no",
+   "why": "empty test report"
+  },
+  {
+   "i": 61,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 62,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 63,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 64,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 65,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 66,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 67,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 68,
+   "label": "no",
+   "why": "empty report"
+  },
+  {
+   "i": 69,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 70,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 71,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 72,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 73,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 74,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 75,
+   "label": "yes",
+   "why": "'claude code just doesnt work anymore'"
+  },
+  {
+   "i": 76,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 77,
+   "label": "no",
+   "why": "template: 'No, this never worked'"
+  },
+  {
+   "i": 78,
+   "label": "yes",
+   "why": "2.1.282 worked, 2.1.283 broken on WSL"
+  },
+  {
+   "i": 79,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 80,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 81,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 82,
+   "label": "unsure",
+   "why": "refusals increasing in frequency; implies worse than before"
+  },
+  {
+   "i": 83,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 84,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 85,
+   "label": "yes",
+   "why": "hook skipped dialog a month ago, no longer"
+  },
+  {
+   "i": 86,
+   "label": "unsure",
+   "why": "/feedback broke after update; reporter unsure if regression"
+  },
+  {
+   "i": 87,
+   "label": "yes",
+   "why": "auto mode denials since ~2.1.268"
+  },
+  {
+   "i": 88,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 89,
+   "label": "no",
+   "why": "feature request"
+  },
+  {
+   "i": 90,
+   "label": "yes",
+   "why": "template: 'Yes, this worked in a previous version'"
+  },
+  {
+   "i": 91,
+   "label": "no",
+   "why": "empty report"
+  },
+  {
+   "i": 92,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 93,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 94,
+   "label": "no",
+   "why": "empty report"
+  },
+  {
+   "i": 95,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 96,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 97,
+   "label": "no",
+   "why": "no sign it used to work"
+  },
+  {
+   "i": 98,
+   "label": "no",
+   "why": "feature request"
+  }
+ ],
+ "releases": [
+  {
+   "i": 0,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 1,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 2,
+   "label": "no",
+   "why": "bug fix patch, no changes needed"
+  },
+  {
+   "i": 3,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 4,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 5,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 6,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 7,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 8,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 9,
+   "label": "no",
+   "why": "patch / dependency bump, no changes needed"
+  },
+  {
+   "i": 10,
+   "label": "yes",
+   "why": "breaking changes with required migration"
+  }
+ ]
+}

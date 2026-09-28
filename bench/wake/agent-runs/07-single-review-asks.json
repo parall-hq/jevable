@@ -1,0 +1,105 @@
+{
+ "kind": "single",
+ "case": "review-asks",
+ "matters": [
+  true
+ ],
+ "notifyLog": "[vercel/next.js] lukesandberg 请求改代码（评论 4087071455）：建议把 stageName 改成用 cacheKey\n",
+ "claude": {
+  "duration_api_ms": 5241,
+  "stop_reason": "end_turn",
+  "session_id": "02b4e8ab-f9a9-4693-bd84-d67160e56d0a",
+  "total_cost_usd": 0.1214316,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 13464,
+   "cache_read_input_tokens": 31818,
+   "output_tokens": 367,
+   "output_tokens_details": {
+    "thinking_tokens": 105
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 13464,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 95,
+     "cache_read_input_tokens": 21584,
+     "cache_creation_input_tokens": 2114,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 2114
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-opus-5-5[1m]": {
+    "inputTokens": 4,
+    "outputTokens": 367,
+    "cacheReadInputTokens": 31818,
+    "cacheCreationInputTokens": 13464,
+    "webSearchRequests": 0,
+    "costUSD": 0.1214316,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 128000,
+    "thinkingTokens": 105,
+    "canonicalModel": "claude-opus-5-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 2,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "这条事件需要提醒你，我已经往 `notify.log` 里加了一行：lukesandberg 在评论 4087071455 里要求改代码，认为 `stageName` 应该改成用 `cacheKey`。",
+  "ttft_ms": 2311,
+  "type": "result",
+  "duration_ms": 6647,
+  "uuid": "05b7081c-437d-433e-a3f9-9be1acc1568f",
+  "ttft_stream_ms": 1078,
+  "time_to_request_ms": 138,
+  "first_content_frame_ms": 1079,
+  "queued_turn_count": 0,
+  "result_index": 0
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "kind": "single",
+ "case": "hn-problems",
+ "matters": [
+  true
+ ],
+ "notifyLog": "HN 49819493 (naw103): reports Claude Code subagents creating conflicts with each other and burning extra tokens to resolve them (mentioned within a promo for their tool Foremerge)\n",
+ "claude": {
+  "duration_api_ms": 7323,
+  "stop_reason": "end_turn",
+  "session_id": "5ccf170e-5141-4f84-9fb9-1188bc6f5e0d",
+  "total_cost_usd": 0.1292038,
+  "usage": {
+   "input_tokens": 4,
+   "cache_creation_input_tokens": 13754,
+   "cache_read_input_tokens": 33679,
+   "output_tokens": 621,
+   "output_tokens_details": {
+    "thinking_tokens": 325
+   },
+   "server_tool_use": {
+    "web_search_requests": 0,
+    "web_fetch_requests": 0
+   },
+   "service_tier": "standard",
+   "cache_creation": {
+    "ephemeral_1h_input_tokens": 13754,
+    "ephemeral_5m_input_tokens": 0
+   },
+   "inference_geo": "not_available",
+   "iterations": [
+    {
+     "input_tokens": 2,
+     "output_tokens": 146,
+     "cache_read_input_tokens": 23445,
+     "cache_creation_input_tokens": 543,
+     "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 543
+     },
+     "type": "message"
+    }
+   ],
+   "speed": "standard"
+  },
+  "modelUsage": {
+   "claude-opus-5-5[1m]": {
+    "inputTokens": 4,
+    "outputTokens": 621,
+    "cacheReadInputTokens": 33679,
+    "cacheCreationInputTokens": 13754,
+    "webSearchRequests": 0,
+    "costUSD": 0.1292038,
+    "contextWindow": 1000000,
+    "maxOutputTokens": 128000,
+    "thinkingTokens": 325,
+    "canonicalModel": "claude-opus-5-5",
+    "provider": "firstParty",
+    "costBasis": "list"
+   }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+   "spawned": 0,
+   "requested": {
+    "background": 0,
+    "foreground": 0,
+    "unset": 0
+   },
+   "started_in_background": 0,
+   "max_depth": 0,
+   "spawned_by_subagents": 0,
+   "completed": 0,
+   "failed": 0,
+   "killed": {
+    "parent": 0,
+    "user": 0,
+    "system": 0
+   },
+   "refused": {
+    "depth_limit": 0,
+    "concurrency_limit": 0,
+    "budget": 0
+   },
+   "by_type": {}
+  },
+  "is_error": false,
+  "num_turns": 2,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "我在 notify.log 里加了一行记录。这条评论（作者 naw103，评论编号 49819493）确实说到了 Claude Code 的问题：它自动派生的子代理会互相冲突，最后虽然能自己理顺，但要多烧很多 token。不过要注意，这条评论主要是在推销作者自己做的工具 Foremerge，问题只是顺带提到，也没给出具体的复现细节。",
+  "ttft_ms": 3826,
+  "type": "result",
+  "duration_ms": 8791,
+  "uuid": "4c18148a-1289-48e5-9d87-678ccc74a08d",
+  "ttft_stream_ms": 941,
+  "time_to_request_ms": 132,
+  "first_content_frame_ms": 941,
+  "queued_turn_count": 0,
+  "result_index": 0
+ }
+}

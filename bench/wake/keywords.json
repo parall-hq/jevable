@@ -1,0 +1,9 @@
+{
+  "_note": "Written 2026-09-28 before any results were seen and before reading the samples of hn-problems, releases and review-asks; not tuned afterwards. tibo, status and regressions reuse packages/web/scripts/demo-data.ts. Each regex runs case-insensitive over the raw event line. hn-problems is two chained greps (grep -i 'claude code' | grep -iE '...'), written here as one regex with lookaheads.",
+  "tibo": "reset",
+  "status": "\\bapi\\b",
+  "regressions": "regression|used to work|no longer|stopped working",
+  "hn-problems": "^(?=.*claude code)(?=.*(bug|error|broken|crash|fail|issue|problem))",
+  "releases": "breaking|security|vulnerab|cve",
+  "review-asks": "suggestion|please|could you|can you|should|\\bnit\\b"
+}

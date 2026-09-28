@@ -2,5 +2,5 @@
   && (json.body.contains("```suggestion")
       || judge.boolean(json.body,
            "Does this review comment ask the author to change the code?",
-           {"true": "It requests or suggests a change, however it is worded: a plain instruction ('run this after X', 'move this', 'drop a comment here'), a tentative suggestion ('maybe we can call this Y', 'this could go in another section'), a terse question that proposes something ('stage?'), or fewer or more tests",
+           {"true": "It requests or suggests a change, including a plain instruction such as 'run this after X', 'move this', 'drop this', or fewer or more tests",
             "false": "Approval, thanks, an explanation, a reply by the author, a promise to do it later, or a note that it is already fixed"}) >= 0.7)

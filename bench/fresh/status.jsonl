@@ -1,0 +1,36 @@
+{"page":"status.claude.com","id":"r1pqn1kb4hvk","name":"Degraded functionality for Claude Cowork on Windows","status":"resolved","latest":"This issue has been resolved. Microsoft has released a September 14 Windows update that fixes it: https://support.microsoft.com/en-us/servicing/os/windows-11/2026/09/kb5129195-windows-11-24h2-25h2-security-update"}
+{"page":"status.claude.com","id":"t33dncr5ydvl","name":"Elevated errors for Claude Mythos 5.1 and Claude Fable 5.1","status":"resolved","latest":"The issue affecting Claude services has been resolved. Impact occurred from 13:57 to 14:20 UTC"}
+{"page":"status.claude.com","id":"461yvfrzpwtt","name":"Elevated errors for multiple models","status":"resolved","latest":"The issue affecting Claude Mythos 5.1, Claude Fable 5.1, and Claude Opus 5 has been resolved. Impact has ended as of 9:16 PT / 16:16 UTC."}
+{"page":"status.claude.com","id":"ls6bn1x81m0w","name":"Elevated errors for Claude Sonnet 5","status":"resolved","latest":"The issue affecting Claude Sonnet 5 has been resolved. Impact occurred from 2:05pm PT / 21:05 UTC to 2:19pm PT / 21:19 UTC."}
+{"page":"status.claude.com","id":"vgz5psbjmt1h","name":"Elevated errors for multiple models","status":"resolved","latest":"This issue has been resolved. From 9:50pm PT / 04:50 UTC through 00:36am PT / 07:36 UTC, users saw elevated errors on requests to Claude models, including Claude Opus 5 and Fable 5."}
+{"page":"status.claude.com","id":"6xskhw7rn4tf","name":"Elevated errors on Google connectors","status":"resolved","latest":"This issue has been resolved."}
+{"page":"status.claude.com","id":"q7txxvbsftgq","name":"Degraded performance for multiple models","status":"resolved","latest":"The issue affecting Claude Opus 5 has been resolved. Impact occurred from 16:11 to 18:23 UTC."}
+{"page":"status.claude.com","id":"zhk4v3yv1lsf","name":"Degraded performance for Claude Opus 5, Claude Sonnet 5","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"qt14v73myyy5","name":"Service disruption on Claude services","status":"resolved","latest":"The issue affecting claude.ai, platform.claude.com, the Claude API, Claude Code, and Claude Cowork has been resolved."}
+{"page":"status.claude.com","id":"hdynq1pc0fn8","name":"Elevated errors for Claude Fable 5","status":"resolved","latest":"The issue affecting Claude services has been resolved. Impact occurred from 20:00 Aug 14, 2026 to 00:11 Aug 15 , 2026 UTC."}
+{"page":"status.claude.com","id":"005ym4vzrq2w","name":"Service disruption on Claude services","status":"resolved","latest":"The issue affecting the Claude API, Claude Code, and Claude Cowork has been resolved. Impact occurred from 20:14 to 20:38 UTC."}
+{"page":"status.claude.com","id":"j160kkjmm2n1","name":"Elevated errors for Claude Mythos 5, Claude Fable 5, and Claude Sonnet 5","status":"resolved","latest":"The issue affecting Claude Mythos 5 and Claude Fable 5 has been resolved."}
+{"page":"status.claude.com","id":"rk6gkg2gwfny","name":"Degraded performance for multiple models","status":"resolved","latest":"This issue has been resolved."}
+{"page":"status.claude.com","id":"mgp99sn4ynd4","name":"Degraded performance for Claude Opus 5","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"f6gkkq6txl7z","name":"Degraded performance of multiple models","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"bdr3fq2rkchr","name":"Elevated errors across many models","status":"resolved","latest":"This issue has been resolved."}
+{"page":"status.claude.com","id":"nlg5hjdfphmb","name":"Elevated errors on Claude Sonnet 5","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"8k9mjhq7wmv3","name":"Elevated errors on Claude Sonnet 5","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"dnl3q35xkn3s","name":"Degraded performance on Claude Sonnet 5","status":"resolved","latest":"As of 15:20 UTC (8:20am PT), error rates on Claude Sonnet 5 have returned to baseline. This incident is resolved."}
+{"page":"status.claude.com","id":"ch7k4vh9fr1y","name":"Error rates across multiple models","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"jq4x54h69z76","name":"Degraded performance on Claude Sonnet 5","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"kqjy03gs895j","name":"Degraded performance on Claude Opus 4.8","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"fsh2zzzl2c4l","name":"Elevated errors across many models","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"rkk5x44tndw9","name":"Elevated errors on Claude Opus 5 and Haiku 4.5","status":"resolved","latest":"As of 7:34 PST / 14:34 UTC the errors have returned to baseline."}
+{"page":"status.claude.com","id":"mfdtrknpxghq","name":"Elevated errors on Claude Opus 5","status":"resolved","latest":"As of 4:47 PST / 11:47 UTC the errors have returned to baseline."}
+{"page":"status.claude.com","id":"lhqp09kxq7pb","name":"Elevated errors on Claude Opus 5","status":"resolved","latest":"As of 2:03 PST / 9:03 UTC the errors have returned to baseline."}
+{"page":"status.claude.com","id":"zftg3gqkmv18","name":"Elevated errors for Opus 5","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"j6gv862066n7","name":"Elevated errors for Claude Fable 5, Claude Sonnet 5, Claude Haiku 4.5, and other models","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"f1q2wvw4qj4j","name":"Elevated errors for Mythos 5, Fable 5, Opus 5 and Claude Haiku 4.5","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.claude.com","id":"0lbk5m7mbqk5","name":"Elevated error rate on Opus 4.8","status":"resolved","latest":"This incident has been resolved."}
+{"page":"status.openai.com","id":"01M3DCNWMW57HYK8FJ5FBFPA39","name":"Issues with Codex ","status":"resolved","latest":"All impacted services have now fully recovered."}
+{"page":"status.openai.com","id":"01M3ACKDE4GYY67FXXNRRSC0CE","name":"Elevated Error Rates on GPT-6 Astra Pro","status":"resolved","latest":"All impacted services have now fully recovered."}
+{"page":"status.openai.com","id":"01M2RC0WHGTX8EHDH7D60JJ7FC","name":"Elevated errors affecting ChatGPT Work mode","status":"resolved","latest":"All impacted services have now fully recovered."}
+{"page":"status.openai.com","id":"01M2HYH64J2CZMZ63HEV2FCQFA","name":"Elevated errors from GPT-5.6 and GPT-5.6 Instant on paid plans","status":"resolved","latest":"All impacted services have now fully recovered."}
+{"page":"status.openai.com","id":"01M27Q9GH7WVKNA61ZR3RDMSY5","name":"Elevated errors for ChatGPT users in Europe","status":"resolved","latest":"All impacted services have now fully recovered."}
+{"page":"status.openai.com","id":"01M26DX2PP1AFHGJK5E4M6S2J6","name":"Elevated errors affecting ChatGPT Work","status":"resolved","latest":"All impacted services are now fully recovered."}

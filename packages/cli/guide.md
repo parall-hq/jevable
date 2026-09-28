@@ -209,6 +209,7 @@ on the same material is asked once per run.
 - One condition per question; combine several with `&&` or `||`.
 - Ask about something the text says ("does it report that a dependency is down?"), not about what someone should do ("does a person need to act?"): vague questions land near 0.5. For short texts like titles, ask what they name ("does the title name a model or the API?") rather than what they imply ("does it affect developers?").
 - Phrase it so that yes is the case you want, and say exactly what counts as yes. When the line is subtle, give judge.boolean `{"true": ..., "false": ...}`.
+- Say what counts in every form it takes. Jev reads criteria literally: a category covers generic mentions only if you say so ("one model, several, or all models"); give the names a thing goes by ("platform.claude.com, the developer platform"); a request covers tentative wording ("maybe we can call this Y", "could go in another section") and terse questions ("stage?") only if you list them.
 - Give the smallest material that answers the question: unrelated text makes answers worse.
 - judge.choice always picks one of its options: say what each option covers and what it does not, and include "other". Put borderline cases into the description ("back within the hour, e.g. 'in a few minutes'").
 - judge.score levels are concrete situations, from lowest to highest.
