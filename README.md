@@ -1,11 +1,20 @@
 # jevable
 
-Make your monitor smart. `jevable` is grep that reads meaning: it passes through
-only the events a [Jev](https://docs.typesafe.ai) judgement lets through, so
-an agent — Claude Code, Codex, OpenClaw, Hermes, pi, dsh, any that runs shell
-commands — can watch a log, a feed or an API and be woken, or tell you, only
-when something counts. One prompt sets it up: see the
-[package README](packages/cli/README.md).
+**grep that reads meaning.** Pipe lines in, ask a yes/no question, get back
+the lines where the answer is yes. [Jev](https://docs.typesafe.ai), TypeSafe's
+fast and cheap classification model, reads each line in about 0.3 s for about
+$0.00002, so an agent can hand it the pile — logs, issues, comments, commits,
+search results, a live feed — and read only what matters.
+
+```sh
+tail -n 0 -F app.log | npx -y jevable "Does this line report that a dependency is down?"
+gh issue list --json number,title,body | jq -c '.[]' | npx -y jevable --on .body "Is this a bug report about login?"
+```
+
+See the [package README](packages/cli/README.md) for setup and how to teach
+your agent to use it, and the [guide](packages/cli/guide.md)
+(`jevable guide`) for asking, testing, CEL rules and watching streams.
+Measured on real events: [jevable.sh/bench](https://jevable.sh/bench).
 
 ## Layout
 

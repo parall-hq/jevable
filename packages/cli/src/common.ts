@@ -54,6 +54,51 @@ export function newEngine(model?: string): Engine {
   return new Engine(new Client({ apiKey: found?.key, baseUrl: p?.baseUrl, model: model || vars.JEV_MODEL || p?.model, provider: p?.label }));
 }
 
+/** A jq-style path (.body, .user.login, .items[0], .["a-b"]) as CEL over the record's JSON. */
+export function jqPath(path: string): string {
+  if (!path.startsWith(".")) throw new Error(`--on ${JSON.stringify(path)}: give a jq-style path such as .body or .user.login`);
+  return path === "." ? "json" : `json${path.replace(/\.\[/g, "[")}`;
+}
+
+export interface QuestionOptions {
+  /** CEL, in place of a question. */
+  rule?: string;
+  file?: string;
+  /** jq-style paths of the fields Jev reads; the whole line when none. */
+  on?: string[];
+  threshold?: string;
+  invert?: boolean;
+}
+
+/**
+ * The rule to run: --rule or -f (CEL), else the rule a plain question stands
+ * for — judge.boolean on the line or the --on fields, against the threshold.
+ */
+export function ruleOrQuestion(positionals: string[], o: QuestionOptions): string {
+  if (o.rule !== undefined || o.file) {
+    if (positionals.length) throw new Error("give a question, or a rule with --rule or -f, not both");
+    if (o.on?.length || o.threshold !== undefined || o.invert) throw new Error("--on, -t and -v go with a question; in a rule, write them into judge.boolean(...)");
+    return ruleSource(o.rule !== undefined ? [o.rule] : [], o.file);
+  }
+  if (positionals.length > 1) throw new Error(`one question only, got ${positionals.length} arguments — quote the question`);
+  const question = positionals[0]?.trim();
+  if (!question) throw new Error("missing question, e.g. jevable \"Does this line report an outage?\" — see `jevable guide`");
+  const on = o.on ?? [];
+  const material = on.length === 0 ? "line" : on.length === 1 ? jqPath(on[0]) : `[${on.map(jqPath).join(", ")}]`;
+  const t = o.threshold === undefined ? 0.7 : Number(o.threshold);
+  if (!(t > 0 && t < 1)) throw new Error(`-t ${JSON.stringify(o.threshold)}: give a number between 0 and 1, e.g. 0.7`);
+  return `judge.boolean(${material}, ${JSON.stringify(question)}) ${o.invert ? "<" : ">="} ${t}`;
+}
+
+/** The options a question takes, for parseArgs. */
+export const QUESTION_OPTIONS = {
+  rule: { type: "string" },
+  file: { type: "string", short: "f" },
+  on: { type: "string", multiple: true },
+  threshold: { type: "string", short: "t" },
+  invert: { type: "boolean", short: "v" },
+} as const;
+
 /** The rule from the positional argument or -f, exactly one. */
 export function ruleSource(positionals: string[], file?: string): string {
   if (file && positionals.length) throw new Error("give the rule as an argument or with -f, not both");

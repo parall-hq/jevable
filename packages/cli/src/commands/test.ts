@@ -1,25 +1,29 @@
 import { parseArgs } from "node:util";
-import { log, newEngine, printStats, ruleSource } from "../common.ts";
+import { log, newEngine, printStats, QUESTION_OPTIONS, ruleOrQuestion } from "../common.ts";
 import { expandSamples, runSamples } from "./samples.ts";
 
-export const TEST_HELP = `jevable test [RULE] --yes SAMPLE... --no SAMPLE... [options]
+export const TEST_HELP = `jevable test QUESTION --yes SAMPLE... --no SAMPLE... [options]
+jevable test --rule RULE | -f FILE --yes SAMPLE... --no SAMPLE... [options]
 
-Run RULE on samples that should pass (--yes) and should not (--no) and show
-each judge answer, which samples came out wrong, and for each question the
-thresholds that separate the two sides.
+Run a question (as \`jevable QUESTION\` would) or a rule on samples that should
+pass (--yes) and should not (--no), and show each judge answer, which samples
+came out wrong, and for each question the thresholds that separate the two
+sides.
 
 A sample is literal text, or a file with one sample per line. Write the
 samples and their expected side before the first run, and keep them.
 
 Options:
-  -f, --file FILE       read the rule from a file
       --yes SAMPLE      a sample that should pass (repeatable)
       --no SAMPLE       a sample that should not pass (repeatable)
+      --on, -t, -v      as for a question (jevable --help)
+      --rule RULE       a CEL rule instead of a question (-f FILE: read it from a file)
       --model MODEL     Jev model (default $JEV_MODEL, else jev-1.13.0)
 
 Exit status: 0 when every sample came out as expected, 1 otherwise, 2 on error.
 
-  jevable test -f rule.cel --yes "can you rename this function?" --no "LGTM" --no "thanks!"
+  jevable test "Does this review comment ask for a change to the code?" --yes "can you rename this?" --no "LGTM"
+  jevable test --on .body "Does this ask for a change?" --yes should.jsonl --no should-not.jsonl
   jevable test -f rule.cel --yes should.txt --no should-not.txt
 `;
 
@@ -29,7 +33,7 @@ export async function testCommand(args: string[]): Promise<number> {
       args,
       allowPositionals: true,
       options: {
-        file: { type: "string", short: "f" },
+        ...QUESTION_OPTIONS,
         yes: { type: "string", multiple: true },
         no: { type: "string", multiple: true },
         model: { type: "string" },
@@ -40,7 +44,7 @@ export async function testCommand(args: string[]): Promise<number> {
       process.stdout.write(TEST_HELP);
       return 0;
     }
-    const rule = ruleSource(positionals, v.file);
+    const rule = ruleOrQuestion(positionals, v);
     if (!v.yes?.length || !v.no?.length) throw new Error("give samples on both sides: --yes for what should pass and --no for what should not");
     const samples = [...expandSamples(v.yes, true), ...expandSamples(v.no, false)];
     const engine = newEngine(v.model);

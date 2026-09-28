@@ -115,8 +115,34 @@ test("key refuses what is no key for Jev", async () => {
   assert.match(run.stdout, /not a key for Jev: TypeSafe keys start with apikey_/);
 });
 
+test("a question filters like grep, on a field with --on, inverted with -v", async () => {
+  const f = await fake(outage);
+  const env = { JEV_API_KEY: FAKE_KEY, JEV_BASE_URL: f.url };
+  const lines = "db outage in eu\nall fine\nanother outage\n";
+  assert.deepEqual((await jevable(["Is this an outage?"], { input: lines, env })).stdout, "db outage in eu\nanother outage\n");
+  assert.deepEqual((await jevable(["-v", "Is this an outage?"], { input: lines, env })).stdout, "all fine\n");
+  const records = `{"title": "outage", "body": "all fine"}\n{"title": "hello", "body": "outage in eu"}\n`;
+  assert.equal((await jevable(["--on", ".body", "Is this an outage?"], { input: records, env })).stdout, `{"title": "hello", "body": "outage in eu"}\n`);
+  const test = await jevable(["test", "Is this an outage?", "--yes", "outage now", "--no", "lunch"], { env });
+  assert.equal(test.code, 0);
+  assert.match(test.stdout, /2 of 2 as expected/);
+});
+
+test("a reader that goes away (| head) ends jevable quietly, and its source with it", async () => {
+  const child = spawn(process.execPath, ["--conditions=jevable-source", CLI, "--from", "while true; do echo x; done", "--rule", 'line == "x"'], {
+    env: { PATH: process.env.PATH ?? "", HOME },
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  let stderr = "";
+  child.stderr.on("data", (c) => (stderr += c));
+  child.stdout.once("data", () => child.stdout.destroy());
+  const code = await new Promise((resolve) => child.on("close", resolve));
+  assert.equal(code, 0);
+  assert.doesNotMatch(stderr, /EPIPE/);
+});
+
 test("guide, help and version", async () => {
-  assert.match((await jevable(["guide"])).stdout, /# jevable — make your monitor smart/);
+  assert.match((await jevable(["guide"])).stdout, /# jevable — grep that reads meaning/);
   assert.match((await jevable(["filter", "--help"])).stdout, /--cooldown DUR/);
   assert.match((await jevable(["--version"])).stdout, /^\d+\.\d+\.\d+\n$/);
   assert.equal((await jevable([])).code, 2);
