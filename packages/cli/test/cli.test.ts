@@ -142,7 +142,7 @@ test("a reader that goes away (| head) ends jevable quietly, and its source with
 });
 
 test("guide, help and version", async () => {
-  assert.match((await jevable(["guide"])).stdout, /# jevable — grep that reads meaning/);
+  assert.match((await jevable(["guide"])).stdout, /# jevable — make your monitor smart/);
   assert.match((await jevable(["filter", "--help"])).stdout, /--cooldown DUR/);
   assert.match((await jevable(["--version"])).stdout, /^\d+\.\d+\.\d+\n$/);
   assert.equal((await jevable([])).code, 2);
