@@ -1,7 +1,7 @@
-# jevable — grep that reads meaning
+# jevable — make your monitor smart
 
-Pipe lines in, ask a yes/no question, get back the lines where the answer is
-yes. Jev (TypeSafe's classification model) answers for each line in about
+jevable is grep that reads meaning. Pipe lines in, ask a yes/no question, get
+back the lines where the answer is yes. Jev (TypeSafe's classification model) answers for each line in about
 0.3 s and about $0.00002, so jevable can read everything and you read only
 what matters.
 
@@ -14,6 +14,9 @@ command.
 
 ## For agents: when to reach for it
 
+- **Watching.** In front of anything that wakes you — a log, a feed, new
+  comments — so that only what matters does: each wake is a paid turn
+  (Watching a stream, below).
 - **Sifting.** Before you read a pile — log lines, issues, pull-request
   comments, commits, search hits, file lists, feed items — to find the few that
   matter, pipe it through jevable and read only what passes. Jev reads the pile
@@ -21,8 +24,6 @@ command.
 - **What grep and jq cannot say.** "Reports an outage", "asks for a change",
   "is a breaking change", "is about billing": conditions on meaning, not on
   words.
-- **Watching.** In front of anything that wakes you, so that only what matters
-  does (Watching a stream, below).
 
 Not for exact strings (grep), fields, numbers and dates (jq), or piles small
 enough to read.

@@ -6,11 +6,12 @@ import { keyCommand } from "./commands/key.ts";
 import { testCommand } from "./commands/test.ts";
 import { log, packageFile } from "./common.ts";
 
-const HELP = `jevable — grep that reads meaning
+const HELP = `jevable — make your monitor smart: grep that reads meaning
 
 Pipe lines in; jevable prints the ones for which Jev, a fast and cheap
-classification model, answers yes to your question. Use it wherever you would
-otherwise read many things to find the few that matter.
+classification model, answers yes to your question. Put it in front of
+whatever wakes an agent, or wherever you would otherwise read many things to
+find the few that matter.
 
   tail -n 0 -F app.log | jevable "Does this line report that a dependency is down?"
   gh issue list --json title,body | jq -c '.[]' | jevable --on .body "Is this a bug report about login?"

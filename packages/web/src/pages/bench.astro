@@ -2,24 +2,16 @@
 // /bench: the measured cost of watching, computed from the benchmark's own
 // result files (bench/wake/), the same arithmetic as bench/wake/report.ts.
 import Base from "../layouts/Base.astro";
-import freshResults from "../../../../bench/wake/fresh-results.json";
-import firstResults from "../../../../bench/wake/results.json";
 import labels from "../../../../bench/fresh/labels.json";
-import { tally, wakeCosts, type AgentRun, type Replayed, type Results } from "../../../../bench/wake/tally.ts";
+import type { Replayed } from "../../../../bench/wake/tally.ts";
+import { caught, first, fresh, freshRun as freshResults, pct, times, wakes as w } from "../lib/bench.ts";
 import { usd } from "../lib/money.ts";
 
-const runs = Object.values(import.meta.glob("../../../../bench/wake/agent-runs/*.json", { eager: true, import: "default" })) as AgentRun[];
-const w = wakeCosts(runs);
-const fresh = tally(freshResults as Results, (e) => e.slice === "fresh", w);
-const first = tally(firstResults as Results, (e) => e.slice === "holdout", w);
 const labelled = Object.values(labels).flat();
 const unsure = labelled.filter((l) => l.label === "unsure").length;
 const T = fresh.total;
 const J = T.jevable;
-const pct = (x: number) => `${Math.round(x * 100)}%`;
-const caught = (missed: number, matter: number) => (matter - missed) / matter;
 const cost = (a: keyof typeof T) => T[a].agent$ + T[a].jev$;
-const times = (x: number) => `${x.toFixed(1)}×`;
 
 const rows = [
   { name: "Wake on every event", key: "every event", note: "a watcher that reports every line" },
@@ -38,7 +30,7 @@ const text = (e: Replayed) => {
     return e.line;
   }
 };
-const wrong = (freshResults as Results).cases.flatMap((c) =>
+const wrong = freshResults.cases.flatMap((c) =>
   c.events
     .filter((e) => e.slice === "fresh" && e.pass !== e.matters)
     .map((e) => {
@@ -53,7 +45,7 @@ const notAsked = misses.filter((x) => x.score === undefined).length;
 
 <Base title="jevable benchmark" description={`Measured on ${fresh.events} real events: ${times(T["every event"].turns / J.turns)} fewer agent turns than waking on every event, ${pct(caught(J.missed, fresh.matter))} of what mattered caught.`}>
   <section class="wrap head">
-    <span class="eyebrow"><b>Bench</b>{(freshResults as Results).date.slice(0, 10)}</span>
+    <span class="eyebrow"><b>Bench</b>{freshResults.date.slice(0, 10)}</span>
     <h1>What watching costs an agent, <span>measured.</span></h1>
     <p class="lede">
       {fresh.events} real events from five live sources — status pages, Hacker News, GitHub issues, releases and pull-request reviews — labelled blind, then
@@ -183,7 +175,7 @@ const notAsked = misses.filter((x) => x.score === undefined).length;
           <li>Labels by a separate agent that saw only each case's goal — not the rules, not any score. Events it was unsure about ({unsure} of {labelled.length}) are left out.</li>
           <li>Keyword regexes were written down before any results were seen.</li>
           <li>Wake cost measured with headless Claude Code ({w.models.join(", ")}): {usd(w.act)} to act on an event, {usd(w.idle)} to decide it does not matter.</li>
-          <li>Jev answers are real ({(freshResults as Results).jev}).</li>
+          <li>Jev answers are real ({freshResults.jev}).</li>
         </ul>
       </div>
       <div>

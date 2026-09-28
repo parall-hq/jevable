@@ -1,9 +1,12 @@
 # jevable
 
-**grep that reads meaning.** Pipe lines in, ask a yes/no question, get back
-the lines where the answer is yes. [Jev](https://docs.typesafe.ai), TypeSafe's
-fast and cheap classification model, reads each line in about 0.3 s for about
-$0.00002 — so your agent does not have to read them all.
+**Make your monitor smart.** An agent watching a log, a feed or an API pays a
+full turn for every line that wakes it, or misses what a grep did not foresee.
+jevable is grep that reads meaning: [Jev](https://docs.typesafe.ai), TypeSafe's
+fast and cheap classification model, judges each line in about 0.3 s for about
+$0.00002, and only what matters wakes the agent. Measured on 334 real events:
+7.3× fewer wakes than waking on every event, 85% of what mattered caught where
+a keyword alert caught 25% ([jevable.sh/bench](https://jevable.sh/bench)).
 
 ```sh
 npx -y jevable key <an API key from TypeSafe, OpenRouter or Vercel AI Gateway>
