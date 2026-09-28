@@ -32,7 +32,10 @@ export async function keyCommand(args: string[]): Promise<number> {
   const where = fromFile.has(found.variable!) ? "in ~/.jevable/env" : `from ${found.variable}`;
   const r = await check(found.provider, found.key);
   if ("error" in r) return say(`The ${found.provider.label} key ${where} does not work: ${r.error}. ${ASK}`, 1);
-  return say(`Jev via ${found.provider.label}, key ${where}; it works (${r.seconds} s).`, 0);
+  const keep = fromFile.has(found.variable!)
+    ? ""
+    : ` It is only in this shell's environment: run \`jevable key "$${found.variable}"\` to save it for watches started elsewhere.`;
+  return say(`Jev via ${found.provider.label}, key ${where}; it works (${r.seconds} s).${keep}`, 0);
 }
 
 async function save(key: string, vars: Record<string, string | undefined>): Promise<number> {

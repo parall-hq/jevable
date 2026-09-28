@@ -21,19 +21,20 @@ something passed. `--on .field` judges a field of JSON lines (a jq path),
 `-t 0.8` raises the threshold, `--json` adds the score. Do the exact part with
 grep or jq first; jevable only needs to see what is left.
 
-## Teach your agent
+## One prompt
 
-Add this to your AGENTS.md or CLAUDE.md:
+Paste this into Claude Code, Codex, OpenClaw, Hermes, pi, dsh or any agent
+that runs shell commands:
 
 ```
-When you would read many things — logs, issues, comments, commits, search
-results — to find the few that matter, pipe them through jevable first:
-`... | npx -y jevable "<a yes/no question>"`, and read only what passes.
-Run `npx -y jevable guide` once for how to ask, test and watch.
+Set up jevable: run `npx -y jevable guide` and follow it.
 ```
 
-Or hand it one job: "<What to watch, and what should happen when it matters.>
-Set it up with jevable: run `npx -y jevable guide` and follow it."
+It asks you once for an API key (TypeSafe, OpenRouter or Vercel AI Gateway),
+adds a note to your AGENTS.md or CLAUDE.md so it reaches for jevable on its own,
+shows it working, and asks what to watch. Or put the job in front:
+"<What to watch, and what should happen when it matters.> Set it up with
+jevable: run `npx -y jevable guide` and follow it."
 
 ## Commands
 

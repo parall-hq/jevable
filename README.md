@@ -13,8 +13,14 @@ tail -n 0 -F app.log | npx -y jevable "Does this line report that a dependency i
 gh issue list --json number,title,body | jq -c '.[]' | npx -y jevable --on .body "Is this a bug report about login?"
 ```
 
-See the [package README](packages/cli/README.md) for setup and how to teach
-your agent to use it, and the [guide](packages/cli/guide.md)
+Or paste one line into your agent — Claude Code, Codex, OpenClaw, Hermes, pi,
+dsh — and it sets itself up:
+
+```
+Set up jevable: run `npx -y jevable guide` and follow it.
+```
+
+See the [package README](packages/cli/README.md) and the [guide](packages/cli/guide.md)
 (`jevable guide`) for asking, testing, CEL rules and watching streams.
 Measured on 334 real events: 7.3× fewer agent wakes than waking on every
 event, 85% of what mattered caught where a keyword alert caught 25%
