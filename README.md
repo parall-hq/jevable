@@ -162,6 +162,7 @@ See [the core package](packages/core/README.md) for the library interface.
 | `packages/core` | `@jevable/core` | Shared CEL rule engine, Jev client, caching and fingerprints. |
 | `packages/cli` | `jevable` | CLI, streams, windows and persistent state. Includes the agent setup guide and full reference. |
 | `packages/web` | `@jevable/web` (private) | Website, demo and benchmarks. Built with Astro on Cloudflare Workers; the guide comes from the CLI’s `guide.md`. |
+| `video/launch` | (private) | The 30-second launch video, made in code with Remotion; its soundtrack is synthesized from the same cue sheet. A standalone npm project, outside the workspaces. |
 
 ## Develop
 
