@@ -1,0 +1,27 @@
+{
+  "name": "jevable-launch-video",
+  "private": true,
+  "license": "MIT",
+  "description": "jevable's launch video: Remotion scenes and a soundtrack synthesized from the same cue sheet.",
+  "type": "module",
+  "scripts": {
+    "studio": "npm run music && remotion studio src/index.ts",
+    "music": "node scripts/music.ts",
+    "render": "npm run music && remotion render src/index.ts Reel out/jevable-launch.mp4 --codec=h264 --crf=12 --x264-preset=slow --audio-codec=aac --audio-bitrate=320k",
+    "poster": "remotion still src/index.ts Poster out/poster.png && remotion still src/index.ts Og out/og.png",
+    "check-types": "tsc -p . && tsc -p scripts"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "@remotion/google-fonts": "4.0.529",
+    "@remotion/noise": "4.0.529",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.0",
+    "@types/react": "^19",
+    "typescript": "^5.9.3"
+  }
+}
