@@ -31,8 +31,7 @@ const runtimes = [
     </p>
     <div class="prompt"><Composer id="need-top" /></div>
     <a class="measured" href="/bench">
-      <b>Measured on {headline.events} real events:</b> {headline.fewer} fewer agent wakes than waking on every event, and {headline.caught} of what mattered
-      caught — a keyword alert caught {headline.keywordCaught}. <span>→</span>
+      {headline.fewer} fewer agent wakes. {headline.caught} recall. <span>View benchmark →</span>
     </a>
   </section>
 
@@ -191,11 +190,6 @@ ok  no   other      1.00  Reset your expectations: the new…
     color: var(--dim);
     text-decoration: none;
     max-width: 62ch;
-  }
-
-  .measured b {
-    color: var(--fg);
-    font-weight: 600;
   }
 
   .measured span {

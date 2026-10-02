@@ -4,16 +4,25 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description: string;
+  theme?: "paper";
 }
 
-const { title, description } = Astro.props;
+const { title, description, theme } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class:list={{ paper: theme === "paper" }}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {theme === "paper" && <script is:inline>
+      (() => {
+        let preference;
+        try { preference = localStorage.getItem("jevable-bench-theme"); } catch {}
+        document.documentElement.dataset.theme = preference === "light" || preference === "dark"
+          ? preference : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      })();
+    </script>}
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
@@ -39,6 +48,9 @@ const { title, description } = Astro.props;
           <a href="/bench">Bench</a>
           <a href="https://www.npmjs.com/package/jevable">npm</a>
           <a href="https://github.com/parall-hq/jevable">GitHub</a>
+          {theme === "paper" && <button id="theme-toggle" aria-label="Dark mode" aria-pressed="false" title="Toggle dark mode">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8" /><path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none" /></svg>
+          </button>}
         </nav>
       </div>
     </header>
@@ -46,14 +58,43 @@ const { title, description } = Astro.props;
       <slot />
     </main>
     <footer class="wrap">
-      <span class="by"><b>jevable</b> by <a href="https://parall.com">Parall</a></span>
+      <span class="by"><b>jevable</b> by <a class="parall-brand" href="https://parall.com"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.238 63.842" width="11" height="16" aria-hidden="true"><g transform="translate(44.238 0) scale(-1 1)" fill="currentColor">
+        <path d="M 10.445 16.317 C 10.449 18.52 11.436 20.607 13.137 22.007 L 15.595 24.031 C 18.152 26.135 19.633 29.273 19.633 32.585 L 19.633 63.84 L 9.216 63.84 L 9.216 24.623 C 9.216 22.416 8.229 20.324 6.525 18.921 L 4.036 16.872 C 1.481 14.767 0 11.63 0 8.319 L 0 0 L 10.417 0 L 10.445 16.317 Z" transform="matrix(1 0 0 -1 0 63.84)" />
+        <path d="M 10.445 16.317 C 10.449 18.52 11.436 20.607 13.137 22.007 L 15.595 24.031 C 18.152 26.135 19.633 29.273 19.633 32.585 L 19.633 63.84 L 9.216 63.84 L 9.216 24.623 C 9.216 22.416 8.229 20.324 6.525 18.921 L 4.036 16.872 C 1.481 14.767 0 11.63 0 8.319 L 0 0 L 10.417 0 L 10.445 16.317 Z" transform="matrix(-1 0 0 1 44.237 0.001)" />
+      </g>
+    </svg>
+Parall</a></span>
       <span>Judgements by <a href="https://docs.typesafe.ai">Jev</a>, TypeSafe's classification model</span>
       <span><a href="/guide">Guide</a> · <a href="/guide.md">guide.md</a> · <a href="https://www.npmjs.com/package/jevable">npm</a> · <a href="https://github.com/parall-hq/jevable">GitHub</a></span>
     </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>("#theme-toggle");
+      if (toggle) {
+        const root = document.documentElement;
+        const sync = () => {
+          const dark = root.dataset.theme === "dark";
+          toggle.setAttribute("aria-pressed", String(dark));
+          document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#0a0a0b" : "#ffffff");
+        };
+        sync();
+        toggle.addEventListener("click", () => {
+          root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+          try { localStorage.setItem("jevable-bench-theme", root.dataset.theme); } catch {}
+          sync();
+        });
+      }
+    </script>
   </body>
 </html>
 
 <style>
+  :global(.paper) .bar { background:var(--bar-bg, rgb(10 10 11 / .96)); border-bottom:1px solid var(--line); }
+  :global(.paper) .dot { box-shadow:none; background:#ffb547; }
+  #theme-toggle { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; padding:0; border:0; background:transparent; cursor:pointer; color:var(--dim); }
+  #theme-toggle:hover { color:var(--fg); }
+  #theme-toggle:focus-visible { outline:2px solid var(--wake); outline-offset:3px; }
+  nav { align-items:center; }
+  @media(max-width:480px) { :global(.paper) nav { gap:10px; } }
   .bar {
     position: sticky;
     top: 0;
@@ -121,7 +162,10 @@ const { title, description } = Astro.props;
     font-size: 13px;
   }
 
+  .parall-brand svg { width:11px; height:16px; flex-shrink:0; }
+  .parall-brand { display:inline-flex; align-items:center; gap:6px; text-decoration:none; }
   .by {
+    display:flex; align-items:center; gap:6px;
     color: var(--dim);
   }
 

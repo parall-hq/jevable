@@ -4,7 +4,7 @@
 import Base from "../layouts/Base.astro";
 import labels from "../../../../bench/fresh/labels.json";
 import type { Replayed } from "../../../../bench/wake/tally.ts";
-import { caught, first, fresh, freshRun as freshResults, pct, times, wakes as w } from "../lib/bench.ts";
+import { caught, fresh, freshRun as freshResults, pct, wakes as w } from "../lib/bench.ts";
 import { usd } from "../lib/money.ts";
 
 const labelled = Object.values(labels).flat();
@@ -19,7 +19,7 @@ const rows = [
   { name: "Check every 30 minutes", key: "heartbeat 30 min", note: "OpenClaw's default heartbeat; up to 30 min late" },
   { name: "jevable", key: "jevable", note: "Jev judges each event; the agent wakes for passes" },
 ] as const;
-const maxTurns = Math.max(...rows.map((r) => T[r.key].turns));
+
 
 // Everything jevable got wrong on the fresh events.
 const text = (e: Replayed) => {
@@ -43,65 +43,24 @@ const nearMisses = misses.filter((x) => x.score !== undefined && x.score >= 0.45
 const notAsked = misses.filter((x) => x.score === undefined).length;
 ---
 
-<Base title="jevable benchmark" description={`Measured on ${fresh.events} real events: ${times(T["every event"].turns / J.turns)} fewer agent turns than waking on every event, ${pct(caught(J.missed, fresh.matter))} of what mattered caught.`}>
-  <section class="wrap head">
-    <span class="eyebrow"><b>Bench</b>{freshResults.date.slice(0, 10)}</span>
-    <h1>What watching costs an agent, <span>measured.</span></h1>
-    <p class="lede">
-      {fresh.events} real events from five live sources — status pages, Hacker News, GitHub issues, releases and pull-request reviews — labelled blind, then
-      replayed through four ways of waking an agent. Every wake is priced at what a real Claude Code turn cost.
-    </p>
-    <div class="stats">
-      <div>
-        <b>{times(T["every event"].turns / J.turns)}</b>
-        <span>fewer agent turns than waking on every event ({J.turns} vs {T["every event"].turns})</span>
-      </div>
-      <div>
-        <b>{pct(caught(J.missed, fresh.matter))}</b>
-        <span>of the {fresh.matter} events that mattered caught; a keyword alert caught {pct(caught(T["keyword alert"].missed, fresh.matter))}</span>
-      </div>
-      <div>
-        <b>{J.turns - J.needless} of {J.turns}</b>
-        <span>jevable wakes were for something that mattered</span>
-      </div>
-      <div>
-        <b>{usd(J.jev$)}</b>
-        <span>of Jev for all {fresh.events} events ({J.questions} questions)</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <span class="eyebrow"><b>01</b>Results</span>
-    <h2><span class="soft">Same events,</span> four ways of watching.</h2>
-    <div class="results panel">
-      <div class="rh">
-        <span>way of watching</span><span>agent turns</span><span>missed</span><span>needless wakes</span><span>cost</span>
-      </div>
-      {
-        rows.map((r) => (
-          <div class:list={["rr", { us: r.key === "jevable" }]}>
-            <span class="name">
-              <b>{r.name}</b>
-              <em>{r.note}</em>
-            </span>
-            <span class="turns">
-              <i style={`--w:${T[r.key].turns / maxTurns}`} />
-              {T[r.key].turns}
-            </span>
-            <span class:list={["num", { bad: T[r.key].missed > 0 }]} data-label="missed">
-              {T[r.key].missed} <small>of {fresh.matter}</small>
-            </span>
-            <span class="num" data-label="needless">{T[r.key].needless}</span>
-            <span class="num" data-label="cost">{usd(cost(r.key))}</span>
-          </div>
-        ))
-      }
-    </div>
-    <p class="fine">
-      Each case's events are taken as one day's stream. Cost = agent turns × {usd(w.single.cost)}, the mean of {w.single.n} measured single-event wakes ({usd(w.single.min)}–{usd(w.single.max)}); a 30-minute check reads a batch and cost {usd(w.batch.cost)} ({w.batch.n} runs). jevable adds its Jev questions at $0.042 per million input tokens.
-    </p>
-
+<Base title="jevable benchmark" description="The cost of watching: four approaches, the same events." theme="paper">
+  <div class="study wrap">
+    <article>
+      <h1>{pct(1 - cost("jevable") / cost("heartbeat 30 min"))} lower cost.<br />{pct(caught(J.missed, fresh.matter))} recall.</h1>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Comparison of watching methods">
+          <table class="comparison">
+            <thead><tr><th scope="col">Method</th><th scope="col">Estimated cost</th><th scope="col">Wakes</th><th scope="col">Recall</th></tr></thead>
+            <tbody>{rows.map(r => <tr class:list={{us:r.key === "jevable"}}>
+              <th scope="row">{r.key === "heartbeat 30 min" ? "Heartbeat (30 min)" : r.name}</th>
+              <td><span class="cost-cell"><span class="track" aria-hidden="true"><i style={`width:${cost(r.key) / Math.max(...rows.map(x => cost(x.key))) * 100}%`}></i></span><span>{usd(cost(r.key))}</span></span></td>
+              <td>{T[r.key].turns}</td><td>{pct(caught(T[r.key].missed, fresh.matter))}</td>
+            </tr>)}</tbody>
+          </table>
+        </div>
+        <details>
+          <summary>Method &amp; full results</summary>
+          <p>We replayed {fresh.events} events across five streams, treating each stream as one day. Costs use measured Claude Code wakes plus Jev calls. The heartbeat is assumed to catch everything; these are replay estimates.</p>
+          <h2>Results by stream</h2>
     <table class="cases">
       <thead>
         <tr><th>case</th><th>events (matter)</th>{rows.map((r) => <th>{r.name}</th>)}</tr>
@@ -125,15 +84,10 @@ const notAsked = misses.filter((x) => x.score === undefined).length;
       </tbody>
     </table>
     <p class="fine">Per case: agent turns / missed / needless wakes.</p>
-  </section>
 
-  <section class="wrap">
-    <span class="eyebrow"><b>02</b>Where it went wrong</span>
-    <h2><span class="soft">jevable missed {J.missed}.</span> Here they are.</h2>
-    <p class="lede">
-      {nearMisses} of the {misses.length} misses scored between 0.45 and the 0.7 threshold; {notAsked} never reached Jev, because a plain condition in the rule
-      decided first. The {J.needless} needless wakes are close calls a person could argue either way.
-    </p>
+        <h2>Misses and unnecessary wakes</h2>
+        <p>jevable missed {J.missed} relevant events and triggered {J.needless} unnecessary wakes.</p>
+        <p>{nearMisses} misses scored between 0.45 and the 0.7 threshold. {notAsked} were filtered out before reaching Jev.</p>
     <ul class="wrong">
       {
         wrong.map((x) => (
@@ -146,27 +100,12 @@ const notAsked = misses.filter((x) => x.score === undefined).length;
         ))
       }
     </ul>
-  </section>
 
-  <section class="wrap">
-    <span class="eyebrow"><b>03</b>Wording is most of it</span>
-    <h2><span class="soft">Same model,</span> better questions.</h2>
-    <p class="lede">
-      On the first run, over {first.events} held-out samples, jevable caught {pct(caught(first.total.jevable.missed, first.matter))} of what mattered. Most
-      misses came from how a question was worded: Jev reads criteria literally. We changed two rules, then fetched new events and labelled them without the rules in
-      sight. On those, misses fell from {T["jevable, rules before"].missed} to {J.missed}:
-    </p>
-    <ul class="lessons">
-      <li><b>A category covers generic mentions only if you say so.</b> "Elevated errors across all models" did not "name a model" until the criteria said one, several or all models.</li>
-      <li><b>Give the names a thing goes by.</b> platform.claude.com is the developer platform — Jev does not know that unless the criteria say it.</li>
-      <li><b>Tentative requests are requests.</b> "Maybe we can call this…", "could go in another section" and a terse "stage?" count only if the criteria list them.</li>
-    </ul>
-    <p class="fine">These are now in the <a href="/guide#writing-questions">guide</a> that agents follow when they write a rule.</p>
-  </section>
+        <h2>Method and limits.</h2>
+        <p>Events came from status pages, Hacker News, GitHub issues, releases and PR reviews. A separate agent labelled them without seeing the rules or scores.</p>
+        <p>This is a small, model-labelled sample. Quiet streams make scheduled heartbeats expensive. Savings and recall will vary with your workload.</p>
 
-  <section class="wrap">
-    <span class="eyebrow"><b>04</b>Method and limits</span>
-    <h2><span class="soft">How this was measured,</span> and what it does not show.</h2>
+          <p>Single-event wakes averaged {usd(w.single.cost)} across {w.single.n} runs ({usd(w.single.min)}–{usd(w.single.max)}). Batched wakes averaged {usd(w.batch.cost)} across {w.batch.n} runs. Jev input costs $0.042 per million tokens.</p>
     <div class="cols">
       <div>
         <h3>Method</h3>
@@ -181,7 +120,7 @@ const notAsked = misses.filter((x) => x.score === undefined).length;
       <div>
         <h3>Limits</h3>
         <ul>
-          <li>Measured wakes start a fresh session. A long-running agent re-reads its history on every wake, so real wakes cost more — which widens every gap here.</li>
+          <li>Measured wakes start a fresh session. Costs in a long-running session may differ as context grows.</li>
           <li>The labeller is a model, not a person; a few calls are arguable (listed above as needless wakes).</li>
           <li>{fresh.matter} events that matter is a small sample; one case (review comments) had only {fresh.perCase.find((c) => c.id === "review-asks")?.events.filter((e) => e.matters).length}.</li>
           <li>The heartbeat looks bad because these streams are small: it pays 48 checks a day however quiet the day is.</li>
@@ -189,308 +128,51 @@ const notAsked = misses.filter((x) => x.score === undefined).length;
         </ul>
       </div>
     </div>
-  </section>
+
+        <p class="sources"><a href="https://github.com/parall-hq/jevable/tree/main/bench/wake">Code and results ↗</a></p>
+        </details>
+    </article>
+  </div>
 </Base>
 
 <style>
-  .head h1 {
-    font-size: clamp(38px, 6vw, 68px);
-    line-height: 1.02;
-    letter-spacing: -0.04em;
-    font-weight: 600;
-    margin: 16px 0 18px;
-    max-width: 16ch;
-  }
-
-  .head h1 span {
-    color: var(--wake);
-  }
-
-  .head {
-    padding-top: clamp(32px, 6vw, 72px);
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 36px;
-  }
-
-  .stats div {
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 18px 20px;
-    display: grid;
-    gap: 6px;
-    align-content: start;
-  }
-
-  .stats div:first-child {
-    border-color: var(--wake-line);
-    background: var(--wake-soft);
-  }
-
-  .stats b {
-    font-size: 30px;
-    letter-spacing: -0.03em;
-    font-weight: 600;
-  }
-
-  .stats div:first-child b {
-    color: var(--wake);
-  }
-
-  .stats span {
-    font-size: 13px;
-    color: var(--dim);
-  }
-
-  .results {
-    margin-top: 28px;
-    overflow: hidden;
-  }
-
-  .rh,
-  .rr {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr) 110px 120px 90px;
-    gap: 16px;
-    align-items: center;
-    padding: 0 20px;
-  }
-
-  .rh {
-    height: 40px;
-    border-bottom: 1px solid var(--line);
-    font: 500 12px var(--mono);
-    color: var(--faint);
-  }
-
-  .rr {
-    min-height: 64px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .rr:last-child {
-    border-bottom: 0;
-  }
-
-  .rr.us {
-    background: var(--wake-soft);
-  }
-
-  .name {
-    display: grid;
-  }
-
-  .name b {
-    font-weight: 600;
-  }
-
-  .name em {
-    font-style: normal;
-    font-size: 12px;
-    color: var(--faint);
-  }
-
-  .turns {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font: 500 14px var(--mono);
-  }
-
-  .turns i {
-    height: 8px;
-    border-radius: 4px;
-    width: calc(var(--w) * 100%);
-    min-width: 4px;
-    max-width: calc(100% - 48px);
-    background: var(--faint);
-  }
-
-  .us .turns i {
-    background: var(--wake);
-  }
-
-  .num {
-    font: 500 14px var(--mono);
-  }
-
-  .num small {
-    color: var(--faint);
-    font-size: 11px;
-  }
-
-  .bad {
-    color: var(--wrong);
-  }
-
-  .us .num {
-    color: var(--wake);
-  }
-
-  .us .num.bad {
-    color: var(--wrong);
-  }
-
-  .fine {
-    margin: 14px 0 0;
-    font-size: 13px;
-    color: var(--faint);
-    max-width: 90ch;
-  }
-
-  .cases {
-    width: 100%;
-    margin-top: 28px;
-    border-collapse: collapse;
-    font: 13px var(--mono);
-  }
-
-  .cases th,
-  .cases td {
-    text-align: left;
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--line);
-    white-space: nowrap;
-  }
-
-  .cases th {
-    font-weight: 500;
-    color: var(--faint);
-  }
-
-  .cases td {
-    color: var(--dim);
-  }
-
-  .wrong {
-    list-style: none;
-    padding: 0;
-    margin: 28px 0 0;
-    display: grid;
-    gap: 8px;
-  }
-
-  .wrong li {
-    display: grid;
-    grid-template-columns: 76px 110px minmax(0, 1fr) 70px;
-    gap: 14px;
-    align-items: baseline;
-    padding: 12px 16px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    font-size: 14px;
-  }
-
-  .tag {
-    font: 500 12px var(--mono);
-    color: var(--dim);
-  }
-
-  .tag.miss {
-    color: var(--wrong);
-  }
-
-  .case,
-  .s {
-    font: 12px var(--mono);
-    color: var(--faint);
-  }
-
-  .s {
-    text-align: right;
-  }
-
-  .t {
-    color: var(--dim);
-  }
-
-  .lessons {
-    margin: 24px 0 0;
-    padding-left: 18px;
-    display: grid;
-    gap: 10px;
-    color: var(--dim);
-    max-width: 80ch;
-  }
-
-  .lessons b {
-    color: var(--fg);
-    font-weight: 600;
-  }
-
-  .cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 24px;
-  }
-
-  .cols > div {
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 18px 22px;
-  }
-
-  .cols h3 {
-    margin: 0 0 8px;
-    font-size: 16px;
-  }
-
-  .cols ul {
-    margin: 0;
-    padding-left: 18px;
-    display: grid;
-    gap: 8px;
-    font-size: 14px;
-    color: var(--dim);
-  }
-
-  @media (max-width: 900px) {
-    .stats {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .rh {
-      display: none;
-    }
-
-    .rr {
-      grid-template-columns: 1fr 1fr 1fr;
-      padding: 14px 16px;
-      gap: 6px 12px;
-    }
-
-    .name,
-    .turns {
-      grid-column: 1 / -1;
-    }
-
-    .num::before {
-      content: attr(data-label);
-      display: block;
-      font-size: 11px;
-      color: var(--faint);
-    }
-
-    .cases {
-      display: block;
-      overflow-x: auto;
-    }
-
-    .wrong li {
-      grid-template-columns: auto auto minmax(0, 1fr);
-    }
-
-    .wrong .t {
-      grid-column: 1 / -1;
-    }
-
-    .cols {
-      grid-template-columns: 1fr;
-    }
-  }
+  .study { position:relative; max-width:1120px; padding-top:64px; }
+  article { max-width:740px; margin:0 auto; font-size:17px; line-height:1.5; font-kerning:normal; }
+  h1 { font-size:clamp(36px,5vw,48px); line-height:1.1; font-weight:500; letter-spacing:-.035em; margin:0 0 16px; }
+  p { max-width:65ch; margin:0 0 20px; }
+  h2 { font-size:27px; font-weight:500; line-height:1.25; margin:32px 0 20px; letter-spacing:-.025em; }
+  .table-scroll { overflow-x:auto; margin:28px 0 18px; }
+  table { width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums; font-size:15px; }
+  th,td { text-align:right; padding:18px 12px; border-bottom:1px solid var(--line); white-space:nowrap; }
+  th:first-child, td:first-child { text-align:left; }
+  th { font-weight:500; }
+  thead { color:var(--dim); font-size:14px; }
+  .comparison { min-width:610px; }
+  .comparison th:first-child { padding-left:0; }
+  .us { background:var(--wake-soft); }
+  .us th:first-child { padding-left:12px; }
+  .cost-cell { display:flex; align-items:center; gap:16px; justify-content:flex-end; }
+  .cost-cell > span:last-child { min-width:58px; }
+  .track { width:100px; height:7px; background:var(--line); display:block; }
+  .track i { display:block; height:100%; background:var(--faint); }
+  .us .track i { background:var(--wake); }
+  details { border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:24px; padding:16px 0; }
+  summary { cursor:pointer; font-size:16px; }
+  summary:hover { color:var(--wake); }
+  summary:focus-visible, a:focus-visible { outline:2px solid var(--wake); outline-offset:5px; }
+  details[open] summary { margin-bottom:24px; }
+  .cases { display:block; overflow-x:auto; font-size:14px; }
+  .fine { font-size:15px; color:var(--dim); margin:18px 0 0; }
+  .wrong { list-style:none; padding:0; }
+  .wrong li { display:grid; grid-template-columns:minmax(0, 1fr) 112px; gap:8px 24px; padding:18px 0; align-items:baseline; border-bottom:1px solid var(--line); }
+  .tag { grid-column:1; grid-row:1; font-weight:500; }
+  .case { grid-column:2; grid-row:1; text-align:right; }
+  .case,.s { color:var(--dim); font-size:15px; }
+  .t { grid-column:1; grid-row:2; overflow-wrap:anywhere; }
+  .s { grid-column:2; grid-row:2; text-align:right; font-variant-numeric:tabular-nums; }
+  li { margin-bottom:10px; }
+  .cols h3 { font-size:18px; margin:28px 0 14px; font-weight:500; }
+  .cols ul { padding-left:22px; }
+  .sources { margin-top:24px; }
+  @media(max-width:600px) { .wrong li { grid-template-columns:minmax(0, 1fr) 90px; column-gap:12px; } .study { padding-top:32px; } article { font-size:16px; } h2 { font-size:24px; } }
 </style>
