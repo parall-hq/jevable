@@ -53,3 +53,5 @@ const engine = new Engine(new Client({ apiKey: process.env.TYPESAFE_API_KEY }));
 const rule = engine.compile(`judge.boolean(line, "Does this report a production outage?") >= 0.7`);
 const { pass, calls } = await rule.match({ line: "checkout returns 500 for every order" });
 ```
+
+[MIT](https://github.com/parall-hq/jevable/blob/main/LICENSE) · [Source](https://github.com/parall-hq/jevable) · [jevable.sh](https://jevable.sh)

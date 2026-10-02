@@ -32,10 +32,7 @@ event, 85% of what mattered caught where a keyword alert caught 25%
 | --- | --- | --- |
 | `packages/core` | `@jevable/core` | The rule engine: CEL rules with `judge.boolean` / `judge.choice` / `judge.score`, the Jev client, `fingerprint`. Shared by everything else. |
 | `packages/cli` | `jevable` | The `jevable` command (`npx -y jevable`). Usage in its [README](packages/cli/README.md). `jevable guide` prints [guide.md](packages/cli/guide.md): the steps an agent follows and the full reference. |
-
 | `packages/web` | `@jevable/web` (private) | [jevable.sh](https://jevable.sh): the landing page and `/guide` (rendered from the CLI's guide.md). Astro, static, on Cloudflare Workers. `npm run dev -w packages/web`; `npm run demo-data -w packages/web` re-records the demo's Jev answers from `cases/`; `npm run deploy -w packages/web`. |
-
-A hosted service goes next to them in `packages/server`, on top of `@jevable/core`.
 
 ## Develop
 
@@ -48,4 +45,6 @@ npm run build       # dist/ per package; core first
 
 Tests and local runs use the TypeScript sources directly through the
 `jevable-source` export condition (`node --conditions=jevable-source`);
-published packages use `dist/`. Not open source: packages are `UNLICENSED`.
+published packages use `dist/`.
+
+[MIT](LICENSE) · [Security](SECURITY.md)

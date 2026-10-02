@@ -1,6 +1,6 @@
 {
   "name": "@jevable/core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "The jevable rule engine: CEL rules that ask Jev, TypeSafe's classification model, semantic questions",
   "type": "module",
   "exports": {
@@ -25,10 +25,17 @@
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "test": "node --conditions=jevable-source --test test/*.test.ts",
-    "prepack": "npm run build"
+    "prepack": "cp ../../LICENSE . && npm run build"
   },
   "dependencies": {
     "@bufbuild/cel": "0.6.1"
   },
-  "license": "UNLICENSED"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parall-hq/jevable.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://jevable.sh",
+  "bugs": "https://github.com/parall-hq/jevable/issues"
 }
