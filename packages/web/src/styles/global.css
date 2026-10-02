@@ -170,3 +170,11 @@ h2 .soft {
     transition: none !important;
   }
 }
+
+/* The benchmark uses an article layout; other pages retain their theme. */
+:root.paper:not([data-theme="dark"]) { --bar-bg:rgb(255 255 255 / .96); --bg:#fff; --raised:#f7f7f5; --sunken:#f7f7f5; --line:#e6e6e3; --line-strong:#bbb; --fg:#171717; --dim:#62625e; --faint:#73736e; --wake:#c38320; color-scheme:light; }
+.paper body::before { display:none; }
+
+.paper .dot { background:#ffb547; box-shadow:none; }
+.paper footer { font-size:14px; }
+@media(max-width:480px) { .paper .nav { gap:18px; } .paper nav { gap:14px; font-size:13px; } }
