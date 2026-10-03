@@ -18,7 +18,7 @@ Options:
       --no SAMPLE       a sample that should not pass (repeatable)
       --on, -t, -v      as for a question (jevable --help)
       --rule RULE       a CEL rule instead of a question (-f FILE: read it from a file)
-      --model MODEL     Jev model (default $JEV_MODEL, else jev-1.13.0)
+      --model MODEL     the decision model for this run only (default: the one \`jevable model\` names)
 
 Exit status: 0 when every sample came out as expected, 1 otherwise, 2 on error.
 

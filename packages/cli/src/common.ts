@@ -1,10 +1,10 @@
 // What the commands share: the engine from the environment, the rule
 // source, and the stderr log with its closing summary.
 
-import { readFileSync } from "node:fs";
+import { chmodSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
-import { join } from "node:path";
-import { choose, Client, Engine, lookup, type Found } from "@jevable/core";
+import { dirname, join } from "node:path";
+import { choose, Client, Engine, lookup, type Found, type Provider } from "@jevable/core";
 import type { FilterResult } from "./run/filter.ts";
 
 // guide.md and package.json sit at the package root, next to src/ and dist/.
@@ -41,17 +41,59 @@ export function settings(): { vars: Record<string, string | undefined>; fromFile
   return { vars, fromFile };
 }
 
-/** The provider of Jev to use, from the environment: JEV_PROVIDER, else the first with a key. */
+/** The provider to use, from the environment: JEV_PROVIDER, else the first with a key. */
 export function provider(vars = settings().vars): Found | undefined {
   return choose(lookup(vars), vars.JEV_PROVIDER);
+}
+
+/**
+ * The model to ask: --model for one run, else the one chosen with `jevable
+ * model` (JEV_MODEL), else the provider's default, Jev.
+ */
+export function modelOf(vars: Record<string, string | undefined>, p?: Provider, override?: string): string | undefined {
+  return override || vars.JEV_MODEL || p?.model;
+}
+
+/** A client for provider `p` with `key`, asking `model`. */
+export function clientFor(p: Provider | undefined, key: string | undefined, model: string | undefined): Client {
+  return new Client({ apiKey: key, baseUrl: p?.baseUrl, path: p?.path, model, provider: p?.label });
 }
 
 /** The shared engine, configured from the environment. A missing key is reported by the first judge call. */
 export function newEngine(model?: string): Engine {
   const { vars } = settings();
   const found = provider(vars);
-  const p = found?.provider;
-  return new Engine(new Client({ apiKey: found?.key, baseUrl: p?.baseUrl, model: model || vars.JEV_MODEL || p?.model, provider: p?.label }));
+  return new Engine(clientFor(found?.provider, found?.key, modelOf(vars, found?.provider, model)));
+}
+
+/** One question, to see that a key, an endpoint and a model work together. */
+export async function check(client: Client): Promise<{ seconds: string } | { error: string }> {
+  const start = performance.now();
+  try {
+    await client.ask("jevable key", { q: { type: "noul", instructions: "Is this text a command?" } });
+    return { seconds: ((performance.now() - start) / 1000).toFixed(2) };
+  } catch (err) {
+    return { error: (err as Error).message.replace(/\.$/, "") };
+  }
+}
+
+/** Sets NAME=value lines in ~/.jevable/env (null removes one), keeping the rest; readable by the owner only. */
+export function writeEnv(set: Record<string, string | null>): void {
+  let lines: string[] = [];
+  try {
+    lines = readFileSync(ENV_FILE, "utf8").split("\n").filter(Boolean);
+  } catch {}
+  lines = lines.filter((l) => !Object.keys(set).includes(l.match(/^\s*(?:export\s+)?([A-Za-z_]\w*)\s*=/)?.[1] ?? ""));
+  for (const [name, value] of Object.entries(set)) if (value !== null) lines.push(`${name}=${value}`);
+  mkdirSync(dirname(ENV_FILE), { recursive: true, mode: 0o700 });
+  writeFileSync(ENV_FILE, `${lines.join("\n")}\n`, { mode: 0o600 });
+  chmodSync(ENV_FILE, 0o600);
+}
+
+/** Prints an answer for the person or agent, and returns the exit status. */
+export function say(text: string, code: number): number {
+  process.stdout.write(`${text}\n`);
+  return code;
 }
 
 /** A jq-style path (.body, .user.login, .items[0], .["a-b"]) as CEL over the record's JSON. */
@@ -115,6 +157,6 @@ export function printStats(r: Pick<FilterResult, "count" | "passed" | "emitted">
   const { calls, cacheHits, tokens } = engine.stats;
   const unit = r.count === 1 ? noun.replace(/s$/, "") : noun;
   const held = r.emitted >= 0 && r.emitted !== r.passed ? ` (${r.emitted} emitted, the rest held back by --key/--cooldown)` : "";
-  const via = calls ? ` via ${engine.client.provider}` : "";
-  log(`${r.count} ${unit} · ${r.passed} passed${held} · ${calls} Jev calls${via} (+${cacheHits} from cache) · ${tokens} tokens`);
+  const to = calls ? ` to ${engine.model} via ${engine.client.provider}` : "";
+  log(`${r.count} ${unit} · ${r.passed} passed${held} · ${calls} call${calls === 1 ? "" : "s"}${to} (+${cacheHits} from cache) · ${tokens} tokens`);
 }

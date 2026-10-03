@@ -35,9 +35,19 @@ and saves it where every runtime and detached watch finds it. Do not make the
 person choose a provider or set a variable, and never put a key in a
 repository.
 
+**Model, once.** jevable asks Jev unless told otherwise. Run `jevable model`:
+it names the model in use and the other decision models the key can use (on
+OpenRouter or Vercel AI Gateway, for instance Liquid d1; a Cloudflare account
+token, `cfat_…`, gets Cloudflare's Clef). Tell the person in
+one line and ask whether they want another; if so, `jevable model <name>`
+checks it and saves the choice, and `jevable model default` goes back.
+`--model <name>` tries a model for one run without saving it. Thresholds
+differ between models: after a switch, run `jevable test` on the samples
+again.
+
 **Asked only to set jevable up** ("Set up jevable", nothing to watch yet):
 
-1. Get a working key (above).
+1. Get a working key and, if the person wants another, a model (above).
 2. So that you and later sessions reach for it, add this to the project's
    AGENTS.md, or CLAUDE.md if that is what the project uses (create AGENTS.md
    if there is neither):

@@ -3,6 +3,7 @@
 
 import { filterCommand } from "./commands/filter.ts";
 import { keyCommand } from "./commands/key.ts";
+import { modelCommand } from "./commands/model.ts";
 import { testCommand } from "./commands/test.ts";
 import { log, packageFile } from "./common.ts";
 
@@ -21,10 +22,11 @@ Usage:
   jevable filter RULE [options]       filter by a CEL rule: plain conditions and judge.* questions
   jevable test QUESTION --yes .. --no ..   check a question (or --rule) on samples, find the threshold
   jevable key [KEY]                   whether there is a working key for Jev; with KEY, check and save it
+  jevable model [NAME]                the decision model it asks (Jev by default) and the others the key can use; with NAME, switch
   jevable guide                       when and how to use it, and recipes
 
 Agents: read \`jevable guide\` first and follow it.
-Setup: \`jevable key\`. Any API key from TypeSafe, OpenRouter or Vercel AI Gateway works.
+Setup: \`jevable key\`, then \`jevable model\` to pick another decision model. Any API key from TypeSafe, OpenRouter or Vercel AI Gateway works.
 Run \`jevable filter --help\` for every option.
 `;
 
@@ -42,6 +44,8 @@ async function main([cmd, ...args]: string[]): Promise<number> {
       return testCommand(args);
     case "key":
       return keyCommand(args);
+    case "model":
+      return modelCommand(args);
     case "guide":
       process.stdout.write(packageFile("guide.md"));
       return 0;
