@@ -9,6 +9,13 @@ export const DEFAULT_BASE_URL = "https://api.typesafe.ai";
 export const DEFAULT_MODEL = "jev-1.13.0";
 export const DEFAULT_PATH = "/v1/systemone";
 
+/** A URL without its trailing slashes (a loop: a regex here backtracks on many slashes). */
+export function trimSlashes(url: string): string {
+  let end = url.length;
+  while (end > 0 && url[end - 1] === "/") end--;
+  return url.slice(0, end);
+}
+
 export type QuestionType = "noul" | "choice" | "score";
 
 /**
@@ -70,7 +77,7 @@ export class Client {
 
   constructor(opts: { apiKey?: string; baseUrl?: string; model?: string; path?: string; provider?: string } = {}) {
     this.apiKey = opts.apiKey ?? "";
-    this.baseUrl = (opts.baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, "");
+    this.baseUrl = trimSlashes(opts.baseUrl || DEFAULT_BASE_URL);
     this.model = opts.model || DEFAULT_MODEL;
     this.path = opts.path || DEFAULT_PATH;
     this.provider = opts.provider || "TypeSafe";

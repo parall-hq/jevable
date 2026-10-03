@@ -3,7 +3,7 @@
 // shapes; they differ in base URL, path, credential and the models they serve.
 // Jev is the default wherever it is served.
 
-import { DEFAULT_BASE_URL, DEFAULT_MODEL, DEFAULT_PATH } from "./client.ts";
+import { DEFAULT_BASE_URL, DEFAULT_MODEL, DEFAULT_PATH, trimSlashes } from "./client.ts";
 
 export interface Provider {
   name: string;
@@ -49,7 +49,7 @@ export interface Found {
  */
 export function lookup(vars: Readonly<Record<string, string | undefined>>): Found[] {
   const custom: Provider[] = vars.JEV_BASE_URL
-    ? [{ name: "custom", label: vars.JEV_BASE_URL, baseUrl: vars.JEV_BASE_URL, path: DEFAULT_PATH, model: DEFAULT_MODEL, catalog: `${vars.JEV_BASE_URL.replace(/\/+$/, "")}/v1/models`, env: ["JEV_API_KEY", "TYPESAFE_API_KEY"], prefix: "" }]
+    ? [{ name: "custom", label: vars.JEV_BASE_URL, baseUrl: vars.JEV_BASE_URL, path: DEFAULT_PATH, model: DEFAULT_MODEL, catalog: `${trimSlashes(vars.JEV_BASE_URL)}/v1/models`, env: ["JEV_API_KEY", "TYPESAFE_API_KEY"], prefix: "" }]
     : [];
   return [...custom, ...PROVIDERS].map((provider) => {
     const variable = provider.env.find((v) => vars[v]);
