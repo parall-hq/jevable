@@ -14,7 +14,7 @@
     "test": "npm test --workspaces --if-present",
     "changeset": "changeset",
     "version-packages": "changeset version && npm install --package-lock-only",
-    "release": "changeset publish"
+    "release": "changeset publish --no-git-tag"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",

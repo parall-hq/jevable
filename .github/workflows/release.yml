@@ -1,14 +1,14 @@
 name: release
 
-# On every push to main. While changesets are pending, keep the "Version
-# Packages" pull request up to date: versions and changelogs. Once it is
-# merged, publish every package whose version is not on npm yet, then tag it
-# and write its GitHub release. npm trusts this workflow (trusted publishing,
-# set up once per package on npmjs.com): no npm token is stored anywhere, and
-# every version carries provenance.
+# Run by hand when it is time to release: Actions → release → Run workflow,
+# or `gh workflow run release`. It turns the pending changesets into the next
+# version and its changelog and commits that to main; publishes every package
+# whose version npm does not have yet, through npm's trusted publishing (set
+# up once per package on npmjs.com: no npm token anywhere, and every version
+# carries provenance); then tags v<version> and writes its GitHub release.
+# After a failure, run it again: whatever is done already is skipped.
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 concurrency: release
 
@@ -17,13 +17,15 @@ permissions:
 
 jobs:
   release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
-      contents: write # the version branch, tags and GitHub releases
-      pull-requests: write # the Version Packages pull request
+      contents: write # the release commit, the tag and the GitHub release
       id-token: write # npm trusted publishing
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -31,13 +33,37 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm ci
       - run: npm test
-      - uses: changesets/action@66d7d1ddafddf1ef45f98ee51a7496f9cdadb2f4 # v2.1.2
-        with:
-          version-script: npm run version-packages
-          publish-script: npm run release
-          pr-title: "chore: release"
-          commit-message: "chore: release"
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: version
         env:
           # the changelog links each entry to its pull request through the GitHub API
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(ls .changeset/*.md | grep -v README.md)" ]; then
+            echo "No pending changesets: releasing the version package.json names."
+            exit 0
+          fi
+          npm run version-packages
+          v=$(node -p 'require("./packages/cli/package.json").version')
+          git add -A
+          git commit -m "chore: release $v"
+          git push origin HEAD:main
+      - name: publish
+        env:
           NPM_CONFIG_PROVENANCE: "true"
+        run: npm run release
+      - name: tag and GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v=$(node -p 'require("./packages/cli/package.json").version')
+          if git rev-parse -q --verify "refs/tags/v$v" >/dev/null; then
+            echo "v$v is tagged already."
+            exit 0
+          fi
+          git tag -a "v$v" -m "jevable $v"
+          git push origin "v$v"
+          awk -v h="## $v" '$0 == h { on = 1; next } /^## / && on { exit } on' packages/cli/CHANGELOG.md > notes.md
+          gh release create "v$v" --title "jevable $v" --notes-file notes.md

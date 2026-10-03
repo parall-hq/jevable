@@ -1,10 +1,28 @@
 {
-  "changelog": ["@changesets/changelog-github", { "repo": "parall-hq/jevable" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "parall-hq/jevable"
+    }
+  ],
   "commit": false,
-  "fixed": [["@jevable/core", "jevable"]],
+  "fixed": [
+    [
+      "@jevable/core",
+      "jevable"
+    ]
+  ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [
+    "@jevable/web"
+  ],
+  "changedFilePatterns": [
+    "src/**",
+    "guide.md",
+    "README.md",
+    "package.json"
+  ]
 }
