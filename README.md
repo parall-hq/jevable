@@ -182,8 +182,14 @@ To work on the website:
 ```bash
 npm run dev -w packages/web
 npm run demo-data -w packages/web  # Re-record Jev answers from cases/; needs a key.
-npm run deploy -w packages/web    # Build and deploy to Cloudflare Workers.
+npm run deploy -w packages/web    # Build and deploy to Cloudflare Workers; main deploys itself.
 ```
+
+### Releasing
+
+A pull request that changes what `jevable` or `@jevable/core` ships (their code, the guide, the README npm shows, their dependencies) adds a changeset: run `npx changeset`, pick patch (a fix) or minor (a feature), write one line for the changelog and commit the file. CI checks for it; when a change needs no release, `npx changeset --empty` says so. Do not edit versions by hand: both packages always share one version.
+
+To release, run the **release** workflow by hand (Actions → release → Run workflow, or `gh workflow run release`). It turns the pending changesets into the next version and its changelog and commits that to main, publishes to npm through npm's trusted publishing (no token, with provenance), tags `v<version>` and writes the GitHub release. The website redeploys whenever main changes what it shows.
 
 Bug reports, new watch scenarios and pull requests are welcome. [Open an issue](https://github.com/parall-hq/jevable/issues), or start with the [example cases](cases/README.md).
 

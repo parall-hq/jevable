@@ -28,3 +28,25 @@ jobs:
           node-version: 20
       - run: node packages/cli/dist/cli.js --version
       - run: printf 'x\ny\n' | node packages/cli/dist/cli.js filter 'line.contains("x")'
+
+  # A pull request that changes what jevable or @jevable/core ships (their
+  # code, the guide, the README npm shows, their dependencies) carries a
+  # changeset, so that the next release says what changed.
+  changeset:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: a changeset for what ships
+        run: |
+          npx changeset status --since=origin/${{ github.base_ref }} || {
+            echo "::error::This pull request changes what jevable or @jevable/core ships but has no changeset. Run \`npx changeset\` and commit the file it writes, or \`npx changeset --empty\` if the change needs no release."
+            exit 1
+          }
