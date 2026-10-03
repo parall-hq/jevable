@@ -82,7 +82,7 @@ test("settings can come from ~/.jevable/env", async () => {
   writeFileSync(join(home, ".jevable", "env"), `# for jevable\nexport JEV_API_KEY="${FAKE_KEY}"\nJEV_BASE_URL=${f.url}\n`);
   const run = await jevable(["filter", `judge.boolean(line, "Is this an outage?") >= 0.7`], { input: "outage\n", env: { HOME: home } });
   assert.deepEqual([run.code, run.stdout], [0, "outage\n"]);
-  assert.ok(run.stderr.includes(`1 calls to jev-1.13.0 via ${f.url}`), run.stderr);
+  assert.ok(run.stderr.includes(`1 call to jev-1.13.0 via ${f.url}`), run.stderr);
 });
 
 test("key without one says what to ask the person", async () => {

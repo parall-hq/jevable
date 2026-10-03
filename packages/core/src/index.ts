@@ -11,6 +11,6 @@ export { RuleError, isRuleBug } from "./cel/check.ts";
 export { toCel, fromCel } from "./cel/values.ts";
 export { clip, cutLongStrings, fingerprint, parseRecord } from "./text.ts";
 export { Client, HttpError, DEFAULT_BASE_URL, DEFAULT_MODEL, DEFAULT_PATH, type Answer, type Question, type QuestionType, type Result } from "./typesafe/client.ts";
-export { PROVIDERS, lookup, choose, whose, type Provider, type Found } from "./typesafe/providers.ts";
+export { PROVIDERS, lookup, choose, whose, withAccount, accountOf, type Provider, type Found, type Account } from "./typesafe/providers.ts";
 export type { Bindings, Call, Outcome } from "./types.ts";
 export type { CelInput } from "@bufbuild/cel";

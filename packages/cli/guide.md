@@ -37,7 +37,8 @@ repository.
 
 **Model, once.** jevable asks Jev unless told otherwise. Run `jevable model`:
 it names the model in use and the other decision models the key can use (on
-OpenRouter or Vercel AI Gateway, for instance Liquid d1). Tell the person in
+OpenRouter or Vercel AI Gateway, for instance Liquid d1; a Cloudflare account
+token, `cfat_…`, gets Cloudflare's Clef). Tell the person in
 one line and ask whether they want another; if so, `jevable model <name>`
 checks it and saves the choice, and `jevable model default` goes back.
 `--model <name>` tries a model for one run without saving it. Thresholds

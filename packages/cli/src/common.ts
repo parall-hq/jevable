@@ -158,5 +158,5 @@ export function printStats(r: Pick<FilterResult, "count" | "passed" | "emitted">
   const unit = r.count === 1 ? noun.replace(/s$/, "") : noun;
   const held = r.emitted >= 0 && r.emitted !== r.passed ? ` (${r.emitted} emitted, the rest held back by --key/--cooldown)` : "";
   const to = calls ? ` to ${engine.model} via ${engine.client.provider}` : "";
-  log(`${r.count} ${unit} · ${r.passed} passed${held} · ${calls} calls${to} (+${cacheHits} from cache) · ${tokens} tokens`);
+  log(`${r.count} ${unit} · ${r.passed} passed${held} · ${calls} call${calls === 1 ? "" : "s"}${to} (+${cacheHits} from cache) · ${tokens} tokens`);
 }

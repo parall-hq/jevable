@@ -56,11 +56,11 @@ export class HttpError extends Error {
   }
 }
 
-/** The message in an error body — {message}, TypeSafe's {detail: {message}}, a gateway's {error: {message}} — else the body itself. */
+/** The message in an error body — {message}, TypeSafe's {detail: {message}}, a gateway's {error: {message}}, Cloudflare's {errors: [{message}]} — else the body itself. */
 function reason(body: string): string {
   try {
     const j = JSON.parse(body);
-    const m = j?.error?.message ?? j?.detail?.message ?? j?.message ?? j?.error;
+    const m = j?.error?.message ?? j?.detail?.message ?? j?.errors?.[0]?.message ?? j?.message ?? j?.error;
     if (typeof m === "string") return m;
   } catch {}
   return body.slice(0, 512);
@@ -70,7 +70,7 @@ export class Client {
   readonly baseUrl: string;
   readonly apiKey: string;
   readonly model: string;
-  /** Where the System One endpoint sits under baseUrl. */
+  /** Where the System One endpoint sits under baseUrl; a {model} in it is replaced by the model, which the body then leaves out. */
   readonly path: string;
   /** Who serves the model here, for messages. */
   readonly provider: string;
@@ -84,20 +84,21 @@ export class Client {
   }
 
   /**
-   * The decision models a catalog URL lists, by id. Catalogs differ: TypeSafe
-   * answers {models: [{name}]}, the gateways {data: [{id}]} with every kind of
-   * model, of which those typed "evaluation" are the decision models.
+   * The decision models a catalog URL lists. Catalogs differ: TypeSafe answers
+   * {models: [{name}]}, the gateways {data: [{id}]} with every kind of model,
+   * of which those typed "evaluation" are the decision models, and Cloudflare
+   * {result: [{id, name}]}, whose model ids are in `field` "name".
    */
-  async models(catalog: string, signal?: AbortSignal): Promise<string[]> {
+  async models(catalog: string, field: "id" | "name" = "id", signal?: AbortSignal): Promise<string[]> {
     const timeout = AbortSignal.timeout(15_000);
     const res = await fetch(catalog, { headers: { Authorization: `Bearer ${this.apiKey}` }, signal: signal ? AbortSignal.any([signal, timeout]) : timeout });
     const text = await res.text();
     if (!res.ok) throw new HttpError(this.provider, res.status, text);
     const j = JSON.parse(text);
-    const items: unknown[] = j.data ?? j.models ?? [];
+    const items: unknown[] = j.data ?? j.models ?? j.result ?? [];
     return items.flatMap((m) => {
       const it = (typeof m === "string" ? { id: m } : m) as { id?: string; name?: string; type?: string };
-      const id = it.id ?? it.name;
+      const id = it[field] ?? it.id ?? it.name;
       return id && (!it.type || it.type === "evaluation") ? [id] : [];
     });
   }
@@ -115,15 +116,18 @@ export class Client {
 
   private async request(state: unknown, questions: Record<string, Question>, signal?: AbortSignal): Promise<Result> {
     const timeout = AbortSignal.timeout(15_000);
-    const res = await fetch(`${this.baseUrl}${this.path}`, {
+    const inPath = this.path.includes("{model}");
+    const res = await fetch(`${this.baseUrl}${this.path.replace("{model}", this.model)}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${this.apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ state, model: this.model, questions }),
+      body: JSON.stringify(inPath ? { state, questions } : { state, model: this.model, questions }),
       signal: signal ? AbortSignal.any([signal, timeout]) : timeout,
     });
     const text = await res.text();
     if (!res.ok) throw new HttpError(this.provider, res.status, text);
-    const out = JSON.parse(text) as Result;
+    // Cloudflare wraps the answer: {result: {model, answers, usage}, success, errors}.
+    const j = JSON.parse(text);
+    const out = (j.result?.answers ? j.result : j) as Result;
     for (const key of Object.keys(questions)) {
       if (!out.answers?.[key]) throw new Error(`${this.provider}: answer ${JSON.stringify(key)} missing`);
     }

@@ -4,16 +4,17 @@
 // variable name. Which model it asks is `jevable model`.
 
 import { parseArgs } from "node:util";
-import { lookup, whose } from "@jevable/core";
+import { accountOf, lookup, whose, withAccount } from "@jevable/core";
 import { check, clientFor, modelOf, provider, say, settings, writeEnv } from "../common.ts";
 
 export const KEY_HELP = `jevable key [KEY]
 
 Without KEY: whether jevable has a key, which model it asks, and whether they
-work. With KEY: tell whose key it is (TypeSafe, OpenRouter, Vercel AI Gateway
-or Perplexity), check it with one question, and save it in ~/.jevable/env,
-where every runtime and detached watch finds it. \`jevable model\` lists the
-other decision models the key can use.
+work. With KEY: tell whose key it is (TypeSafe, OpenRouter, Vercel AI Gateway,
+Perplexity or a Cloudflare account token), check it with one question, and
+save it in ~/.jevable/env, where every runtime and detached watch finds it,
+with the Cloudflare account it reaches. \`jevable model\` lists the other
+decision models the key can use.
 
 Exit status: 0 when a working key is in place, 1 when not.
 `;
@@ -45,14 +46,27 @@ export async function keyCommand(args: string[]): Promise<number> {
 
 async function save(key: string, vars: Record<string, string | undefined>): Promise<number> {
   // A custom endpoint (JEV_BASE_URL) takes any key; otherwise the key says whose it is.
-  const p = vars.JEV_BASE_URL ? lookup(vars)[0].provider : whose(key);
-  if (!p) return say("That is not a key jevable can use: TypeSafe keys start with apikey_, OpenRouter keys with sk-or-, Vercel AI Gateway keys with vck_, Perplexity keys with pplx-.", 1);
+  let p = vars.JEV_BASE_URL ? lookup(vars)[0].provider : whose(key);
+  if (!p) return say("That is not a key jevable can use: TypeSafe keys start with apikey_, OpenRouter keys with sk-or-, Vercel AI Gateway keys with vck_, Perplexity keys with pplx-, Cloudflare account tokens with cfat_.", 1);
+  // A provider whose URLs name an account (Cloudflare): the one set, else the one the key reaches.
+  const account: Record<string, string> = {};
+  if (p.account) {
+    let id = vars[p.account.env];
+    try {
+      id ||= await accountOf(p, key);
+    } catch (err) {
+      return say(`The ${p.label} key does not work: ${(err as Error).message}. Nothing saved.`, 1);
+    }
+    account[p.account.env] = id;
+    p = withAccount(p, id);
+  }
   const r = await check(clientFor(p, key, p.model));
   if ("error" in r) return say(`The ${p.label} key does not work: ${r.error}. Nothing saved.`, 1);
   // Name the provider too, so a key saved now wins over an older one elsewhere;
   // a model chosen for another provider goes, since model names differ between them.
   writeEnv({
     [p.env[0]]: key,
+    ...account,
     ...(p.name === "custom" ? {} : { JEV_PROVIDER: p.name }),
     ...(vars.JEV_PROVIDER === p.name ? {} : { JEV_MODEL: null }),
   });

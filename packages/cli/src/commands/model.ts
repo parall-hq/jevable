@@ -42,7 +42,7 @@ export async function modelCommand(args: string[]): Promise<number> {
   if (!p.catalog) return say(`${now} ${p.label} serves no other decision model.`, 0);
   let others: string[];
   try {
-    others = (await clientFor(p, found.key, current).models(p.catalog)).filter((m) => m !== current);
+    others = (await clientFor(p, found.key, current).models(p.catalog, p.catalogField)).filter((m) => m !== current);
   } catch (err) {
     return say(`${now} Could not list the others: ${(err as Error).message}`, 0);
   }
