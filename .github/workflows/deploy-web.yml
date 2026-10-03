@@ -1,0 +1,41 @@
+name: deploy web
+
+# jevable.sh follows main. The site renders the CLI's guide.md, the benchmark
+# results and the demo data, so a change to any of them redeploys it. Needs
+# the CLOUDFLARE_API_TOKEN (Workers Scripts: Edit on this account only) and
+# CLOUDFLARE_ACCOUNT_ID secrets; without them the deploy is skipped.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/web/**"
+      - "packages/cli/guide.md"
+      - "bench/**"
+      - "package-lock.json"
+  workflow_dispatch:
+
+concurrency: deploy-web
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::notice::CLOUDFLARE_API_TOKEN is not set: skipping the deploy"
+            exit 0
+          fi
+          npm run deploy -w packages/web

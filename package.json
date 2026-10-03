@@ -11,9 +11,14 @@
   "scripts": {
     "build": "npm run build --workspaces",
     "typecheck": "npm run typecheck --workspaces --if-present",
-    "test": "npm test --workspaces --if-present"
+    "test": "npm test --workspaces --if-present",
+    "changeset": "changeset",
+    "version-packages": "changeset version && npm install --package-lock-only",
+    "release": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^1.0.1",
+    "@changesets/cli": "^3.0.3",
     "@types/node": "^24",
     "typescript": "7.0.2"
   }
