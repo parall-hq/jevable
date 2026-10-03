@@ -1,6 +1,6 @@
 {
   "name": "jevable",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "grep that reads meaning: pass through only the records a Jev judgement lets through",
   "type": "module",
   "bin": {
@@ -27,7 +27,7 @@
     "prepack": "cp ../../LICENSE . && npm run build"
   },
   "dependencies": {
-    "@jevable/core": "0.2.2"
+    "@jevable/core": "0.3.0"
   },
   "license": "MIT",
   "repository": {

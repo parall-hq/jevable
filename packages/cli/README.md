@@ -42,6 +42,7 @@ jevable: run `npx -y jevable guide` and follow it."
 - `jevable filter RULE` — the same with a CEL rule: plain conditions, several `judge.*` questions, choices, scores, `--window`.
 - `jevable test QUESTION --yes ... --no ...` — run a question (or `--rule`) on samples, show the scores and the thresholds that separate them.
 - `jevable key [KEY]` — whether there is a working key for Jev; given a key, tell whose it is, check it and save it.
+- `jevable model [NAME]` — the decision model it asks (Jev by default) and the others your key can use; given a name, check it and switch. `--model` overrides it for one run.
 - `jevable guide` — when to reach for it, how to ask and test, rules, watching a stream ([guide.md](guide.md)).
 
 ## As a library

@@ -2,7 +2,7 @@
 // background shell) actually sees on stdout, and when the process ends.
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { existsSync, mkdirSync, mkdtempSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, test } from "node:test";
@@ -61,7 +61,7 @@ test("-m 1 ends the process while stdin stays open", async () => {
   });
   assert.equal(run.code, 0);
   assert.equal(JSON.parse(run.stdout).line, "outage now");
-  assert.match(run.stderr, /2 records · 1 passed · 2 Jev calls/);
+  assert.match(run.stderr, /2 records · 1 passed · 2 calls to jev-1\.13\.0 via /);
 });
 
 test("--from stops the source when jevable stops", async () => {
@@ -82,7 +82,7 @@ test("settings can come from ~/.jevable/env", async () => {
   writeFileSync(join(home, ".jevable", "env"), `# for jevable\nexport JEV_API_KEY="${FAKE_KEY}"\nJEV_BASE_URL=${f.url}\n`);
   const run = await jevable(["filter", `judge.boolean(line, "Is this an outage?") >= 0.7`], { input: "outage\n", env: { HOME: home } });
   assert.deepEqual([run.code, run.stdout], [0, "outage\n"]);
-  assert.match(run.stderr, new RegExp(`1 Jev calls via ${f.url.replace(/[.]/g, "\\.")}`));
+  assert.match(run.stderr, new RegExp(`1 calls to jev-1\\.13\\.0 via ${f.url.replace(/[.]/g, "\\.")}`));
 });
 
 test("key without one says what to ask the person", async () => {
@@ -109,10 +109,43 @@ test("key checks a pasted key and saves it where later runs find it", async () =
   assert.deepEqual([run.code, run.stdout], [0, "outage\n"]);
 });
 
-test("key refuses what is no key for Jev", async () => {
+test("key refuses what is no key jevable can use", async () => {
   const run = await jevable(["key", "sk-ant-api03-xyz"]);
   assert.equal(run.code, 1);
-  assert.match(run.stdout, /not a key for Jev: TypeSafe keys start with apikey_/);
+  assert.match(run.stdout, /not a key jevable can use: TypeSafe keys start with apikey_/);
+});
+
+test("model lists what the key can use, switches after one check, and goes back to the default", async () => {
+  const f = await fake(outage);
+  const home = tempHome();
+  const env = { HOME: home, JEV_BASE_URL: f.url };
+  assert.match((await jevable(["model"], { env })).stdout, /^No key yet: run `jevable key` first\./);
+  await jevable(["key", FAKE_KEY], { env });
+  const saved = () => readFileSync(join(home, ".jevable", "env"), "utf8");
+
+  const list = await jevable(["model"], { env });
+  assert.equal(list.code, 0);
+  assert.match(list.stdout, /^jev-1\.13\.0 via .* \(the default\)\. Your key can also use: fake-d1\. Switch with `jevable model <name>`/);
+
+  const bad = await jevable(["model", "no-such-model"], { env });
+  assert.equal(bad.code, 1);
+  assert.match(bad.stdout, /^no-such-model does not work via .*404.*Nothing saved/);
+  assert.doesNotMatch(saved(), /JEV_MODEL/);
+
+  const ok = await jevable(["model", "fake-d1"], { env });
+  assert.equal(ok.code, 0);
+  assert.match(ok.stdout, /^Saved: jevable asks fake-d1 via .* run `jevable test` on your samples again\./);
+  assert.match(saved(), /^JEV_MODEL=fake-d1$/m);
+  assert.match((await jevable(["key"], { env })).stdout, /^fake-d1 via .*; it works/);
+  // the saved choice is what runs ask, and --model overrides it for one run
+  const run = await jevable(["Is this an outage?"], { input: "outage\n", env });
+  assert.deepEqual([run.code, run.stdout], [0, "outage\n"]);
+  const once = await jevable(["--model", "no-such-model", "Is this an outage?"], { input: "outage\n", env });
+  assert.notEqual(once.code, 0);
+  assert.match(once.stdout + once.stderr, /404/);
+
+  assert.match((await jevable(["model", "default"], { env })).stdout, /^Back to jev-1\.13\.0/);
+  assert.doesNotMatch(saved(), /JEV_MODEL/);
 });
 
 test("a question filters like grep, on a field with --on, inverted with -v", async () => {

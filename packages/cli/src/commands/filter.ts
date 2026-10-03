@@ -31,7 +31,7 @@ Options:
       --all             emit everything with "pass" and the answers, to see the scores first
       --state FILE      remember keys across runs
   -j, --jobs N          records judged at the same time (default 8)
-      --model MODEL     Jev model (default $JEV_MODEL, else jev-1.13.0)
+      --model MODEL     the decision model for this run only (default: the one \`jevable model\` names)
 
 Exit status: 0 when something was emitted, 1 when nothing was, 2 on error.
 An error that stops jevable is also printed on stdout, so a watcher reading only

@@ -15,6 +15,6 @@
     "marked": "^18"
   },
   "devDependencies": {
-    "@jevable/core": "0.2.2"
+    "@jevable/core": "0.3.0"
   }
 }

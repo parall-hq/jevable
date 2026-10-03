@@ -2,7 +2,7 @@
 import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
 import { Engine } from "./engine.ts";
-import { Client, type Answer, type Question } from "./typesafe/client.ts";
+import { Client, DEFAULT_MODEL, type Answer, type Question } from "./typesafe/client.ts";
 
 /** Decides one answer; state is the request's state as JSON (a string material arrives quoted). */
 export type Answerer = (state: string, q: Question) => Omit<Answer, "type">;
@@ -18,6 +18,8 @@ export interface FakeJev {
 
 /** The API key the fake accepts; any other is refused with 401. */
 export const FAKE_KEY = "test-key";
+/** The models the fake serves and lists at /v1/models; any other is refused with 404. */
+export const FAKE_MODELS = [DEFAULT_MODEL, "fake-d1"];
 
 /** Starts a fake that bills 10 tokens per request. */
 export async function fakeJev(answer: Answerer): Promise<FakeJev> {
@@ -31,7 +33,15 @@ export async function fakeJev(answer: Answerer): Promise<FakeJev> {
         res.writeHead(401).end('{"error":"invalid api key"}');
         return;
       }
+      if (req.method === "GET") {
+        res.writeHead(200, { "Content-Type": "application/json" }).end(JSON.stringify({ models: FAKE_MODELS.map((name) => ({ name })) }));
+        return;
+      }
       const { state, model, questions } = JSON.parse(body) as { state: unknown; model: string; questions: Record<string, Question> };
+      if (!FAKE_MODELS.includes(model)) {
+        res.writeHead(404).end(`{"error":"no model ${model}"}`);
+        return;
+      }
       const answers: Record<string, Answer> = {};
       for (const [k, q] of Object.entries(questions)) answers[k] = { type: q.type, ...answer(JSON.stringify(state), q) };
       res.writeHead(200, { "Content-Type": "application/json" }).end(JSON.stringify({ model, answers, usage: { input_tokens: 10, output_tokens: 0 } }));
