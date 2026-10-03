@@ -20,6 +20,8 @@ export interface Replayed {
   passBefore?: boolean;
   questionsBefore?: number;
   tokensBefore?: number;
+  /** How long the rule took on this event, when it asked anything (ms). */
+  ms?: number;
   calls?: { fn: string; question: string; value?: number; options?: Record<string, number> }[];
 }
 

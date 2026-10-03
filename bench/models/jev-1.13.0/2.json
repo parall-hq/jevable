@@ -1,0 +1,4601 @@
+{
+ "date": "2026-10-03T05:19:30.864Z",
+ "jev": "jev-1.13.0 via TypeSafe",
+ "stats": {
+  "calls": 208,
+  "cacheHits": 9,
+  "tokens": 118564
+ },
+ "cases": [
+  {
+   "id": "status",
+   "grep": "\\bapi\\b",
+   "events": [
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 240,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.51
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 427,
+     "ms": 118,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.9
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 413,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.86
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 100,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.86
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 413,
+     "ms": 109,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 413,
+     "ms": 94,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.88
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 422,
+     "ms": 84,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 412,
+     "ms": 104,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.45
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 107,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.87
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.45
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 430,
+     "ms": 93,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.88
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 75,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.96
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 413,
+     "ms": 89,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.89
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 413,
+     "ms": 91,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.52
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 91,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 124,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.98
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 412,
+     "ms": 101,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.82
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.98
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 418,
+     "ms": 89,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.52
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 423,
+     "ms": 224,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 91,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.95
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.95
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 415,
+     "ms": 119,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.94
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 434,
+     "ms": 96,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.98
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 434,
+     "ms": 86,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 418,
+     "ms": 167,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.98
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 412,
+     "ms": 126,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.97
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 417,
+     "ms": 136,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.92
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 415,
+     "ms": 92,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.17
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 102,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.22
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 414,
+     "ms": 136,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this incident title name a model, the API, or a developer tool?",
+       "value": 0.28
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "hn-problems",
+   "grep": "^(?=.*claude code)(?=.*(bug|error|broken|crash|fail|issue|problem))",
+   "events": [
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 428,
+     "ms": 99,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.18
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 405,
+     "ms": 99,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 390,
+     "ms": 130,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 483,
+     "ms": 137,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 488,
+     "ms": 89,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 470,
+     "ms": 150,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 456,
+     "ms": 112,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 461,
+     "ms": 101,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.11
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 598,
+     "ms": 116,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.23
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 420,
+     "ms": 91,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.12
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 599,
+     "ms": 126,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 423,
+     "ms": 93,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 664,
+     "ms": 118,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 565,
+     "ms": 98,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 492,
+     "ms": 89,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 400,
+     "ms": 112,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.82
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 430,
+     "ms": 117,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 529,
+     "ms": 88,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.27
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 464,
+     "ms": 307,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 1,
+     "tokens": 460,
+     "ms": 472,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.92
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 453,
+     "ms": 536,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.56
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 425,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 495,
+     "ms": 112,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.14
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 459,
+     "ms": 95,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 402,
+     "ms": 103,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.94
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 375,
+     "ms": 90,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 619,
+     "ms": 150,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.11
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 541,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.62
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 438,
+     "ms": 132,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.1
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 470,
+     "ms": 224,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 395,
+     "ms": 330,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 394,
+     "ms": 141,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.9
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 430,
+     "ms": 110,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.31
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 569,
+     "ms": 104,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.12
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 368,
+     "ms": 117,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 475,
+     "ms": 105,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.25
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 452,
+     "ms": 83,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.61
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 1,
+     "tokens": 654,
+     "ms": 86,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.88
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 518,
+     "ms": 92,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.17
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 616,
+     "ms": 110,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 416,
+     "ms": 93,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 388,
+     "ms": 95,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 387,
+     "ms": 96,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 403,
+     "ms": 105,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.22
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 382,
+     "ms": 95,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the author report a problem they ran into with Claude Code?",
+       "value": 0.04
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "regressions",
+   "grep": "regression|used to work|no longer|stopped working",
+   "events": [
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 700,
+     "ms": 105,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 618,
+     "ms": 132,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.4
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 866,
+     "ms": 94,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.11
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 757,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 942,
+     "ms": 89,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 539,
+     "ms": 137,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 699,
+     "ms": 124,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 535,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 861,
+     "ms": 84,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 619,
+     "ms": 91,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 884,
+     "ms": 94,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 446,
+     "ms": 152,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 984,
+     "ms": 123,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.84
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 956,
+     "ms": 103,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.67
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 815,
+     "ms": 96,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 469,
+     "ms": 98,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 945,
+     "ms": 140,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.94
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 916,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.14
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 440,
+     "ms": 102,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 352,
+     "ms": 90,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 940,
+     "ms": 101,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.14
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 859,
+     "ms": 119,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 651,
+     "ms": 118,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 801,
+     "ms": 113,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 685,
+     "ms": 102,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 824,
+     "ms": 110,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 652,
+     "ms": 146,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 445,
+     "ms": 126,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 755,
+     "ms": 137,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 678,
+     "ms": 117,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 695,
+     "ms": 133,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 438,
+     "ms": 119,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 682,
+     "ms": 102,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 896,
+     "ms": 136,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 872,
+     "ms": 133,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.59
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 900,
+     "ms": 175,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 679,
+     "ms": 94,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.16
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 853,
+     "ms": 107,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.16
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 895,
+     "ms": 101,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 439,
+     "ms": 114,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 1,
+     "tokens": 740,
+     "ms": 103,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.99
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 458,
+     "ms": 95,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.9
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 638,
+     "ms": 88,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.17
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 695,
+     "ms": 129,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 914,
+     "ms": 99,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 904,
+     "ms": 115,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.17
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 755,
+     "ms": 114,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 809,
+     "ms": 151,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 514,
+     "ms": 182,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 886,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.22
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 455,
+     "ms": 113,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 661,
+     "ms": 107,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 580,
+     "ms": 94,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 982,
+     "ms": 116,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.13
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 876,
+     "ms": 101,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.24
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 476,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 432,
+     "ms": 88,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 437,
+     "ms": 103,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 590,
+     "ms": 138,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.12
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 923,
+     "ms": 84,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.1
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 545,
+     "ms": 105,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 859,
+     "ms": 91,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.13
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 947,
+     "ms": 127,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 872,
+     "ms": 122,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 962,
+     "ms": 103,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 437,
+     "ms": 109,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 753,
+     "ms": 121,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 554,
+     "ms": 123,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 505,
+     "ms": 98,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 753,
+     "ms": 112,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 850,
+     "ms": 122,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 841,
+     "ms": 93,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 838,
+     "ms": 135,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.68
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 898,
+     "ms": 98,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.24
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 625,
+     "ms": 134,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 694,
+     "ms": 103,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 458,
+     "ms": 130,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.31
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 913,
+     "ms": 103,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.11
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 890,
+     "ms": 166,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 909,
+     "ms": 175,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 1,
+     "tokens": 895,
+     "ms": 106,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.98
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 909,
+     "ms": 178,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.98
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 832,
+     "ms": 115,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.11
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 875,
+     "ms": 146,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 574,
+     "ms": 101,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 457,
+     "ms": 91,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 945,
+     "ms": 195,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 439,
+     "ms": 106,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 513,
+     "ms": 97,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 856,
+     "ms": 125,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 447,
+     "ms": 105,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 961,
+     "ms": 106,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does the reporter say that something which used to work stopped working, after an update or since some date (a regression)?",
+       "value": 0.02
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "releases",
+   "grep": "breaking|security|vulnerab|cve",
+   "events": [
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 411,
+     "ms": 105,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "breaking": 0.01,
+        "other": 0.99,
+        "security": 0
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 400,
+     "ms": 110,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "other": 0.99,
+        "security": 0,
+        "breaking": 0.01
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 459,
+     "ms": 131,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "other": 0.98,
+        "breaking": 0.02,
+        "security": 0
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 428,
+     "ms": 128,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "security": 0,
+        "breaking": 0.02,
+        "other": 0.98
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "security": 0,
+        "breaking": 0.02,
+        "other": 0.98
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 383,
+     "ms": 137,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "breaking": 0.01,
+        "other": 0.99,
+        "security": 0
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 383,
+     "ms": 119,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "other": 0.99,
+        "security": 0,
+        "breaking": 0.01
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 388,
+     "ms": 132,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "other": 1,
+        "security": 0,
+        "breaking": 0
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 388,
+     "ms": 161,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "other": 1,
+        "breaking": 0,
+        "security": 0
+       }
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "breaking": 0.01,
+        "other": 0.99,
+        "security": 0
+       }
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 1,
+     "tokens": 944,
+     "ms": 98,
+     "calls": [
+      {
+       "fn": "choice",
+       "question": "What does this release mean for a project that already depends on this library?",
+       "options": {
+        "breaking": 1,
+        "security": 0,
+        "other": 0
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "review-asks",
+   "grep": "suggestion|please|could you|can you|should|\\bnit\\b",
+   "events": [
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 518,
+     "ms": 124,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 484,
+     "ms": 227,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 1,
+     "tokens": 436,
+     "ms": 95,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 441,
+     "ms": 98,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 427,
+     "ms": 138,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.03
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 441,
+     "ms": 126,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 429,
+     "ms": 118,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 446,
+     "ms": 90,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 421,
+     "ms": 94,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 426,
+     "ms": 135,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 430,
+     "ms": 100,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 425,
+     "ms": 105,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 424,
+     "ms": 233,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 427,
+     "ms": 88,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 430,
+     "ms": 121,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 453,
+     "ms": 121,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.09
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 438,
+     "ms": 92,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 434,
+     "ms": 115,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 453,
+     "ms": 95,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.12
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 456,
+     "ms": 134,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 460,
+     "ms": 169,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.08
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 448,
+     "ms": 111,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.16
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 539,
+     "ms": 93,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.04
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 459,
+     "ms": 92,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 455,
+     "ms": 110,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 452,
+     "ms": 134,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 420,
+     "ms": 139,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 426,
+     "ms": 88,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.07
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 427,
+     "ms": 135,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 423,
+     "ms": 116,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.05
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 476,
+     "ms": 179,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.06
+      }
+     ]
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": false,
+     "slice": "fresh",
+     "grep": true,
+     "pass": false,
+     "questions": 0,
+     "tokens": 0,
+     "calls": []
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": true,
+     "questions": 1,
+     "tokens": 395,
+     "ms": 156,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.93
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": true,
+     "pass": true,
+     "questions": 1,
+     "tokens": 404,
+     "ms": 90,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.92
+      }
+     ]
+    },
+    {
+     "matters": true,
+     "slice": "fresh",
+     "grep": false,
+     "pass": false,
+     "questions": 1,
+     "tokens": 399,
+     "ms": 115,
+     "calls": [
+      {
+       "fn": "boolean",
+       "question": "Does this review comment ask the author to change the code?",
+       "value": 0.69
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
